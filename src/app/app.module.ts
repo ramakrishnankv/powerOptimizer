@@ -20,6 +20,8 @@ import { DashboardComponent } from './views/pages/dashboard/dashboard.component'
 import { PagePrimeComponent } from './views/templates/page-prime/page-prime.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NavbarPrimeComponent } from './views/components/navbar-prime/navbar-prime.component';
+import { ProgressBarComponent } from './views/components/progress-bar/progress-bar.component';
+import { ProgressbarModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { NavbarPrimeComponent } from './views/components/navbar-prime/navbar-pri
     HeaderPrimaryComponent,
     FooterPrimaryComponent,
     PagePrimeComponent,
-    NavbarPrimeComponent
+    NavbarPrimeComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { NavbarPrimeComponent } from './views/components/navbar-prime/navbar-pri
     ReactiveFormsModule,
     HttpModule,
     AppRouting,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

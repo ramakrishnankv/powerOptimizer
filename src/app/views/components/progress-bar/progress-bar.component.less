@@ -1,0 +1,18 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
+.progress {
+  border-radius: 0;
+}
+.progress-bar {
+  float: left;
+}
+.progress-content {
+  line-height: @size-em-lg * 1.2;
+}
+
+@media (max-width: 359px){
+  .progress-content {
+    font-size: @size-third;
+  }
+}
