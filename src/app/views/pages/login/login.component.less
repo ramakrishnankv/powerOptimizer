@@ -1,0 +1,52 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
+.login-module {
+  width: auto;
+  margin: 0 auto;
+  max-width: 340px;
+  background: url("../../../../assets/images/loginBG.jpg") center -25px no-repeat;
+
+  .login-form {
+    .btn {
+      background-color: @button-bg-color-second;
+      border-color: @button-bg-color-second;
+    }
+  }
+  .login-options {
+    margin: 10px 0;
+    & > * {
+      font-size: 14px;
+      a {
+        color: @font-color-third;
+      }
+    }
+    .form-check-input {
+      margin-left: -@size-em-md;
+    }
+    .form-check-label {
+       padding-left: @size-em-sm;
+    }
+  }
+  .org-product-name {
+    font-size: 24px;
+  }
+  .login-footer {
+    margin-top: 80px;
+  }
+
+  @media (min-width: 640px) {
+      background-position: center -70px;
+      .login-footer {
+        margin-top: 40px;
+      }
+  }
+
+  @media (max-width: 339px) {
+    .login-options > * {
+      max-width: 100%;
+      flex: auto;
+      text-align: left !important;
+    }
+  }
+}

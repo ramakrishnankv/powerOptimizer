@@ -1,0 +1,41 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
+.navbar-toggler {
+  cursor: pointer;
+}
+.navbar-nav {
+  .nav-link {
+    color: @link-color-third;
+    border-bottom: 1px solid #CCC;
+  }
+  .selected .nav-link {
+    color: @link-color-second;
+  }
+}
+
+.navbar-collapse {
+  padding-left: @size-em-sm;
+}
+
+.profile-module {
+  width: 38px;
+  height: 38px;
+  border: 2px solid @border-color-second;
+  border-radius: 50%;
+  position: absolute;
+  right: 6rem;
+  background: url("../../../../assets/images/profile-default.png") center center no-repeat;
+  background-size: contain;
+}
+
+@media (min-width: 992px){
+  .profile-module {
+    right: 1rem;
+  }
+  .navbar-nav {
+    .nav-link {
+      border: none;
+    }
+  }
+}

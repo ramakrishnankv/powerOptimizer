@@ -1,0 +1,38 @@
+<div class="container-fluid login-module">
+  <app-org-logo [cssClassName]="'text-center'"></app-org-logo>
+
+  <section class="login-form mt-5">
+    <form name="userLoginForm" action="" (submit)="unda" method="post" [formGroup]="userLoginForm" novalidate >
+      <fieldset>
+          <div class="form-group">
+            <label for="login-user-name" class="d-none"></label>
+            <input type="text" class="form-control form-control-lg" id="login-user-name" name="login-user-name" placeholder="User name" formControlName="loginUserName">
+          </div>
+          <div class="form-group">
+            <label for="login-user-password" class="d-none"></label>
+            <input type="password" class="form-control form-control-lg" id="login-user-password" placeholder="Password" formControlName="loginUserPassword">
+          </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" [routerLink]="['/home']">Login</button>
+
+        <div class="row login-options mt-3">
+          <div class="col-6">
+            <div class="form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="login-user-remember">
+              <label class="form-check-label" for="login-user-remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+
+          <div class="col-6 text-right forgot-pw">
+            <a [routerLink]="['/home']">Forgot Password?</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+  <section class="login-footer">
+        <h3 class="text-center mb-2 org-product-name">Power Optimization</h3>
+        <p class="text-center mb-4 org-product-desc">Power Utilization Monitoring Tool</p>
+  </section>
+</div>

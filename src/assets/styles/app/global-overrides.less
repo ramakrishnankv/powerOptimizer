@@ -1,0 +1,50 @@
+*:before, *:after {
+  content: "";
+  display: table;
+}
+
+body {
+  background-color: @bg-color-prime;
+  color: @font-color-third;
+  font-family: "Arial", "Tahoma", "Helvetica Neue", "sans-serif";
+}
+app-root {
+  box-sizing: border-box;
+}
+app-root:before, app-root:after {
+  content: "";
+  display: table;
+}
+.form-control {
+  background-color: @input-bg-color-prime;
+  border-color: @border-color-third;
+  border-radius: 1.3em;
+  color: #FFF;
+  font-size: 1em;
+}
+
+.form-control::-webkit-input-placeholder { color: @font-color-third; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: @font-color-third; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: @font-color-third; }  /* Microsoft Edge */
+
+.form-control:focus::-webkit-input-placeholder { color: @font-color-prime; }  /* WebKit, Blink, Edge */
+.form-control:focus:-moz-placeholder { color: @font-color-prime; }  /* Mozilla Firefox 4 to 18 */
+.form-control:focus::-moz-placeholder { color: @font-color-prime; }  /* Mozilla Firefox 19+ */
+.form-control:focus:-ms-input-placeholder { color: @font-color-prime; }  /* Internet Explorer 10-11 */
+.form-control:focus::-ms-input-placeholder { color: @font-color-prime; }  /* Microsoft Edge */
+
+.form-control:focus {
+  background-color: @input-bg-color-second;
+  border-color: @input-bg-color-second;
+  color: @font-color-prime;
+}
+
+.btn {
+  border-radius: 1.3em;
+}
+
+.org-logo-md {
+  width: 50px;
+}
