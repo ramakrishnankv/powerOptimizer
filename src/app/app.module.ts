@@ -22,6 +22,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NavbarPrimeComponent } from './views/components/navbar-prime/navbar-prime.component';
 import { ProgressBarComponent } from './views/components/progress-bar/progress-bar.component';
 import { ProgressbarModule } from 'ngx-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { ProgressbarModule } from 'ngx-bootstrap';
     HttpModule,
     AppRouting,
     CollapseModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

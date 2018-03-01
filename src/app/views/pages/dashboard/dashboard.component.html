@@ -1,6 +1,21 @@
 <app-page-prime>
   <section class="dashboard-module">
-    <app-progress-bar></app-progress-bar>
+      <app-progress-bar></app-progress-bar>
 
+    <div class="row">
+      <div class="col-6 col-sm-6 col-md-4 col-lg-3" *ngFor="let graph of dashboardData.activitySummary; trackBy: constructGraph">
+        <div>
+          <canvas baseChart
+                  [data]="graph.doughnutChartData"
+                  [labels]="graph.doughnutChartLabels"
+                  [chartType]="graph.doughnutChartType"
+                  [legend]="false"
+                  [options]="graph.options"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+        <div class="text-center text-uppercase mt-1">{{graph.type}}</div>
+      </div>
+    </div>
   </section>
 </app-page-prime>
