@@ -1,20 +1,27 @@
 <app-page-prime>
-  <section class="dashboard-module">
-      <app-progress-bar></app-progress-bar>
-
-    <div class="row">
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3" *ngFor="let graph of dashboardData.activitySummary; trackBy: constructGraph">
-        <div>
-          <canvas baseChart
+  <section class="dashboard-module container-flex">
+    <app-progress-bar></app-progress-bar>
+    <div class="row mt-4">
+      <div class="col-6 col-sm-6 col-md-4 col-lg-3" *ngFor="let graph of dashboardData.activitySummary;
+                                                            trackBy: constructGraph.bind(this)">
+        <div class="graph-container">
+          <div #graphMidLegend class="center-container">
+            <div class="center-content">
+              <p><strong>{{graph.validCountPerc}}%</strong></p>
+              <p>{{graph.title}}</p>
+            </div>
+          </div>
+          <canvas #summaryChart id="summary-chart" width="200%" height="200%" baseChart
                   [data]="graph.doughnutChartData"
-                  [labels]="graph.doughnutChartLabels"
+                  [colors]="graph.colors"
                   [chartType]="graph.doughnutChartType"
-                  [legend]="false"
+                  [legend]="true"
                   [options]="graph.options"
                   (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
+                  (chartClick)="chartClicked($event)" >
+          </canvas>
         </div>
-        <div class="text-center text-uppercase mt-1">{{graph.type}}</div>
+        <div class="equipment-type text-center text-uppercase">{{graph.type}}</div>
       </div>
     </div>
   </section>

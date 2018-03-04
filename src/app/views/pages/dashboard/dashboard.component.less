@@ -1,6 +1,46 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
 .org-logo-md {
   width: 100px;
 }
 .dashboard-module {
-  padding: 1.5rem 0;
+  padding: 1.7rem 0;
+}
+.graph-container {
+  display: block;
+}
+.equipment-type {
+  margin: .5rem 0 1rem;
+}
+.center-container {
+  position: absolute;
+  display: table;
+  text-align: center;
+  background: white;
+  box-sizing: content-box;
+  overflow: hidden;
+  z-index: -2;
+  border-radius: 50%;
+  .center-content {
+    display: table-cell;
+    color: black;
+    vertical-align: middle;
+    text-align: center;
+    &>* {
+      margin: 0;
+      line-height: @size-em-lg * 1.2;
+      font-size: @size-third;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .center-container {
+    .center-content {
+      &>* {
+        font-size: @size-prime;
+        line-height: inherit;
+      }
+    }
+  }
 }
