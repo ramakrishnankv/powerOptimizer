@@ -1,0 +1,40 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
+.navbar-iconic-module {
+  justify-content: center;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  li {
+    margin: 0 7px;
+    &.selected a {
+      background-color: transparent;
+    }
+  }
+  a {
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  @media (min-width: 576px) {
+    ul li {
+      margin: 0 10px;
+    }
+    .navbar-collapse {
+      margin-top: 20px;
+      max-width: 700px;
+    }
+    .icon {
+        width: 40px;
+        height: 40px;
+      }
+  }
+}

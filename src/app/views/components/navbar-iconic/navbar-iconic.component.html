@@ -1,0 +1,14 @@
+<nav class="navbar-iconic-module navbar navbar-toggleable-md navbar-inverse">
+  <div class="navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li *ngFor="let menu of menuList;let index = index;" [className]="menu.menuURL == currentURL ? 'selected' : ''" >
+        <a class="nav-link" [routerLink]="menu.menuURL">
+          <img class="icon menu-icon" src="assets/icons/svg/si-glyph-{{menu.menuIcon}}.svg" />
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+

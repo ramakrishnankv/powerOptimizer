@@ -1,50 +1,28 @@
 import { Component, OnInit, ElementRef,
          ViewChild, ViewChildren, QueryList,
-         Renderer, HostListener } from '@angular/core';
+         HostListener } from '@angular/core';
 import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
+import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
-  providers: [ AppUIConfigProperties ]
+  providers: [ StateColorEvaluator ]
 })
 
 export class DashboardComponent implements OnInit {
 
-  appColorConf: any;
-  renderer: any;
-
-  @ViewChildren('graphMidLegend') graphMidLegends: QueryList<ElementRef>;
+  appUIConf: any;
+  stateColorEval: any;
 
   constructor(private elem: ElementRef,
-              private appColors: AppUIConfigProperties,
-              private _renderer: Renderer ) {
-    this.appColorConf = appColors;
-    this.renderer = _renderer;
+              private stateColorEvaluator: StateColorEvaluator ) {
+    this.appUIConf = AppUIConfigProperties;
+    this.stateColorEval = stateColorEvaluator;
   }
 
   ngAfterViewInit() {
-    this.graphMidLegends.map(this.updateChartCenter.bind(this));
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    setTimeout(() => {this.graphMidLegends.map(this.updateChartCenter.bind(this))}, 20)
-  }
-
-  updateChartCenter(element, index) {
-    let graphMidElem = element;
-    let canvasElem = document.querySelectorAll('canvas')[index];
-    let canW = canvasElem.offsetWidth;
-    let canH = canvasElem.offsetHeight;
-    let canL = canvasElem.offsetLeft;
-    let canT = canvasElem.offsetTop;
-    const spacer: number = 11;
-    this.renderer.setElementStyle(graphMidElem.nativeElement, 'width', `${canW-spacer-7}px`);
-    this.renderer.setElementStyle(graphMidElem.nativeElement, 'height', `${canH-spacer-2}px`);
-    this.renderer.setElementStyle(graphMidElem.nativeElement, 'left', `${canL+spacer}px`);
-    this.renderer.setElementStyle(graphMidElem.nativeElement, 'top', `${canT+spacer}px`);
   }
 
   ngOnInit() {
@@ -84,14 +62,14 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructGraph(index, graph) {
+  prepareGraphData(index, graph) {
     let doughnutChartData: number[] = [graph.activeCount, graph.inactiveCount];
     let doughnutChartType:string = 'doughnut';
 
     let validCountPerc = graph.activeCount * 100/graph.totalCount;
-    let doughnutChartColor: string = this.appColorConf.provideColorValue(validCountPerc).color;
-    let colors:any[] = [{backgroundColor:[doughnutChartColor, this.appColorConf.graphProps.baseColor], borderWidth: 0}];
-    let options:any = {cutoutPercentage: this.appColorConf.graphProps.graphCutoutPercentage,
+    let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
+    let colors:any[] = [{backgroundColor:[doughnutChartColor, this.appUIConf.graphProps.baseColor], borderWidth: 0}];
+    let options:any = {cutoutPercentage: this.appUIConf.graphProps.graphCutoutPercentage,
       elements: {
       }
     };
@@ -103,12 +81,6 @@ export class DashboardComponent implements OnInit {
     graph.options = options;
 
     return graph;
-  }
-
-  chartHovered($event) {
-  }
-
-  chartClicked($event) {
   }
 
 }

@@ -22,29 +22,56 @@ app-root:before, app-root:after {
   color: #FFF;
   font-size: 1em;
 }
-
 .form-control::-webkit-input-placeholder { color: @font-color-third; }  /* WebKit, Blink, Edge */
 .form-control:-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 4 to 18 */
 .form-control::-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 19+ */
 .form-control:-ms-input-placeholder { color: @font-color-third; }  /* Internet Explorer 10-11 */
 .form-control::-ms-input-placeholder { color: @font-color-third; }  /* Microsoft Edge */
-
 .form-control:focus::-webkit-input-placeholder { color: @font-color-prime; }  /* WebKit, Blink, Edge */
 .form-control:focus:-moz-placeholder { color: @font-color-prime; }  /* Mozilla Firefox 4 to 18 */
 .form-control:focus::-moz-placeholder { color: @font-color-prime; }  /* Mozilla Firefox 19+ */
 .form-control:focus:-ms-input-placeholder { color: @font-color-prime; }  /* Internet Explorer 10-11 */
 .form-control:focus::-ms-input-placeholder { color: @font-color-prime; }  /* Microsoft Edge */
-
 .form-control:focus {
   background-color: @input-bg-color-second;
   border-color: @input-bg-color-second;
   color: @font-color-prime;
 }
-
 .btn {
   border-radius: 1.3em;
 }
-
 .org-logo-md {
   width: 50px;
+}
+.icon-bar {
+  flex-direction: row;
+  a.nav-link {
+    display: inline-block;
+    flex-direction: cell;
+    padding: 10px;
+    border: 1px solid @border-color-four;
+    border-radius: 50%;
+    background-color: @bg-color-four;
+  }
+  .btn {
+    padding: 6px;
+    border-radius: 6px;
+    border-color: @border-color-four;
+    background-color: @bg-color-four;
+  }
+}
+.icon {
+  width: 24px;
+  height: 24px;
+}
+.sec-title-prime {
+  text-transform: uppercase;
+  color: @font-color-second;
+  font-size: @size-third;
+}
+
+@media (min-width: 576px) {
+  .sec-title-prime {
+    font-size: @size-prime;
+  }
 }

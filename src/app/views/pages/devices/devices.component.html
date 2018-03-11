@@ -1,0 +1,51 @@
+<app-page-prime>
+  <div class="devices-module">
+    <section class="container-flex">
+
+      <div class="row mt-3">
+        <div class="line-graph-container col-7 col-sm-7 col-md-7 col-lg-7">
+          <app-chart-line [lineGraphData]="lineGraphData"></app-chart-line>
+        </div>
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of devicesData.activitySummary;
+                                                            trackBy: prepareGraphData.bind(this)">
+          <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+        </div>
+      </div>
+    </section>
+    <section class="product-details">
+      <nav class="icon-bar navbar navbar-light bg-light">
+        <div class="sec-title-prime">Device details</div>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn bg-search btn-outline-success" type="submit">
+            <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+          </button>
+        </form>
+        <a href="#" class="nav-link selected">
+          <img class="icon menu-icon" src="assets/icons/svg/si-glyph-house.svg" />
+        </a>
+      </nav>
+      <div>
+        <ul class="list-inline">
+          <li class="list-inline-item">Total Devices: 4000</li>
+          <li class="list-inline-item">Active Devices: 2000</li>
+          <li class="list-inline-item">Inactive Devices: 2000</li>
+        </ul>
+      </div>
+    </section>
+    <section class="product-table">
+      <table>
+        <tr>
+          <th *ngFor="let devHead of deviceListsHeaders">{{devHead}} {{i}}</th>
+        </tr>
+        <tr *ngFor="let device of deviceLists; let odd=odd let even=even" [class.odd]="odd" [class.even]="even">
+          <td>{{device.name}}</td>
+          <td>{{device.group}}</td>
+          <td>{{device.ward}}</td>
+          <td>{{device.pincode}}</td>
+        </tr>
+      </table>
+
+    </section>
+  </div>
+</app-page-prime>

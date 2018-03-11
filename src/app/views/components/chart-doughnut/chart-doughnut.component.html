@@ -1,0 +1,22 @@
+<div #graphContainer class="graph-container">
+  <div class="center-container">
+    <div class="center-content">
+      <p><strong>{{doughnutGraphData.validCountPerc}}%</strong></p>
+      <p>{{doughnutGraphData.title}}</p>
+    </div>
+  </div>
+  <canvas #summaryChart id="summary-chart" width="200%" height="200%" baseChart
+          [data]="doughnutGraphData.doughnutChartData"
+          [colors]="doughnutGraphData.colors"
+          [chartType]="doughnutGraphData.doughnutChartType"
+          [legend]="true"
+          [options]="doughnutGraphData.options"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)" >
+  </canvas>
+</div>
+
+<div *ngIf="showTotal; then total else type"></div>
+<ng-template #total><div class="graph-bottom-content equipment-total text-right">Actual: {{doughnutGraphData.totalCount}} Units</div></ng-template>
+<ng-template #type><div class="graph-bottom-content equipment-type text-center text-uppercase">{{doughnutGraphData.type}}</div></ng-template>
+

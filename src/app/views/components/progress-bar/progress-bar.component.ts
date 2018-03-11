@@ -1,21 +1,25 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { ProgressbarModule } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.less'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [ StateColorEvaluator ]
 })
 export class ProgressBarComponent implements OnInit {
 
+  stateColorEval: any;
   consumptions = [
     {consumed: 300, unit: 'KWh', max: 300},
     {consumed: 50, unit: 'KWh', max: 100},
     {consumed: 370, unit: 'KWh', max: 500}
   ]
 
-  constructor() {
-
+  constructor(private stateColorEvaluator: StateColorEvaluator) {
+    this.stateColorEval = stateColorEvaluator;
   }
 
   ngOnInit() {
@@ -23,32 +27,14 @@ export class ProgressBarComponent implements OnInit {
   }
 
   constructProgressBar(index, consume) {
-    let consPer:number = Math.ceil(consume.consumed * 100 / consume.max);
-    let consLimits = '';
-    let type = '';
-
-    switch (true) {
-      case consPer <= 25 :
-        consLimits = 'Minimum';
-        type = "success";
-        break;
-      case consPer <= 50 :
-        consLimits = 'Average';
-        type = "info";
-        break;
-      case consPer <= 75 :
-        consLimits = 'High';
-        type = "warning";
-        break;
-      case consPer > 75 :
-        consLimits = 'Maximum';
-        type = "danger";
-        break;
-    }
+    let consPer: number = Math.ceil(consume.consumed * 100 / consume.max);
+    let consLimits: string;
+    let type: string;
+    let status: any = this.stateColorEval.provideColorValue(consPer);
 
     consume.consPer = consPer;
-    consume.consLimits = consLimits;
-    consume.type = type;
+    consume.consLimits = status.limitText;
+    consume.type = status.text;
     return consume;
   }
 }

@@ -24,6 +24,10 @@ import { ProgressBarComponent } from './views/components/progress-bar/progress-b
 import { ProgressbarModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
+import { NavbarIconicComponent } from './views/components/navbar-iconic/navbar-iconic.component';
+import { DevicesComponent } from './views/pages/devices/devices.component';
+import { ChartLineComponent } from './views/components/chart-line/chart-line.component';
+import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-doughnut.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { ChartsModule } from 'ng2-charts';
     FooterPrimaryComponent,
     PagePrimeComponent,
     NavbarPrimeComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    NavbarIconicComponent,
+    DevicesComponent,
+    ChartLineComponent,
+    ChartDoughnutComponent
   ],
   imports: [
     BrowserModule,

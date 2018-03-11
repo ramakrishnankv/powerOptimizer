@@ -4,7 +4,7 @@ import { CollapseModule } from 'ngx-bootstrap';
 @Component({
   selector: 'app-page-prime',
   templateUrl: './page-prime.component.html',
-  styles: []
+  styleUrls: ['./page-prime.component.less']
 })
 export class PagePrimeComponent implements OnInit {
 
