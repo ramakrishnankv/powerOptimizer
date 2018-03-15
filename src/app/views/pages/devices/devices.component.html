@@ -33,19 +33,22 @@
         </ul>
       </div>
     </section>
-    <section class="product-table">
-      <table>
-        <tr>
-          <th *ngFor="let devHead of deviceListsHeaders">{{devHead}} {{i}}</th>
-        </tr>
-        <tr *ngFor="let device of deviceLists; let odd=odd let even=even" [class.odd]="odd" [class.even]="even">
-          <td>{{device.name}}</td>
-          <td>{{device.group}}</td>
-          <td>{{device.ward}}</td>
-          <td>{{device.pincode}}</td>
-        </tr>
-      </table>
+    <section class="product-table container-flex">
+      <div class="row">
+        <app-tabular-content-primary></app-tabular-content-primary>
 
+        <table class="table">
+          <tr class="header-row text-uppercase">
+            <th *ngFor="let devHead of deviceListsHeaders">{{devHead}} {{i}}</th>
+          </tr>
+          <tr *ngFor="let device of deviceLists; let odd=odd let even=even" [class.odd]="odd" [class.even]="even">
+            <td>{{device.name}}</td>
+            <td>{{device.group}}</td>
+            <td>{{device.ward}}</td>
+            <td>{{device.pincode}}</td>
+          </tr>
+        </table>
+      </div>
     </section>
   </div>
 </app-page-prime>

@@ -70,6 +70,22 @@ app-root:before, app-root:after {
   font-size: @size-third;
 }
 
+table {
+  font-size: @size-four;
+  tr.header-row {
+    background-color: @bg-color-third;
+    color: @font-color-four;
+  }
+  tr.even {
+    background-color: @table-bg-color-prime;
+    color: @font-color-prime;
+  }
+  tr.odd {
+    background-color: @table-bg-color-second;
+    color: @font-color-prime;
+  }
+}
+
 @media (min-width: 576px) {
   .sec-title-prime {
     font-size: @size-prime;

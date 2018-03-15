@@ -28,6 +28,7 @@ import { NavbarIconicComponent } from './views/components/navbar-iconic/navbar-i
 import { DevicesComponent } from './views/pages/devices/devices.component';
 import { ChartLineComponent } from './views/components/chart-line/chart-line.component';
 import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-doughnut.component';
+import { TabularContentPrimaryComponent } from './views/components/tabular-content-primary/tabular-content-primary.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-
     NavbarIconicComponent,
     DevicesComponent,
     ChartLineComponent,
-    ChartDoughnutComponent
+    ChartDoughnutComponent,
+    TabularContentPrimaryComponent
   ],
   imports: [
     BrowserModule,
