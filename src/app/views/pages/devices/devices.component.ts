@@ -28,33 +28,67 @@ export class DevicesComponent implements OnInit {
   }
 
 
+  // Tabular Contents
   deviceListsHeaders = [
     'Device name', 'Group', 'Ward No.', 'Pincode'
   ]
 
   deviceLists = [
     {
-      name: 'AG1',
+      name: 'AG1333',
       group: 'Atttingal',
       ward: 2,
       pincode: 560002
-    },    {
+    },
+    {
       name: 'AG1',
-      group: 'Atttingal',
+      group: 'Chikamangaluru',
       ward: 2,
       pincode: 560002
-    },    {
-      name: 'AG1',
-      group: 'Atttingal',
+    },
+    {
+      name: 'AG132',
+      group: 'Thiruvananthapuram',
       ward: 2,
       pincode: 560002
-    },    {
+    },
+    {
       name: 'AG1',
-      group: 'Atttingal',
+      group: 'Varanasi',
+      ward: 2,
+      pincode: 560002
+    },
+    {
+      name: 'AG1',
+      group: 'Varanasi',
+      ward: 2,
+      pincode: 560002
+    },
+    {
+      name: 'AG1',
+      group: 'Varanasi',
+      ward: 2,
+      pincode: 560002
+    },
+    {
+      name: 'AG1',
+      group: 'Varanasi',
+      ward: 2,
+      pincode: 560002
+    },
+    {
+      name: 'AG1',
+      group: 'Varanasi',
       ward: 2,
       pincode: 560002
     }
   ]
+
+  public deviceListData: any = {
+     tableHeaders: this.deviceListsHeaders,
+     tableData: this.deviceLists,
+     pageName : 'devices'
+  }
 
   // lineChart
   public lineChartData:Array<any> = [
@@ -94,7 +128,7 @@ export class DevicesComponent implements OnInit {
 
     graph.doughnutChartData = doughnutChartData;
     graph.doughnutChartType = doughnutChartType;
-    graph.validCountPerc = validCountPerc;
+    graph.validCountPerc = validCountPerc.toFixed(2);
     graph.colors = colors;
     graph.options = options;
 

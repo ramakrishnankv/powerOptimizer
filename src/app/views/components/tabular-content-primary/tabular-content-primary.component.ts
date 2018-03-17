@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tabular-content-primary',
@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabularContentPrimaryComponent implements OnInit {
 
-  constructor() { }
+
+  constructor() {
+
+   }
 
   ngOnInit() {
+
+  }
+
+  @Input() tabularData: any;
+
+  gerateList(index, datas) {
+    let data = [];
+    for(let i in datas) {
+      data.push(i);
+    }
+    console.log(data);
+    return data;
   }
 
 }

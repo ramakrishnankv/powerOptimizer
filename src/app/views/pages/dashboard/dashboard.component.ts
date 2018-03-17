@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
 
     graph.doughnutChartData = doughnutChartData;
     graph.doughnutChartType = doughnutChartType;
-    graph.validCountPerc = validCountPerc;
+    graph.validCountPerc = validCountPerc.toFixed(2);
     graph.colors = colors;
     graph.options = options;
 

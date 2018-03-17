@@ -1,11 +1,28 @@
-<table class="table">
-  <tr class="header-row text-uppercase">
-    <th *ngFor="let devHead of deviceListsHeaders">{{devHead}} {{i}}</th>
-  </tr>
-  <tr *ngFor="let device of deviceLists; let odd=odd let even=even" [class.odd]="odd" [class.even]="even">
-    <td>{{device.name}}</td>
-    <td>{{device.group}}</td>
-    <td>{{device.ward}}</td>
-    <td>{{device.pincode}}</td>
-  </tr>
-</table>
+<div class="container-flex">
+  <div class="table-container row">
+    <table class="table">
+      <tr class="header-row text-uppercase">
+        <th *ngFor="let dataHead of tabularData.tableHeaders">{{dataHead}} {{i}}</th>
+      </tr>
+      <tr *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+        <!-- TODO: Create Gerneric Approach -->
+        <div *ngIf="tabularData.pageName == 'devices'; then devices else issues"></div>
+        <!-- Device Data -->
+        <ng-template #devices>
+          <td>{{data.name}}</td>
+          <td>{{data.group}}</td>
+          <td>{{data.ward}}</td>
+          <td>{{data.pincode}}</td>
+        </ng-template>
+        <ng-template #issues>
+          <!-- Issues Data -->
+          <td>{{data.serial}}</td>
+          <td>{{data.category}}</td>
+          <td>{{data.deviceID}}</td>
+          <td>{{data.createdBy}}</td>
+          <td>{{data.assignee}}</td>
+        </ng-template>
+      </tr>
+    </table>
+  </div>
+</div>

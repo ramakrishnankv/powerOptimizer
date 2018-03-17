@@ -1,0 +1,42 @@
+<app-page-prime>
+  <div class="issues-module">
+    <section class="container-flex">
+      <div class="row mt-3 graphs-container">
+        <div class="line-graph-container col-4">
+
+        </div>
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of issuesData.activitySummary;
+                                                            trackBy: prepareGraphData.bind(this)">
+          <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+        </div>
+        <div class="line-graph-container col-3">
+
+        </div>
+      </div>
+    </section>
+    <section class="product-details">
+      <div class="row">
+        <ul class="product-detail-list list-inline" *ngFor="let counts of issuesData.activitySummary;">
+          <li class="list-inline-item">Total Issues: {{counts.totalCount}}</li>
+          <li class="list-inline-item">P1 Issues: {{counts.p1Issues}}</li>
+          <li class="list-inline-item">P2 Issues: {{counts.p2Issues}}</li>
+          <li class="list-inline-item">P3 Issues: {{counts.p3Issues}}</li>
+        </ul>
+      </div>
+
+      <div class="row product-details-row">
+        <nav class="navbar navbar-light bg-light icon-bar">
+          <div class="col sec-title-prime">ISSUES</div>
+          <div class="col right-container">
+            <a href="#" class="nav-link icon-box selected">
+              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-circle-plus.svg" />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <section class="product-table">
+      <app-tabular-content-primary [tabularData]="issuesListData"></app-tabular-content-primary>
+    </section>
+  </div>
+</app-page-prime>

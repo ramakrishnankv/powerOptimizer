@@ -7,6 +7,7 @@ body {
   background-color: @bg-color-prime;
   color: @font-color-third;
   font-family: "Arial", "Tahoma", "Helvetica Neue", "sans-serif";
+  font-size: @size-four;
 }
 app-root {
   box-sizing: border-box;
@@ -43,26 +44,51 @@ app-root:before, app-root:after {
 .org-logo-md {
   width: 50px;
 }
+.icon {
+  width: 24px;
+  height: 24px;
+}
+.product-details-row {
+  background-color: @bg-color-third;
+}
 .icon-bar {
   flex-direction: row;
-  a.nav-link {
+  align-items: center;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  .right-container {
+    padding-left: 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  form {
+    text-align: right;
+    .search-input {
+      max-width: 60%;
+      display: inline;
+      margin-right: 0;
+    }
+  }
+  .nav-link {
     display: inline-block;
-    flex-direction: cell;
     padding: 10px;
     border: 1px solid @border-color-four;
     border-radius: 50%;
     background-color: @bg-color-four;
   }
-  .btn {
+  .icon-box {
     padding: 6px;
     border-radius: 6px;
     border-color: @border-color-four;
     background-color: @bg-color-four;
+    margin: 0 @size-em-xxs;
+    line-height: 16px;
   }
-}
-.icon {
-  width: 24px;
-  height: 24px;
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
 }
 .sec-title-prime {
   text-transform: uppercase;
@@ -70,11 +96,19 @@ app-root:before, app-root:after {
   font-size: @size-third;
 }
 
-table {
+.table-container {
+  overflow: scroll;
+  max-height: 250px;
+}
+table.table {
   font-size: @size-four;
+  margin-bottom: 0;
   tr.header-row {
     background-color: @bg-color-third;
     color: @font-color-four;
+    th {
+      border: none;
+    }
   }
   tr.even {
     background-color: @table-bg-color-prime;
@@ -84,9 +118,23 @@ table {
     background-color: @table-bg-color-second;
     color: @font-color-prime;
   }
+  td {
+    padding-top: @size-em-xs;
+    padding-bottom: @size-em-xs;
+  }
+}
+.product-detail-list {
+  font-size: @size-four;
+  display: flex;
+  justify-content: space-between;
+  margin: @size-em-xs;
+  width: 100%;
 }
 
 @media (min-width: 576px) {
+  body {
+    font-size: @size-prime;
+  }
   .sec-title-prime {
     font-size: @size-prime;
   }

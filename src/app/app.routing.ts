@@ -6,11 +6,13 @@ import { DashboardComponent } from './views/pages/dashboard/dashboard.component'
 import { HomeComponent } from './views/pages/home/home.component';
 import { PageNotFoundComponent } from './views/pages/page-not-found/page-not-found.component';
 import { DevicesComponent } from './views/pages/devices/devices.component';
+import { IssuesComponent } from './views/pages/issues/issues.component';
 
 export const AppRoutes: Routes = [
   {path: '', children: [{path: '', component: LoginComponent}, {path: 'login', component: LoginComponent}]},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'devices', component: DevicesComponent},
+  {path: 'issues', component: IssuesComponent},
   {path: 'home', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

@@ -29,6 +29,7 @@ import { DevicesComponent } from './views/pages/devices/devices.component';
 import { ChartLineComponent } from './views/components/chart-line/chart-line.component';
 import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-doughnut.component';
 import { TabularContentPrimaryComponent } from './views/components/tabular-content-primary/tabular-content-primary.component';
+import { IssuesComponent } from './views/pages/issues/issues.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TabularContentPrimaryComponent } from './views/components/tabular-conte
     DevicesComponent,
     ChartLineComponent,
     ChartDoughnutComponent,
-    TabularContentPrimaryComponent
+    TabularContentPrimaryComponent,
+    IssuesComponent
   ],
   imports: [
     BrowserModule,
