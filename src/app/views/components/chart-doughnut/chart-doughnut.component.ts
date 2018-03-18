@@ -32,10 +32,12 @@ export class ChartDoughnutComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   ngAfterViewInit() {
     this.graphContainer.map(this.updateChartCenter.bind(this));
+    setTimeout(() => {this.graphContainer.map(this.updateChartCenter.bind(this))}, 700);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -53,11 +55,12 @@ export class ChartDoughnutComponent implements OnInit {
     let canL = canvasElem.offsetLeft;
     let canT = canvasElem.offsetTop;
 
-    const spacer: number = 11;
-    this.renderer.setElementStyle(graphMidElem, 'width', `${canW-spacer-7}px`);
-    this.renderer.setElementStyle(graphMidElem, 'height', `${canH-spacer-2}px`);
-    this.renderer.setElementStyle(graphMidElem, 'left', `${canL+spacer}px`);
-    this.renderer.setElementStyle(graphMidElem, 'top', `${canT+spacer}px`);
+    const sizeSpacer: number = 5;
+    const posSpacer: number = 3;
+    this.renderer.setElementStyle(graphMidElem, 'width', `${canW-sizeSpacer}px`);
+    this.renderer.setElementStyle(graphMidElem, 'height', `${canH-sizeSpacer}px`);
+    this.renderer.setElementStyle(graphMidElem, 'left', `${canL+posSpacer}px`);
+    this.renderer.setElementStyle(graphMidElem, 'top', `${canT+posSpacer}px`);
   }
 
   chartHovered($event) {
