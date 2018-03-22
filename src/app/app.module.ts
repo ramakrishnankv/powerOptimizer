@@ -30,6 +30,7 @@ import { ChartLineComponent } from './views/components/chart-line/chart-line.com
 import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-doughnut.component';
 import { TabularContentPrimaryComponent } from './views/components/tabular-content-primary/tabular-content-primary.component';
 import { IssuesComponent } from './views/pages/issues/issues.component';
+import { GroupsComponent } from './views/pages/groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { IssuesComponent } from './views/pages/issues/issues.component';
     ChartLineComponent,
     ChartDoughnutComponent,
     TabularContentPrimaryComponent,
-    IssuesComponent
+    IssuesComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,
