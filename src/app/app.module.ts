@@ -31,6 +31,10 @@ import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-
 import { TabularContentPrimaryComponent } from './views/components/tabular-content-primary/tabular-content-primary.component';
 import { IssuesComponent } from './views/pages/issues/issues.component';
 import { GroupsComponent } from './views/pages/groups/groups.component';
+import { NonGroupDevicesComponent } from './views/pages/groups/non-group-devices/non-group-devices.component';
+import { GroupDevicesComponent } from './views/pages/groups/group-devices/group-devices.component';
+import { EmptyGroupsComponent } from './views/pages/groups/empty-groups/empty-groups.component';
+import { NavbarTabsComponent } from './views/components/navbar-tabs/navbar-tabs.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { GroupsComponent } from './views/pages/groups/groups.component';
     ChartDoughnutComponent,
     TabularContentPrimaryComponent,
     IssuesComponent,
-    GroupsComponent
+    GroupsComponent,
+    NonGroupDevicesComponent,
+    GroupDevicesComponent,
+    EmptyGroupsComponent,
+    NavbarTabsComponent
   ],
   imports: [
     BrowserModule,

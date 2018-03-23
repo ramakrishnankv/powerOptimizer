@@ -9,15 +9,12 @@
       </div>
     </section>
     <section class="product-details">
-      <div class="row">
-        <ul class="product-detail-list list-inline" *ngFor="let counts of issuesData.activitySummary;">
-          <li class="list-inline-item">Total Issues: {{counts.totalCount}}</li>
-          <li class="list-inline-item">P1 Issues: {{counts.p1Issues}}</li>
-          <li class="list-inline-item">P2 Issues: {{counts.p2Issues}}</li>
-          <li class="list-inline-item">P3 Issues: {{counts.p3Issues}}</li>
-        </ul>
-      </div>
-
+      <ul class="product-detail-list list-inline row" *ngFor="let counts of issuesData.activitySummary;">
+        <li class="col-6">Total Issues: {{counts.totalCount}}</li>
+        <li class="col-6 text-right">P1 Issues: {{counts.p1Issues}}</li>
+        <li class="col-6">P2 Issues: {{counts.p2Issues}}</li>
+        <li class="col-6 text-right">P3 Issues: {{counts.p3Issues}}</li>
+      </ul>
       <div class="row product-details-row">
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">ISSUES</div>

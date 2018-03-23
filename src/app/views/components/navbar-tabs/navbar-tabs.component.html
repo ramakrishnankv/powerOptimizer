@@ -1,0 +1,11 @@
+<div class="row">
+  <nav class="navbar w-100">
+    <ul class="row nav nav-tabs">
+      <li #menuListParent class="nav-item" *ngFor="let menu of tabMenuList;let index = index;"  >
+        <a [routerLink]="menu.menuURL" (click)="selectTab($event, item)" [className]="menu.menuURL == currentURL ? 'nav-link active' : 'nav-link'">
+          {{menu.menuName}} <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

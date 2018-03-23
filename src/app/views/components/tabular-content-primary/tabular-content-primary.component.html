@@ -4,24 +4,58 @@
       <tr class="header-row text-uppercase">
         <th *ngFor="let dataHead of tabularData.tableHeaders">{{dataHead}} {{i}}</th>
       </tr>
-      <tr *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
-        <!-- TODO: Create Gerneric Approach -->
-        <div *ngIf="tabularData.pageName == 'devices'; then devices else issues"></div>
-        <!-- Device Data -->
-        <ng-template #devices>
-          <td>{{data.name}}</td>
-          <td>{{data.group}}</td>
-          <td>{{data.ward}}</td>
-          <td>{{data.pincode}}</td>
-        </ng-template>
-        <ng-template #issues>
-          <!-- Issues Data -->
-          <td>{{data.serial}}</td>
-          <td>{{data.category}}</td>
-          <td>{{data.deviceID}}</td>
-          <td>{{data.createdBy}}</td>
-          <td>{{data.assignee}}</td>
-        </ng-template>
+      <tr [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+          <ng-template [ngSwitchCase]="'issues'">
+            <!-- Issues Data -->
+            <td>{{data.serial}}</td>
+            <td>{{data.category}}</td>
+            <td>{{data.deviceID}}</td>
+            <td>{{data.createdBy}}</td>
+            <td>{{data.assignee}}</td>
+          </ng-template>
+          <ng-template [ngSwitchCase]="'nonGroupDevices'">
+            <!-- Groups / nonGroupDevices Data -->
+            <td>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="non-group-{{i}}">
+                <label for="non-group-{{i}}">{{data.name}}</label>
+              </div>
+            </td>
+            <td>{{data.group}}</td>
+            <td>{{data.ward}}</td>
+            <td>{{data.pincode}}</td>
+          </ng-template>
+          <ng-template [ngSwitchCase]="'groupDevices'">
+            <!-- Groups / groupDevices Data -->
+            <td>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="non-group-{{i}}">
+                <label for="non-group-{{i}}">{{data.name}}</label>
+              </div>
+            </td>
+            <td>{{data.group}}</td>
+            <td>{{data.ward}}</td>
+            <td>{{data.pincode}}</td>
+          </ng-template>
+          <ng-template [ngSwitchCase]="'emptyGroups'">
+            <!-- Groups / emptyGroups Data -->
+            <td>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="non-group-{{i}}">
+                <label for="non-group-{{i}}">{{data.name}}</label>
+              </div>
+            </td>
+            <td>{{data.group}}</td>
+            <td>{{data.ward}}</td>
+            <td>{{data.pincode}}</td>
+          </ng-template>
+          <ng-template [ngSwitchCase]="'devices'">
+            <!-- Devices Data -->
+            <td>{{data.name}}</td>
+            <td>{{data.group}}</td>
+            <td>{{data.ward}}</td>
+            <td>{{data.pincode}}</td>
+          </ng-template>
       </tr>
     </table>
   </div>

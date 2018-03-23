@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
 import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { deviceMenuList } from '../../../models/deviceMenuList';
 
 @Component({
   selector: 'app-groups',
@@ -12,10 +13,12 @@ export class GroupsComponent implements OnInit {
 
   appUIConf: any;
   stateColorEval: any;
+  menuList: any;
 
   constructor( private stateColorEvaluator: StateColorEvaluator ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = stateColorEvaluator;
+    this.menuList = deviceMenuList;
   }
 
   ngAfterViewInit() {

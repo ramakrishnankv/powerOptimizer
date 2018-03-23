@@ -9,15 +9,12 @@
       </div>
     </section>
     <section class="product-details">
-      <div class="row">
-        <ul class="product-detail-list list-inline" *ngFor="let counts of groupsData.activitySummary;">
-          <li class="list-inline-item">Total Groups: {{counts.totalCount}}</li>
-          <li class="list-inline-item">Grouped Devices: {{counts.groupedDevices}}</li>
-          <li class="list-inline-item">Total Devices: {{counts.totalDevices}}</li>
-          <li class="list-inline-item">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
-        </ul>
-      </div>
-
+      <ul class="product-detail-list list-inline row" *ngFor="let counts of groupsData.activitySummary;">
+        <li class="col-6">Total Groups: {{counts.totalCount}}</li>
+        <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
+        <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
+        <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
+      </ul>
       <div class="row product-details-row">
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">DEVICES IN THE GROUPS</div>
@@ -30,9 +27,8 @@
       </div>
     </section>
     <section class="product-table">
-      <app-navbar-prime></app-navbar-prime>
+      <app-navbar-tabs [tabMenuList]="menuList"></app-navbar-tabs>
       <router-outlet></router-outlet>
-      <app-tabular-content-primary [tabularData]="groupsListData"></app-tabular-content-primary>
     </section>
   </div>
 </app-page-prime>

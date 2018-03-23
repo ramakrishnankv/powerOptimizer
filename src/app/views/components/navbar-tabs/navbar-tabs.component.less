@@ -1,0 +1,22 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
+.navbar {
+  padding-bottom: 0;
+}
+.nav-tabs {
+  .nav-item {
+    margin-right: 2px;
+    &:first-child {
+      margin-left: 5px;
+    }
+    a {
+      color: @font-color-prime;
+      background-color: @bg-color-four;
+    }
+    a.active {
+      background-color: @bg-color-five;
+    }
+  }
+}
+
