@@ -33,7 +33,6 @@ export class GroupsComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>, $event) {
-    console.log($event)
     $event.preventDefault();
     $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
