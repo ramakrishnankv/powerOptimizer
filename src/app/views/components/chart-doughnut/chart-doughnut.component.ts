@@ -37,7 +37,7 @@ export class ChartDoughnutComponent implements OnInit {
 
   ngAfterViewInit() {
     this.graphContainer.map(this.updateChartCenter.bind(this));
-    setTimeout(() => {this.graphContainer.map(this.updateChartCenter.bind(this))}, 700);
+    setTimeout(() => {this.graphContainer.map(this.updateChartCenter.bind(this))}, 300);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -49,14 +49,16 @@ export class ChartDoughnutComponent implements OnInit {
     let graphContainerElem = element.nativeElement;
     let graphMidElem = graphContainerElem.querySelectorAll('.center-container')[index];
     let canvasElem = graphContainerElem.querySelectorAll('canvas')[index];
+    let nutThick = 100 - this.appUIConf.graphProps.graphCutoutPercentage;
+    let nutThickPerc = nutThick/100;
 
-    let canW = canvasElem.offsetWidth;
-    let canH = canvasElem.offsetHeight;
-    let canL = canvasElem.offsetLeft;
-    let canT = canvasElem.offsetTop;
+    let canW = canvasElem.offsetWidth - Math.round((canvasElem.offsetWidth)*nutThickPerc);
+    let canH = canvasElem.offsetHeight - Math.round((canvasElem.offsetHeight)*nutThickPerc);
+    let canL = canvasElem.offsetLeft + Math.round(((canvasElem.offsetWidth)*nutThickPerc)/2);
+    let canT = canvasElem.offsetTop + Math.round(((canvasElem.offsetHeight)*nutThickPerc)/2);
 
-    const sizeSpacer: number = 5;
-    const posSpacer: number = 3;
+    const sizeSpacer: number = 0;
+    const posSpacer: number = 0;
     this.renderer.setElementStyle(graphMidElem, 'width', `${canW-sizeSpacer}px`);
     this.renderer.setElementStyle(graphMidElem, 'height', `${canH-sizeSpacer}px`);
     this.renderer.setElementStyle(graphMidElem, 'left', `${canL+posSpacer}px`);

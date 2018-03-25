@@ -1,11 +1,9 @@
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Example of importing and using data model
 import { states } from './data-model';
 
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.states.samArray);
-    console.log(this.states.showSample());
-    console.log(this.states.Sam.fn);
+
   }
 
   createLoginForm() {
@@ -38,6 +34,10 @@ export class LoginComponent implements OnInit {
 
   validateForm() {
     //console.log(this.userLoginForm.controls.loginUserName.value);
+  }
+
+  handleSubmit() {
+    console.log('submitting..... login');
   }
 
 

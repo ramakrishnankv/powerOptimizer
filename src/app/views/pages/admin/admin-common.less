@@ -1,0 +1,37 @@
+@import '~assets/styles/app/less/variables.less';
+@import '~assets/styles/app/less/colors.less';
+
+.form-title-container {
+  background-color: @bg-color-third;
+  color: @font-color-second;
+  padding-top: @size-em-sm;
+  padding-bottom: @size-em-sm;
+  font-size: @size-em-lg;
+}
+.form-container {
+  padding-top: @size-em-xl;
+  padding-bottom: @size-em-xl;
+  background-color: @bg-color-four;
+  color: @font-color-prime;
+}
+table.table {
+  td {
+    border: none;
+    vertical-align: middle;
+    padding: @size-em-xx @size-em-xs;
+    label {
+      margin: 0;
+      font-size: @size-em-lg;
+    }
+    .form-control {
+      &:focus {
+        border-color: @border-color-prime;
+        color: @font-color-prime;
+      }
+    }
+    .btn {
+      margin-right: @size-em-xs;
+    }
+  }
+}
+

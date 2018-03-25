@@ -12,7 +12,7 @@ export class GroupDevicesComponent implements OnInit {
   ngOnInit() {
   }
 
-    // Tabular Contents
+  // Tabular Contents
   groupsListsHeaders = [
     'Device name', 'Group', 'Ward No.', 'Pincode'
   ]

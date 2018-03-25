@@ -1,0 +1,34 @@
+<app-page-prime>
+  <div class="schedules-module">
+    <section class="container-flex">
+      <div class="row mt-3 graphs-container">
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of schedulesData.activitySummary;
+                                                            trackBy: prepareGraphData.bind(this)">
+          <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+        </div>
+      </div>
+    </section>
+    <section class="product-details">
+      <ul class="product-detail-list list-inline row" *ngFor="let counts of schedulesData.activitySummary;">
+        <li class="col-6">Total Schedules: {{counts.totalCount}}</li>
+        <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
+        <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
+        <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
+      </ul>
+      <div class="row product-details-row">
+        <nav class="navbar navbar-light bg-light icon-bar">
+          <div class="col sec-title-prime">DEVICES IN THE SCHEDULES</div>
+          <div class="col right-container">
+            <a href="#" class="nav-link icon-box selected">
+              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-circle-plus.svg" />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <section class="product-table">
+      <app-navbar-tabs [tabMenuList]="menuList"></app-navbar-tabs>
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</app-page-prime>

@@ -22,7 +22,7 @@ export class OrgLogoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.cssClassName);
+
   }
 
 }

@@ -1,0 +1,113 @@
+<app-page-prime>
+  <section class="admin-edit-device-module container-flex">
+    <div class="container-liquid">
+      <div class="row">
+        <div class="form-title-container col-12">
+          <span class="form-title">ADMIN - EDIT DEVICE</span>
+        </div>
+        <div class="form-container col-12">
+          <form name="editDeviceForm" action="" (submit)="unda" method="post" [formGroup]="editDeviceForm" novalidate >
+            <fieldset>
+              <table class="table">
+                <tr class="form-group">
+                  <td><label for="edit-device-macID" >MacID:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-macID" name="edit-device-macID" [ngModel]="editFormData.macID" formControlName="editDeviceMacID"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-name" >Name:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.name" formControlName="editDeviceName"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-status" >Status:</label></td>
+                  <td>
+                    <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="editDeviceStatus" >
+                      <option [ngValue]="editFormData.status" [selected]="editFormData.status=='Active'">{{editFormData.status}}</option>
+                      <option>Linked</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-description" >Description:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-description" name="edit-device-description" [ngModel]="editFormData.description" formControlName="editDeviceDescription"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-ward-name" >WardName:</label></td>
+                  <td>
+                    <select class="form-control" id="edit-device-ward-name" name="edit-device-ward-name" formControlName="editDeviceWardName">
+                      <option [selected]="editFormData.wardName[0]">{{editFormData.wardName}}</option>
+                      <option>Ward Name 1</option>
+                      <option>Ward Name 2</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-ward-number" >Ward Number:</label></td>
+                  <td>
+                    <select class="form-control" id="edit-device-ward-number" name="edit-device-ward-number" formControlName="editDeviceWardNumber">
+                      <option [selected]="editFormData.wardNumber[0]">{{editFormData.wardNumber}}</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-division" >Division:</label></td>
+                  <td>
+                    <select class="form-control" id="edit-device-division" name="edit-device-division" formControlName="editDeviceDivision">
+                      <option [selected]="editFormData.division[0]">{{editFormData.division}}</option>
+                      <option>Division</option>
+                      <option>Division</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-sub-division" >Sub Division:</label></td>
+                  <td>
+                    <select class="form-control" id="edit-device-sub-division" name="edit-device-sub-division" formControlName="editDeviceSubDivision">
+                      <option [selected]="editFormData.subDivision[0]">{{editFormData.subDivision}}</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-zone" >Zone:</label></td>
+                  <td>
+                    <select class="form-control" id="edit-device-zone" name="edit-device-zone" formControlName="editDeviceZone">
+                      <option [selected]="editFormData.zone[0]">{{editFormData.zone}}</option>
+                      <option>Zone Zone</option>
+                      <option>Zone Zone Zone</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-pin-code" >Pin Code:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.pinCode" formControlName="editDevicePinCode"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-address" >Address:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-address" name="edit-device-address" [ngModel]="editFormData.address" formControlName="editDeviceAddress"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-customerID" >Customer ID:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.customerID" formControlName="editDeviceCustomerID"></td>
+                </tr>
+                <tr class="form-group">
+                  <td>&nbsp;</td>
+                  <td>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-primary" [routerLink]="['/devices']">Update</button>
+                      <button type="button" class="btn btn-primary" [routerLink]="['/devices']">Cancel</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-page-prime>

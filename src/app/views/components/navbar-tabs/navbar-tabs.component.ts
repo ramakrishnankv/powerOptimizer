@@ -24,6 +24,9 @@ export class NavbarTabsComponent implements OnInit {
     if(this.router.url == '/groups') {
       this.currentURL =  '/groups/nonGroupDevices';
     }
+    if(this.router.url == '/schedules') {
+      this.currentURL =  '/schedules/noScheduleDevices';
+    }
   }
 
   ngAfterViewInit() {

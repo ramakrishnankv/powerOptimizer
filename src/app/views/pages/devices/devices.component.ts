@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
 import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
 
@@ -13,18 +14,15 @@ export class DevicesComponent implements OnInit {
 
   appUIConf: any;
   stateColorEval: any;
+  router: Router;
 
-  constructor( private stateColorEvaluator: StateColorEvaluator ) {
+  constructor( private stateColorEvaluator: StateColorEvaluator, private rout: Router ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = stateColorEvaluator;
   }
 
-  ngAfterViewInit() {
-
-  }
-
   ngOnInit() {
-
+    this.router = this.rout;
   }
 
 
@@ -133,6 +131,10 @@ export class DevicesComponent implements OnInit {
     graph.options = options;
 
     return graph;
+  }
+
+  editDevice() {
+    this.router.navigate(['admin/editDevice']);
   }
 
 }

@@ -1,0 +1,112 @@
+<app-page-prime>
+  <section class="admin-add-device-module container-flex">
+    <div class="container-liquid">
+      <div class="row">
+        <div class="form-title-container col-12">
+          <span class="form-title">ADMIN - DEVICE</span>
+        </div>
+        <div class="form-container col-12">
+          <form name="addDeviceForm" action="" (submit)="unda" method="post" [formGroup]="addDeviceForm" novalidate >
+            <fieldset>
+              <table class="table">
+                <tr class="form-group">
+                  <td><label for="add-device-macID" >MacID:</label></td>
+                  <td><input type="text" class="form-control" id="add-device-macID" name="add-device-macID" placeholder="" formControlName="addDeviceMacID"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-name" >Name:</label></td>
+                  <td><input type="text" class="form-control" id="add-device-name" name="add-device-name" placeholder="" formControlName="addDeviceName"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-status" >Status:</label></td>
+                  <td>
+                    <select class="form-control" id="add-device-status" name="add-device-status" formControlName="addDeviceStatus">
+                      <option selected="selected">Linked</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-description" >Description:</label></td>
+                  <td><input type="text" class="form-control" id="add-device-description" name="add-device-description" placeholder="" formControlName="addDeviceDescription"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-ward-name" >WardName:</label></td>
+                  <td>
+                    <select class="form-control" id="add-device-ward-name" name="add-device-ward-name" formControlName="addDeviceWardName">
+                      <option selected="selected">Ward Name</option>
+                      <option>Ward Name 1</option>
+                      <option>Ward Name 2</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-ward-number" >Ward Number:</label></td>
+                  <td>
+                    <select class="form-control" id="add-device-ward-number" name="add-device-ward-number" formControlName="addDeviceWardNumber">
+                      <option selected="selected">Linked</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-division" >Division:</label></td>
+                  <td>
+                    <select class="form-control" id="add-device-division" name="add-device-division" formControlName="addDeviceDivision">
+                      <option selected="selected">Division</option>
+                      <option>Division</option>
+                      <option>Division</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-sub-division" >Sub Division:</label></td>
+                  <td>
+                    <select class="form-control" id="add-device-sub-division" name="add-device-sub-division" formControlName="addDeviceSubDivision">
+                      <option selected="selected">Linked</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-zone" >Zone:</label></td>
+                  <td>
+                    <select class="form-control" id="add-device-zone" name="add-device-zone" formControlName="addDeviceZone">
+                      <option selected="selected">Zone 1</option>
+                      <option>Zone Zone</option>
+                      <option>Zone Zone Zone</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-pin-code" >Pin Code:</label></td>
+                  <td><input type="text" class="form-control" id="add-device-pin-code" name="add-device-pin-code" placeholder="" formControlName="addDevicePinCode"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-address" >Address:</label></td>
+                  <td><input type="text" class="form-control" id="add-device-address" name="add-device-address" placeholder="" formControlName="addDeviceAddress"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-device-customerID" >Customer ID:</label></td>
+                  <td><input type="text" class="form-control" id="add-device-customerID" name="add-device-customerID" placeholder="" formControlName="addDeviceCustomerID"></td>
+                </tr>
+                <tr class="form-group">
+                  <td>&nbsp;</td>
+                  <td>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-primary" [routerLink]="['/devices']">Save</button>
+                      <button type="button" class="btn btn-primary" [routerLink]="['/devices']">Cancel</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-page-prime>

@@ -10,16 +10,17 @@
   position: relative;
 }
 .equipment-type {
-  margin: .3rem 0 .5rem;
+  margin: @size-em-xxs 0 @size-em-sm;
 }
 .center-container {
+  box-shadow: 0 0 @size-em-md 0 @box-shadow-prime;
   position: absolute;
   display: table;
   text-align: center;
   background: white;
   box-sizing: content-box;
   overflow: hidden;
-  z-index: -2;
+  z-index: 1;
   border-radius: 50%;
   width: 90%;
   left: 5px;
@@ -31,13 +32,13 @@
     text-align: center;
     &>* {
       margin: 0;
-      line-height: @size-em-lg * 1.2;
+      line-height: @size-em-xl * 1.2;
       font-size: @size-third;
     }
   }
 }
 /* OVERRIDES - Issues */
-:host-context(.issues-module, .groups-module) {
+:host-context(.issues-module, .groups-module, .schedules-module) {
   .graph-bottom-content {
     display: none;
   }

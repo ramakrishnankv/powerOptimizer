@@ -18,13 +18,13 @@ export class TabularContentPrimaryComponent implements OnInit {
   }
 
   @Input() tabularData: any;
+  @Input() rowClickHandler;
 
   gerateList(index, datas) {
     let data = [];
     for(let i in datas) {
       data.push(i);
     }
-    console.log(data);
     return data;
   }
 

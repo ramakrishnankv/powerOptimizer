@@ -2,12 +2,13 @@
   content: "";
   display: table;
 }
-
+html, body {
+  font-size: @size-prime;
+}
 body {
   background-color: @bg-color-prime;
   color: @font-color-third;
   font-family: "Arial", "Tahoma", "Helvetica Neue", "sans-serif";
-  font-size: @size-four;
 }
 app-root {
   box-sizing: border-box;
@@ -19,9 +20,16 @@ app-root:before, app-root:after {
 .form-control {
   background-color: @input-bg-color-prime;
   border-color: @border-color-third;
-  border-radius: 1.3em;
-  color: #FFF;
-  font-size: 1em;
+  font-size: @size-em-lg;
+}
+.login-form {
+  .form-control {
+    border-radius: 1.3em;
+    color: @font-color-third;
+  }
+  .btn {
+    border-radius: 1.3em;
+  }
 }
 .form-control::-webkit-input-placeholder { color: @font-color-third; }  /* WebKit, Blink, Edge */
 .form-control:-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 4 to 18 */
@@ -38,8 +46,10 @@ app-root:before, app-root:after {
   border-color: @input-bg-color-second;
   color: @font-color-prime;
 }
-.btn {
-  border-radius: 1.3em;
+.btn-primary {
+  background-color: @button-bg-color-second;
+  border-color: @button-bg-color-second;
+  color: @font-color-prime;
 }
 .org-logo-md {
   width: 50px;
@@ -50,6 +60,9 @@ app-root:before, app-root:after {
 }
 .product-details-row {
   background-color: @bg-color-third;
+}
+.nav-link {
+  font-size: @size-em-lg;
 }
 .icon-bar {
   flex-direction: row;
@@ -95,7 +108,6 @@ app-root:before, app-root:after {
   color: @font-color-second;
   font-size: @size-third;
 }
-
 .table-container {
   overflow: scroll;
   max-height: 250px;
@@ -105,7 +117,7 @@ app-root:before, app-root:after {
     max-height: 270px;
   }
 }
-.groups-module {
+.groups-module, .schedules-module {
   .table-container {
     max-height: 225px;
   }
@@ -135,6 +147,14 @@ table.table {
 }
 .product-detail-list {
   font-size: @size-four;
+}
+.devices-module {
+  .product-detail-list {
+    display: flex;
+    justify-content: space-between;
+    margin: @size-em-xs;
+    width: 100%;
+  }
 }
 
 @media (min-width: 576px) {

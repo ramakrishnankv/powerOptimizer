@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { menuList } from '../../../models/menuList';
+import { mainMenuList } from '../../../models/mainMenuList';
 
 @Component({
   selector: 'app-navbar-iconic',
@@ -12,18 +12,15 @@ export class NavbarIconicComponent implements OnInit {
   public menuList: any;
   public currentURL: string = "";
 
-
   constructor(private elm: ElementRef, private router: Router ) {
-    this.menuList = menuList;
+    this.menuList = mainMenuList;
   }
 
   ngOnInit() {
     this.currentURL = this.router.url;
-    console.log(this.currentURL)
   }
 
   isCurrentURL() {
-    console.log(this.router)
     return "currentClass";
   }
 

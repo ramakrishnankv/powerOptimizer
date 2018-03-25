@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { menuList } from '../../../models/menuList';
+import { adminMenuList } from '../../../models/adminMenuList';
 
 @Component({
   selector: 'app-navbar-prime',
@@ -14,17 +14,14 @@ export class NavbarPrimeComponent implements OnInit {
   public currentURL: string = "";
 
   constructor(private elm: ElementRef, private router: Router ) {
-    this.menuList = menuList;
+    this.menuList = adminMenuList;
   }
 
   ngOnInit() {
     this.currentURL = this.router.url;
-    console.log(this.currentURL)
   }
 
   isCurrentURL() {
-    console.log(this.router)
     return "currentClass";
   }
-
 }

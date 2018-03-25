@@ -8,15 +8,14 @@
   background: url("../../../../assets/images/loginBG.jpg") center -25px no-repeat;
 
   .login-form {
-    .btn {
-      background-color: @button-bg-color-second;
-      border-color: @button-bg-color-second;
+    #login-user-name, #login-user-password {
+      font-size: @size-em-lg;
     }
   }
   .login-options {
     margin: 10px 0;
     & > * {
-      font-size: 14px;
+      font-size: @size-em-md;
       a {
         color: @font-color-third;
       }
@@ -29,7 +28,8 @@
     }
   }
   .org-product-name {
-    font-size: 24px;
+    color: @font-color-second;
+    font-size: @size-em-md * 2;
   }
   .login-footer {
     margin-top: 80px;
@@ -44,9 +44,7 @@
 
   @media (max-width: 339px) {
     .login-options > * {
-      max-width: 100%;
       flex: auto;
-      text-align: left !important;
     }
   }
 }

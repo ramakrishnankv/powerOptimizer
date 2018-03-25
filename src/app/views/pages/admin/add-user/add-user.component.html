@@ -1,0 +1,70 @@
+<app-page-prime>
+  <section class="admin-add-user-module container-flex">
+    <div class="container-liquid">
+      <div class="row">
+        <div class="form-title-container col-12">
+          <span class="form-title">ADMIN - USER</span>
+        </div>
+        <div class="form-container col-12">
+          <form name="addUserForm" action="" (submit)="unda" method="post" [formGroup]="addUserForm" novalidate >
+            <fieldset>
+              <table class="table">
+                <tr class="form-group">
+                  <td><label for="add-user-userID" >User ID:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-userID" name="add-user-userID" placeholder="" formControlName="addUserFirstName"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-first-name" >First Name:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-first-name" name="add-user-first-name" placeholder="" formControlName="addUserFirstName"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-last-name" >Last Name:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="addUserLastName"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-password" >Password:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="addUserPassword"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-email-address" >Email Address:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="addUserEmailAddress"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-profile-picture" >Email Address:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="addUserProfilePicture"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-role" >Role:</label></td>
+                  <td>
+                    <select class="form-control" id="add-user-role" name="add-user-role" formControlName="addUserRole">
+                      <option [ngValue]="lined" selected="selected">Linked</option>
+                      <option>Unlinked</option>
+                      <option>Pending</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-customerID" >Customer ID:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-customerID" name="add-user-customerID" placeholder="" formControlName="addUserCustomerID"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-status" >Pin Code:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-status" name="add-user-status" placeholder="" formControlName="addUserStauts"></td>
+                </tr>
+                <tr class="form-group">
+                  <td>&nbsp;</td>
+                  <td>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-primary" [routerLink]="['/groups']">Save</button>
+                      <button type="button" class="btn btn-primary" [routerLink]="['/groups']">Cancel</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-page-prime>

@@ -37,7 +37,7 @@
       </div>
     </section>
     <section class="product-table">
-      <app-tabular-content-primary [tabularData]="deviceListData"></app-tabular-content-primary>
+      <app-tabular-content-primary [tabularData]="deviceListData" [rowClickHandler]="editDevice.bind(this)"></app-tabular-content-primary>
     </section>
   </div>
 </app-page-prime>

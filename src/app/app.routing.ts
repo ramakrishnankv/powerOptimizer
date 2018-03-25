@@ -11,6 +11,14 @@ import { GroupsComponent } from './views/pages/groups/groups.component';
 import { NonGroupDevicesComponent } from './views/pages/groups/non-group-devices/non-group-devices.component';
 import { GroupDevicesComponent } from './views/pages/groups/group-devices/group-devices.component';
 import { EmptyGroupsComponent } from './views/pages/groups/empty-groups/empty-groups.component';
+import { SchedulesComponent } from './views/pages/schedules/schedules.component';
+import { NoScheduleDevicesComponent } from './views/pages/schedules/no-schedule-devices/no-schedule-devices.component';
+import { ConflictDevicesComponent } from './views/pages/schedules/conflict-devices/conflict-devices.component';
+import { AllDevicesComponent } from './views/pages/schedules/all-devices/all-devices.component';
+import { AddDeviceComponent } from './views/pages/admin/add-device/add-device.component';
+import { AddCustomerComponent } from './views/pages/admin/add-customer/add-customer.component';
+import { AddUserComponent } from './views/pages/admin/add-user/add-user.component';
+import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device.component';
 
 export const AppRoutes: Routes = [
   {path: '', children: [{path: '', component: LoginComponent}, {path: 'login', component: LoginComponent}]},
@@ -23,6 +31,16 @@ export const AppRoutes: Routes = [
                     {path: 'emptyGroups', component: EmptyGroupsComponent}
   ]},
   {path: 'issues', component: IssuesComponent},
+  {path: 'schedules', component: SchedulesComponent, children: [
+                    {path: '', component: NoScheduleDevicesComponent},
+                    {path: 'noScheduleDevices', component: NoScheduleDevicesComponent},
+                    {path: 'conflictDevices', component: ConflictDevicesComponent},
+                    {path: 'allDevices', component: AllDevicesComponent}
+  ]},
+  {path: 'admin/addDevice', component: AddDeviceComponent},
+  {path: 'admin/addCustomer', component: AddCustomerComponent},
+  {path: 'admin/addUser', component: AddUserComponent},
+  {path: 'admin/editDevice', component: EditDeviceComponent},
   {path: 'home', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
 import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
-import { deviceMenuList } from '../../../models/deviceMenuList';
+import { groupsMenuList } from '../../../models/groupsMenuList';
 
 @Component({
   selector: 'app-groups',
@@ -14,11 +17,12 @@ export class GroupsComponent implements OnInit {
   appUIConf: any;
   stateColorEval: any;
   menuList: any;
+  modalRef: BsModalRef;
 
-  constructor( private stateColorEvaluator: StateColorEvaluator ) {
+  constructor( private stateColorEvaluator: StateColorEvaluator, private modalService: BsModalService ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = stateColorEvaluator;
-    this.menuList = deviceMenuList;
+    this.menuList = groupsMenuList;
   }
 
   ngAfterViewInit() {
@@ -26,6 +30,13 @@ export class GroupsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  openModal(template: TemplateRef<any>, $event) {
+    console.log($event)
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
   }
 
   // Tabular Contents

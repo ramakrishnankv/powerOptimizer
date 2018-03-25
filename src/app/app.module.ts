@@ -18,9 +18,10 @@ import { FooterPrimaryComponent } from './views/components/footer-primary/footer
 import { OrgLogoComponent } from './views/components/org-logo/org-logo.component';
 import { DashboardComponent } from './views/pages/dashboard/dashboard.component';
 import { PagePrimeComponent } from './views/templates/page-prime/page-prime.component';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NavbarPrimeComponent } from './views/components/navbar-prime/navbar-prime.component';
 import { ProgressBarComponent } from './views/components/progress-bar/progress-bar.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ModalModule } from 'ngx-bootstrap';
 import { ProgressbarModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
@@ -35,6 +36,14 @@ import { NonGroupDevicesComponent } from './views/pages/groups/non-group-devices
 import { GroupDevicesComponent } from './views/pages/groups/group-devices/group-devices.component';
 import { EmptyGroupsComponent } from './views/pages/groups/empty-groups/empty-groups.component';
 import { NavbarTabsComponent } from './views/components/navbar-tabs/navbar-tabs.component';
+import { SchedulesComponent } from './views/pages/schedules/schedules.component';
+import { NoScheduleDevicesComponent } from './views/pages/schedules/no-schedule-devices/no-schedule-devices.component';
+import { ConflictDevicesComponent } from './views/pages/schedules/conflict-devices/conflict-devices.component';
+import { AllDevicesComponent } from './views/pages/schedules/all-devices/all-devices.component';
+import { AddDeviceComponent } from './views/pages/admin/add-device/add-device.component';
+import { AddCustomerComponent } from './views/pages/admin/add-customer/add-customer.component';
+import { AddUserComponent } from './views/pages/admin/add-user/add-user.component';
+import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +68,15 @@ import { NavbarTabsComponent } from './views/components/navbar-tabs/navbar-tabs.
     NonGroupDevicesComponent,
     GroupDevicesComponent,
     EmptyGroupsComponent,
-    NavbarTabsComponent
+    NavbarTabsComponent,
+    SchedulesComponent,
+    NoScheduleDevicesComponent,
+    ConflictDevicesComponent,
+    AllDevicesComponent,
+    AddDeviceComponent,
+    AddCustomerComponent,
+    AddUserComponent,
+    EditDeviceComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +85,7 @@ import { NavbarTabsComponent } from './views/components/navbar-tabs/navbar-tabs.
     HttpModule,
     AppRouting,
     CollapseModule.forRoot(),
+    ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
     ChartsModule
   ],
