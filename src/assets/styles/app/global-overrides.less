@@ -19,7 +19,7 @@ app-root:before, app-root:after {
 }
 .form-control {
   background-color: @input-bg-color-prime;
-  border-color: @border-color-third;
+  border-color: @border-color-five;
   font-size: @size-em-lg;
 }
 .login-form {
@@ -43,13 +43,14 @@ app-root:before, app-root:after {
 .form-control:focus::-ms-input-placeholder { color: @font-color-prime; }  /* Microsoft Edge */
 .form-control:focus {
   background-color: @input-bg-color-second;
-  border-color: @input-bg-color-second;
+  border-color: @border-color-five;
   color: @font-color-prime;
 }
 .btn-primary {
   background-color: @button-bg-color-second;
   border-color: @button-bg-color-second;
   color: @font-color-prime;
+  font-size: @size-third;
 }
 .org-logo-md {
   width: 50px;
@@ -93,7 +94,7 @@ app-root:before, app-root:after {
   .icon-box {
     padding: 6px;
     border-radius: 6px;
-    border-color: @border-color-four;
+    border-color: @border-color-five;
     background-color: @bg-color-four;
     margin: 0 @size-em-xxs;
     line-height: 16px;
@@ -102,13 +103,32 @@ app-root:before, app-root:after {
     width: 16px;
     height: 16px;
   }
+  &.inverse-theme {
+    background-color: @bg-color-four;
+    border-top: 1px solid @border-color-prime;
+    color: @font-color-prime;
+    .sec-title-prime {
+      color: @font-color-prime;
+      text-transform: initial;
+    }
+  }
 }
 .sec-title-prime {
   text-transform: uppercase;
   color: @font-color-second;
-  font-size: @size-third;
+  font-size: @size-four;
+}
+.form-tight-row {
+  padding-left: 15px;
+  padding-right: 15px;
+  .form-tight-cell {
+    button {
+      margin-top: 3px;
+    }
+  }
 }
 .table-container {
+  background-color: @bg-color-four;
   overflow: scroll;
   max-height: 250px;
 }
@@ -155,6 +175,9 @@ table.table {
     margin: @size-em-xs;
     width: 100%;
   }
+}
+.modal-dialog {
+  color: @font-color-prime;
 }
 
 @media (min-width: 576px) {

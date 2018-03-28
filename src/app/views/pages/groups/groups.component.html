@@ -16,13 +16,50 @@
         <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
       </ul>
       <div class="row product-details-row">
-        <nav class="navbar navbar-light bg-light icon-bar">
-          <div class="col sec-title-prime">DEVICES IN THE GROUPS</div>
-          <button type="button" class="btn btn-primary" (click)="openModal(template, $event)">Create template modal</button>
-          <div class="col right-container">
+        <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
+          <div class="col-3 sec-title-prime">Groups</div>
+          <div  class="col-7">
+            <form class="form-inline" name="groupsUpdateForm" action="" (submit)="unda" method="post" [formGroup]="groupsUpdateForm" novalidate >
+              <div class="form-row row no-gutters form-tight-cell w-100">
+                <div class="col-9">
+                  <div class="row no-gutters">
+                    <select class="col-9 form-control" id="search-groups-select" name="search-groups-select" formControlName="searchGroupsSelect">
+                      <option selected="selected">Groups 1</option>
+                      <option>Groups 2</option>
+                      <option>Groups 4</option>
+                    </select>
+                    <div class="col-3">
+                      <button class="btn icon-box bg-search btn-outline-success" type="submit">
+                        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <button class="btn icon-box bg-search btn-outline-success" type="submit">
+                    <img class="icon menu-icon" src="assets/icons/svg/si-glyph-trash.svg" />
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-2 right-container">
             <a href="/groups" class="nav-link icon-box selected" (click)="openModal(template, $event)">
               <img class="icon menu-icon" src="assets/icons/svg/si-glyph-circle-plus.svg" />
             </a>
+          </div>
+        </nav>
+      </div>
+      <div class="row product-details-row">
+        <nav class="navbar navbar-light bg-light icon-bar">
+          <div class="col sec-title-prime">DEVICES IN THE GROUPS</div>
+          <div class="col right-container">
+            <form class="">
+              <input class="form-control search-input icon-box" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn icon-box bg-search btn-outline-success" type="submit">
+                <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+              </button>
+            </form>
           </div>
         </nav>
       </div>

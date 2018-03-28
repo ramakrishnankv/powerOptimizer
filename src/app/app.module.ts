@@ -23,6 +23,7 @@ import { ProgressBarComponent } from './views/components/progress-bar/progress-b
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap';
 import { ProgressbarModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { NavbarIconicComponent } from './views/components/navbar-iconic/navbar-iconic.component';
@@ -87,6 +88,7 @@ import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     ChartsModule
   ],
   providers: [],

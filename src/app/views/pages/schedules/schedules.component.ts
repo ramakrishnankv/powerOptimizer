@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+
 import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
 import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
 import { schedulesMenuList } from '../../../models/schedulesMenuList';
@@ -14,11 +17,14 @@ export class SchedulesComponent implements OnInit {
   appUIConf: any;
   stateColorEval: any;
   menuList: any;
+  scheduleUpdateForm: FormGroup;
 
-  constructor( private stateColorEvaluator: StateColorEvaluator ) {
+  constructor( private stateColorEvaluator: StateColorEvaluator,
+               private fb: FormBuilder ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = stateColorEvaluator;
     this.menuList = schedulesMenuList;
+    this.createScheduleUpdateForm();
   }
 
   ngAfterViewInit() {
@@ -26,6 +32,12 @@ export class SchedulesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  createScheduleUpdateForm() {
+    this.scheduleUpdateForm = this.fb.group({
+      searchScheduleSelect: ['', Validators.required]
+    })
   }
 
   // Tabular Contents

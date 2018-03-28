@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -17,12 +18,16 @@ export class GroupsComponent implements OnInit {
   appUIConf: any;
   stateColorEval: any;
   menuList: any;
+  groupsUpdateForm: FormGroup;
   modalRef: BsModalRef;
 
-  constructor( private stateColorEvaluator: StateColorEvaluator, private modalService: BsModalService ) {
+  constructor( private stateColorEvaluator: StateColorEvaluator,
+               private modalService: BsModalService,
+               private fb: FormBuilder ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = stateColorEvaluator;
     this.menuList = groupsMenuList;
+    this.createGroupsUpdateForm();
   }
 
   ngAfterViewInit() {
@@ -36,6 +41,12 @@ export class GroupsComponent implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
+  }
+
+  createGroupsUpdateForm() {
+    this.groupsUpdateForm = this.fb.group({
+      searchGroupsSelect: ['', Validators.required]
+    })
   }
 
   // Tabular Contents
