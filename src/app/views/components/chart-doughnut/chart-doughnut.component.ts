@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef,
   ViewChild, ViewChildren, QueryList,
   Renderer, HostListener, Input} from '@angular/core';
+import { Router } from '@angular/router';
 import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
 import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
 
@@ -16,6 +17,7 @@ export class ChartDoughnutComponent implements OnInit {
   stateColorEval: any;
   renderer: any;
   deviceContainer: ElementRef;
+  router: Router;
 
   @Input() doughnutGraphData: any;
   @Input() showTotal: boolean;
@@ -24,11 +26,13 @@ export class ChartDoughnutComponent implements OnInit {
 
   constructor(private elem: ElementRef,
               private stateColorEvaluator: StateColorEvaluator,
-              private _renderer: Renderer ) {
+              private _renderer: Renderer,
+              private _router: Router ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = stateColorEvaluator;
     this.renderer = _renderer;
     this.deviceContainer = elem;
+    this.router = _router;
   }
 
   ngOnInit() {
@@ -65,10 +69,8 @@ export class ChartDoughnutComponent implements OnInit {
     this.renderer.setElementStyle(graphMidElem, 'top', `${canT+posSpacer}px`);
   }
 
-  chartHovered($event) {
+  prepareNavigation(graphContainer) {
+    let pageType = graphContainer.getAttribute('data-page-type').toLowerCase();
+    location.href=`/${pageType}`;
   }
-
-  chartClicked($event) {
-  }
-
 }

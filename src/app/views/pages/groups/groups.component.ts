@@ -19,6 +19,8 @@ export class GroupsComponent implements OnInit {
   stateColorEval: any;
   menuList: any;
   groupsUpdateForm: FormGroup;
+  isChartCollapsed: boolean = false;
+  collapsedClass: string = '';
   modalRef: BsModalRef;
 
   constructor( private stateColorEvaluator: StateColorEvaluator,
@@ -35,6 +37,14 @@ export class GroupsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  chartCollapsed(event: any): void {
+    this.collapsedClass = 'collapsed-content';
+  }
+
+  chartExpanded(event: any): void {
+    this.collapsedClass = '';
   }
 
   openModal(template: TemplateRef<any>, $event) {
@@ -121,7 +131,10 @@ export class GroupsComponent implements OnInit {
 
   prepareGraphData(index, graph) {
     let doughnutChartData: number[] = [graph.groupedDevices, graph.totalDevices];
+    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
     let doughnutChartType:string = 'doughnut';
+    let chartHover = ($event) => {  };
+    let chartClick = ($event) => {  };
 
     let validCountPerc = graph.groupedDevices * 100/graph.totalDevices;
     let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
@@ -132,10 +145,13 @@ export class GroupsComponent implements OnInit {
     };
 
     graph.doughnutChartData = doughnutChartData;
+    graph.doughnutChartLabels = doughnutChartLabels;
     graph.doughnutChartType = doughnutChartType;
     graph.validCountPerc = validCountPerc.toFixed(2);
     graph.colors = colors;
     graph.options = options;
+    graph.chartHovered = chartHover;
+    graph.chartClicked = chartClick;
 
     return graph;
   }

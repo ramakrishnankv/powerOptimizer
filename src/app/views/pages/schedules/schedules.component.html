@@ -1,21 +1,32 @@
 <app-page-prime>
-  <div class="schedules-module">
+  <div class="content-wrapper-module schedules-module">
     <section class="container-flex">
-      <div class="row mt-3 graphs-container">
-        <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of schedulesData.activitySummary;
-                                                            trackBy: prepareGraphData.bind(this)">
-          <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+      <div class="collapse-content-parent {{collapsedClass}}">
+        <div class="icon-bar text-right mt-2 mb-2">
+          <button class="btn icon-box bg-search" type="button" (click)="isChartCollapsed = !isChartCollapsed">
+            <img class="icon menu-icon exp-collapse" src="assets/icons/svg/si-glyph-arrow-two-up.svg" />
+          </button>
+        </div>
+        <div (collapsed)="chartCollapsed($event)"
+             (expanded)="chartExpanded($event)"
+             [collapse]="isChartCollapsed"
+             class=" ">
+          <div class="row graphs-container">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of schedulesData.activitySummary;
+                                                                trackBy: prepareGraphData.bind(this)">
+              <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+            </div>
+          </div>
+          <ul class="product-detail-list list-inline row" *ngFor="let counts of schedulesData.activitySummary;">
+            <li class="col-6">Total Schedules: {{counts.totalCount}}</li>
+            <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
+            <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
+            <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
+          </ul>
         </div>
       </div>
     </section>
     <section class="product-details">
-      <ul class="product-detail-list list-inline row" *ngFor="let counts of schedulesData.activitySummary;">
-        <li class="col-6">Total Schedules: {{counts.totalCount}}</li>
-        <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
-        <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
-        <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
-      </ul>
-
       <div class="row product-details-row">
         <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
           <div class="col-3 sec-title-prime">Templates</div>
@@ -60,7 +71,7 @@
               <div class="form-row row no-gutters form-tight-cell w-100">
                 <div class="col">
                   <div class="row no-gutters">
-                    <select class="col-10 form-control" id="search-schedule-select" name="search-schedule-select" formControlName="searchScheduleSelect">
+                    <select class="col-10 form-control" id="search-schedule-groups" name="search-schedule-groups" formControlName="searchScheduleSelect">
                       <option selected="selected">Schedule 1</option>
                       <option>Schedule 2</option>
                       <option>Schedule 4</option>

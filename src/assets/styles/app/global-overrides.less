@@ -46,11 +46,22 @@ app-root:before, app-root:after {
   border-color: @border-color-five;
   color: @font-color-prime;
 }
-.btn-primary {
+.btn {
+  cursor: pointer;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
   background-color: @button-bg-color-second;
   border-color: @button-bg-color-second;
   color: @font-color-prime;
   font-size: @size-third;
+}
+.error-message {
+  display: none;
+}
+.error {
+  .error-message {
+    display: block;
+  }
 }
 .org-logo-md {
   width: 50px;
@@ -110,6 +121,23 @@ app-root:before, app-root:after {
     .sec-title-prime {
       color: @font-color-prime;
       text-transform: initial;
+    }
+  }
+}
+.content-wrapper-module {
+  padding: .2rem 0;
+}
+.collapse-content-parent {
+  position: relative;
+  .collapse-control {
+    position: absolute;
+  }
+  .icon-bar .icon {
+    transform: rotate(0);
+  }
+  &.collapsed-content {
+    .icon-bar .icon.exp-collapse {
+      transform: rotate(180deg);
     }
   }
 }

@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   dashboardData = {
     activitySummary: [
       {
-        type: "Device",
+        type: "Devices",
         title: "Inactive",
         totalCount: 400,
         activeCount: 25,
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
         inactiveCount: 200
       },
       {
-        type: "Schedule",
+        type: "Schedules",
         title: "M2 Schedule",
         totalCount: 400,
         activeCount: 300,
@@ -64,7 +64,10 @@ export class DashboardComponent implements OnInit {
 
   prepareGraphData(index, graph) {
     let doughnutChartData: number[] = [graph.activeCount, graph.inactiveCount];
+    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
     let doughnutChartType:string = 'doughnut';
+    let chartHover = ($event) => {  };
+    let chartClick = ($event) => {  };
 
     let validCountPerc = graph.activeCount * 100/graph.totalCount;
     let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
@@ -75,10 +78,13 @@ export class DashboardComponent implements OnInit {
     };
 
     graph.doughnutChartData = doughnutChartData;
+    graph.doughnutChartLabels = doughnutChartLabels;
     graph.doughnutChartType = doughnutChartType;
     graph.validCountPerc = validCountPerc.toFixed(2);
     graph.colors = colors;
     graph.options = options;
+    graph.chartHovered = chartHover;
+    graph.chartClicked = chartClick;
 
     return graph;
   }

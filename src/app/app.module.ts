@@ -11,7 +11,6 @@ import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIco
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { LoginComponent } from './views/pages/login/login.component';
-import { HomeComponent } from './views/pages/home/home.component';
 import { PageNotFoundComponent } from './views/pages/page-not-found/page-not-found.component';
 import { HeaderPrimaryComponent } from './views/components/header-primary/header-primary.component';
 import { FooterPrimaryComponent } from './views/components/footer-primary/footer-primary.component';
@@ -52,7 +51,6 @@ import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device
     LoginComponent,
     OrgLogoComponent,
     DashboardComponent,
-    HomeComponent,
     PageNotFoundComponent,
     HeaderPrimaryComponent,
     FooterPrimaryComponent,

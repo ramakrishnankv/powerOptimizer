@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core/src/metadata/ng_module';
 import { LoginComponent } from './views/pages/login/login.component';
 import { DashboardComponent } from './views/pages/dashboard/dashboard.component';
-import { HomeComponent } from './views/pages/home/home.component';
 import { PageNotFoundComponent } from './views/pages/page-not-found/page-not-found.component';
 import { DevicesComponent } from './views/pages/devices/devices.component';
 import { IssuesComponent } from './views/pages/issues/issues.component';
@@ -41,7 +40,6 @@ export const AppRoutes: Routes = [
   {path: 'admin/addCustomer', component: AddCustomerComponent},
   {path: 'admin/addUser', component: AddUserComponent},
   {path: 'admin/editDevice', component: EditDeviceComponent},
-  {path: 'home', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

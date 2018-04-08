@@ -12,6 +12,8 @@ export class IssuesComponent implements OnInit {
 
   appUIConf: any;
   stateColorEval: any;
+  isChartCollapsed: boolean = false;
+  collapsedClass: string = '';
 
   constructor( private stateColorEvaluator: StateColorEvaluator ) {
     this.appUIConf = AppUIConfigProperties;
@@ -24,6 +26,14 @@ export class IssuesComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  chartCollapsed(event: any): void {
+    this.collapsedClass = 'collapsed-content';
+  }
+
+  chartExpanded(event: any): void {
+    this.collapsedClass = '';
   }
 
   // Tabular Contents
@@ -98,7 +108,10 @@ export class IssuesComponent implements OnInit {
 
   prepareGraphData(index, graph) {
     let doughnutChartData: number[] = [graph.p1Issues+graph.p2Issues, graph.p3Issues];
+    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
     let doughnutChartType:string = 'doughnut';
+    let chartHover = ($event) => {  };
+    let chartClick = ($event) => { console.log('haaaa'); };
 
     let validCountPerc = graph.p1Issues * 100/graph.totalCount;
     let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
@@ -109,10 +122,13 @@ export class IssuesComponent implements OnInit {
     };
 
     graph.doughnutChartData = doughnutChartData;
+    graph.doughnutChartLabels = doughnutChartLabels;
     graph.doughnutChartType = doughnutChartType;
     graph.validCountPerc = validCountPerc.toFixed(2);
     graph.colors = colors;
     graph.options = options;
+    graph.chartHovered = chartHover;
+    graph.chartClicked = chartClick;
 
     return graph;
   }

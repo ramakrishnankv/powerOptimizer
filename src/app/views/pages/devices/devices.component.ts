@@ -15,6 +15,8 @@ export class DevicesComponent implements OnInit {
   appUIConf: any;
   stateColorEval: any;
   router: Router;
+  isChartCollapsed: boolean = false;
+  collapsedClass: string = '';
 
   constructor( private stateColorEvaluator: StateColorEvaluator, private rout: Router ) {
     this.appUIConf = AppUIConfigProperties;
@@ -23,6 +25,14 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     this.router = this.rout;
+  }
+
+  chartCollapsed(event: any): void {
+    this.collapsedClass = 'collapsed-content';
+  }
+
+  chartExpanded(event: any): void {
+    this.collapsedClass = '';
   }
 
 
@@ -114,7 +124,10 @@ export class DevicesComponent implements OnInit {
 
   prepareGraphData(index, graph) {
     let doughnutChartData: number[] = [graph.activeCount, graph.inactiveCount];
+    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
     let doughnutChartType:string = 'doughnut';
+    let chartHover = ($event) => {  };
+    let chartClick = ($event) => {  };
 
     let validCountPerc = graph.activeCount * 100/graph.totalCount;
     let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
@@ -125,10 +138,13 @@ export class DevicesComponent implements OnInit {
     };
 
     graph.doughnutChartData = doughnutChartData;
+    graph.doughnutChartLabels = doughnutChartLabels;
     graph.doughnutChartType = doughnutChartType;
     graph.validCountPerc = validCountPerc.toFixed(2);
     graph.colors = colors;
     graph.options = options;
+    graph.chartHovered = chartHover;
+    graph.chartClicked = chartClick;
 
     return graph;
   }

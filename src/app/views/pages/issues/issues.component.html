@@ -1,20 +1,32 @@
 <app-page-prime>
-  <div class="issues-module">
+  <div class="content-wrapper-module issues-module">
     <section class="container-flex">
-      <div class="row mt-3 graphs-container">
-        <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of issuesData.activitySummary;
-                                                            trackBy: prepareGraphData.bind(this)">
-          <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+      <div class="collapse-content-parent {{collapsedClass}}">
+        <div class="icon-bar text-right mt-2 mb-2">
+          <button class="btn icon-box bg-search" type="button" (click)="isChartCollapsed = !isChartCollapsed">
+            <img class="icon menu-icon exp-collapse" src="assets/icons/svg/si-glyph-arrow-two-up.svg" />
+          </button>
+        </div>
+        <div (collapsed)="chartCollapsed($event)"
+             (expanded)="chartExpanded($event)"
+             [collapse]="isChartCollapsed"
+             class=" ">
+          <div class="row graphs-container">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of issuesData.activitySummary;
+                                                                trackBy: prepareGraphData.bind(this)">
+              <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+            </div>
+          </div>
+          <ul class="product-detail-list list-inline row" *ngFor="let counts of issuesData.activitySummary;">
+            <li class="col-6">Total Issues: {{counts.totalCount}}</li>
+            <li class="col-6 text-right">P1 Issues: {{counts.p1Issues}}</li>
+            <li class="col-6">P2 Issues: {{counts.p2Issues}}</li>
+            <li class="col-6 text-right">P3 Issues: {{counts.p3Issues}}</li>
+          </ul>
         </div>
       </div>
     </section>
     <section class="product-details">
-      <ul class="product-detail-list list-inline row" *ngFor="let counts of issuesData.activitySummary;">
-        <li class="col-6">Total Issues: {{counts.totalCount}}</li>
-        <li class="col-6 text-right">P1 Issues: {{counts.p1Issues}}</li>
-        <li class="col-6">P2 Issues: {{counts.p2Issues}}</li>
-        <li class="col-6 text-right">P3 Issues: {{counts.p3Issues}}</li>
-      </ul>
       <div class="row product-details-row">
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">ISSUES</div>

@@ -1,20 +1,32 @@
 <app-page-prime>
-  <div class="groups-module">
+  <div class="content-wrapper-module groups-module">
     <section class="container-flex">
-      <div class="row mt-3 graphs-container">
-        <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of groupsData.activitySummary;
-                                                            trackBy: prepareGraphData.bind(this)">
-          <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+      <div class="collapse-content-parent {{collapsedClass}}">
+        <div class="icon-bar text-right mt-2 mb-2">
+          <button class="btn icon-box bg-search" type="button" (click)="isChartCollapsed = !isChartCollapsed">
+            <img class="icon menu-icon exp-collapse" src="assets/icons/svg/si-glyph-arrow-two-up.svg" />
+          </button>
+        </div>
+        <div (collapsed)="chartCollapsed($event)"
+             (expanded)="chartExpanded($event)"
+             [collapse]="isChartCollapsed"
+             class=" ">
+          <div class="row graphs-container">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of groupsData.activitySummary;
+                                                                trackBy: prepareGraphData.bind(this)">
+              <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
+            </div>
+          </div>
+          <ul class="product-detail-list list-inline row" *ngFor="let counts of groupsData.activitySummary;">
+            <li class="col-6">Total Groups: {{counts.totalCount}}</li>
+            <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
+            <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
+            <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
+          </ul>
         </div>
       </div>
     </section>
     <section class="product-details">
-      <ul class="product-detail-list list-inline row" *ngFor="let counts of groupsData.activitySummary;">
-        <li class="col-6">Total Groups: {{counts.totalCount}}</li>
-        <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
-        <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
-        <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
-      </ul>
       <div class="row product-details-row">
         <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
           <div class="col-3 sec-title-prime">Groups</div>
