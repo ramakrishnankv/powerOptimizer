@@ -1,25 +1,32 @@
 import { Component, OnInit, ElementRef,
          ViewChild, ViewChildren, QueryList,
          HostListener } from '@angular/core';
-import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
+import { UserDataModel } from '../../../models/user/user-data.model';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 
 export class DashboardComponent implements OnInit {
 
   appUIConf: any;
   stateColorEval: any;
+  userDataModel: any;
 
   constructor(private elem: ElementRef,
-              private stateColorEvaluator: StateColorEvaluator ) {
+              private colorStateEvaluator: ColorStateEvaluatorHelper,
+              private _userDataModel: UserDataModel ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = stateColorEvaluator;
+    this.stateColorEval = colorStateEvaluator;
+    this.userDataModel = _userDataModel;
+    console.log(this.userDataModel.userData);
+
+
   }
 
   ngAfterViewInit() {

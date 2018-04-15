@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, Headers, RequestOptions} from '@angular/http';
 /*
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule } from '@angular/material';
@@ -25,17 +25,20 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
+import { CookieService } from 'ngx-cookie-service';
+
 import { NavbarIconicComponent } from './views/components/navbar-iconic/navbar-iconic.component';
-import { DevicesComponent } from './views/pages/devices/devices.component';
 import { ChartLineComponent } from './views/components/chart-line/chart-line.component';
 import { ChartDoughnutComponent } from './views/components/chart-doughnut/chart-doughnut.component';
 import { TabularContentPrimaryComponent } from './views/components/tabular-content-primary/tabular-content-primary.component';
+import { NavbarTabsComponent } from './views/components/navbar-tabs/navbar-tabs.component';
+
+import { DevicesComponent } from './views/pages/devices/devices.component';
 import { IssuesComponent } from './views/pages/issues/issues.component';
 import { GroupsComponent } from './views/pages/groups/groups.component';
 import { NonGroupDevicesComponent } from './views/pages/groups/non-group-devices/non-group-devices.component';
 import { GroupDevicesComponent } from './views/pages/groups/group-devices/group-devices.component';
 import { EmptyGroupsComponent } from './views/pages/groups/empty-groups/empty-groups.component';
-import { NavbarTabsComponent } from './views/components/navbar-tabs/navbar-tabs.component';
 import { SchedulesComponent } from './views/pages/schedules/schedules.component';
 import { NoScheduleDevicesComponent } from './views/pages/schedules/no-schedule-devices/no-schedule-devices.component';
 import { ConflictDevicesComponent } from './views/pages/schedules/conflict-devices/conflict-devices.component';
@@ -44,6 +47,11 @@ import { AddDeviceComponent } from './views/pages/admin/add-device/add-device.co
 import { AddCustomerComponent } from './views/pages/admin/add-customer/add-customer.component';
 import { AddUserComponent } from './views/pages/admin/add-user/add-user.component';
 import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device.component';
+
+import { AuthenticationInterceptor } from './services/AuthenticationInterceptor';
+
+import { UserDataModel } from './models/user/user-data.model';
+import { AuthService } from './services/authentication/auth.service';
 
 @NgModule({
   declarations: [
@@ -89,7 +97,7 @@ import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device
     BsDatepickerModule.forRoot(),
     ChartsModule
   ],
-  providers: [],
+  providers: [ UserDataModel, CookieService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

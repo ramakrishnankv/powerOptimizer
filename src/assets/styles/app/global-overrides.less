@@ -62,6 +62,14 @@ app-root:before, app-root:after {
   .error-message {
     display: block;
   }
+  input {
+    &:not(.ng-valid) {
+      border-color: @error-color;
+    }
+  }
+}
+input.ng-invalid.ng-touched.ng-dirty {
+  border-color: @error-color;
 }
 .org-logo-md {
   width: 50px;

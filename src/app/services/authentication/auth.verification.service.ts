@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService }      from './auth.service';
 
 @Injectable()
 export class AuthVerificationService implements CanActivate {
 
-  constructor(private router: Router) { }
+  // THIS CLASS IS USED TO CHECK THE LOGIN STATUS AND REDIRECT ON THE TOP LEVEL
+  constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (localStorage.getItem('currentUser')) {
-            // logged in so return true
-            return true;
-        }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    let url: string = state.url;
 
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-        return false;
-    }
+    return this.checkLogin(url);
+  }
+
+  checkLogin(url: string): boolean {
+    if (this.authService.isLoggedIn) { return true; }
+
+    // Store the attempted URL for redirecting
+    this.authService.redirectUrl = url;
+
+    // Navigate to the login page with extras
+    this.router.navigate(['/login']);
+    return false;
+  }
 
 }

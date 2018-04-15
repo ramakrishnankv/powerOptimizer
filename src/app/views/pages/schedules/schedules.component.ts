@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 
-import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 import { schedulesMenuList } from '../../../models/schedulesMenuList';
 
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
   styleUrls: ['./schedules.component.less'],
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 export class SchedulesComponent implements OnInit {
 
@@ -21,10 +21,10 @@ export class SchedulesComponent implements OnInit {
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
 
-  constructor( private stateColorEvaluator: StateColorEvaluator,
+  constructor( private colorStateEvaluator: ColorStateEvaluatorHelper,
                private fb: FormBuilder ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = stateColorEvaluator;
+    this.stateColorEval = colorStateEvaluator;
     this.menuList = schedulesMenuList;
     this.createScheduleUpdateForm();
   }

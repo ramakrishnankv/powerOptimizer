@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 
 @Component({
   selector: 'app-issues',
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.less'],
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 export class IssuesComponent implements OnInit {
 
@@ -15,9 +15,9 @@ export class IssuesComponent implements OnInit {
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
 
-  constructor( private stateColorEvaluator: StateColorEvaluator ) {
+  constructor( private colorStateEvaluator: ColorStateEvaluatorHelper ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = stateColorEvaluator;
+    this.stateColorEval = colorStateEvaluator;
   }
 
   ngAfterViewInit() {

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 import { ProgressbarModule } from 'ngx-bootstrap';
 
 @Component({
@@ -7,7 +7,7 @@ import { ProgressbarModule } from 'ngx-bootstrap';
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 export class ProgressBarComponent implements OnInit {
 
@@ -18,8 +18,8 @@ export class ProgressBarComponent implements OnInit {
     {consumed: 370, unit: 'KWh', max: 500}
   ]
 
-  constructor(private stateColorEvaluator: StateColorEvaluator) {
-    this.stateColorEval = stateColorEvaluator;
+  constructor(private colorStateEvaluator: ColorStateEvaluatorHelper) {
+    this.stateColorEval = colorStateEvaluator;
   }
 
   ngOnInit() {

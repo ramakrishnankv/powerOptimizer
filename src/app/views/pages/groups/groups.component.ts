@@ -3,15 +3,15 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
-import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 import { groupsMenuList } from '../../../models/groupsMenuList';
 
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.less'],
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 export class GroupsComponent implements OnInit {
 
@@ -23,11 +23,11 @@ export class GroupsComponent implements OnInit {
   collapsedClass: string = '';
   modalRef: BsModalRef;
 
-  constructor( private stateColorEvaluator: StateColorEvaluator,
+  constructor( private colorStateEvaluator: ColorStateEvaluatorHelper,
                private modalService: BsModalService,
                private fb: FormBuilder ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = stateColorEvaluator;
+    this.stateColorEval = colorStateEvaluator;
     this.menuList = groupsMenuList;
     this.createGroupsUpdateForm();
   }

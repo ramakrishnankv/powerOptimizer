@@ -1,6 +1,6 @@
-import { AppUIConfigProperties } from '../configs/ui/app-ui-config-properties';
+import { AppUIConfigProperties } from '../configs/app-ui-config-properties';
 
-export class StateColorEvaluator {
+export class ColorStateEvaluatorHelper {
 
   uiConfigs: any;
   constructor() {

@@ -44,6 +44,7 @@
     "less": "^3.0.1",
     "ng2-charts": "^1.6.0",
     "ngx-bootstrap": "^2.0.2",
+    "ngx-cookie-service": "^1.0.10",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",

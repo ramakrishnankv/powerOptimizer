@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.less'],
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 
 export class DevicesComponent implements OnInit {
@@ -18,9 +18,9 @@ export class DevicesComponent implements OnInit {
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
 
-  constructor( private stateColorEvaluator: StateColorEvaluator, private rout: Router ) {
+  constructor( private colorStateEvaluator: ColorStateEvaluatorHelper, private rout: Router ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = stateColorEvaluator;
+    this.stateColorEval = colorStateEvaluator;
   }
 
   ngOnInit() {

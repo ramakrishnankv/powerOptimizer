@@ -17,6 +17,4 @@ export const AppUIConfigProperties = {
     baseColor: '#0076a3',
     graphCutoutPercentage: 70
   }
-
-
 }

@@ -22,8 +22,8 @@
           <div class="col-6">
             <div class="form-check-inline">
               <input class="form-check-input" type="checkbox"
-                     value="" id="login-user-remember"
-                     formControlName="loginRemember">
+                     value="" id="login-user-remember" [checked]="isRememberChecked" [ngModel]="isRememberChecked"
+                     formControlName="loginRemember" (change)="isRememberChecked = !isRememberChecked">
               <label class="form-check-label" for="login-user-remember">
                 Remember Me
               </label>

@@ -2,14 +2,14 @@ import { Component, OnInit, ElementRef,
   ViewChild, ViewChildren, QueryList,
   Renderer, HostListener, Input} from '@angular/core';
 import { Router } from '@angular/router';
-import { AppUIConfigProperties } from '../../../configs/ui/app-ui-config-properties';
-import { StateColorEvaluator } from '../../../helpers/stateColorEvaluator';
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 
 @Component({
   selector: 'app-chart-doughnut',
   templateUrl: './chart-doughnut.component.html',
   styleUrls: ['./chart-doughnut.component.less'],
-  providers: [ StateColorEvaluator ]
+  providers: [ ColorStateEvaluatorHelper ]
 })
 export class ChartDoughnutComponent implements OnInit {
 
@@ -25,11 +25,11 @@ export class ChartDoughnutComponent implements OnInit {
   @ViewChildren('graphContainer') graphContainer: QueryList<ElementRef>;
 
   constructor(private elem: ElementRef,
-              private stateColorEvaluator: StateColorEvaluator,
+              private colorStateEvaluator: ColorStateEvaluatorHelper,
               private _renderer: Renderer,
               private _router: Router ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = stateColorEvaluator;
+    this.stateColorEval = colorStateEvaluator;
     this.renderer = _renderer;
     this.deviceContainer = elem;
     this.router = _router;
