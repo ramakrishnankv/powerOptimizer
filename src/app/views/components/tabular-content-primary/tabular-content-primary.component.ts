@@ -8,24 +8,11 @@ import { NgSwitch } from '@angular/common';
 })
 export class TabularContentPrimaryComponent implements OnInit {
 
-
-  constructor() {
-
-  }
-
-  ngOnInit() {
-
-  }
-
   @Input() tabularData: any;
   @Input() rowClickHandler;
 
-  gerateList(index, datas) {
-    let data = [];
-    for(let i in datas) {
-      data.push(i);
-    }
-    return data;
-  }
+  constructor( ) { }
+
+  ngOnInit() {  }
 
 }

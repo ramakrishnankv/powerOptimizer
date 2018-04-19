@@ -1,77 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+
+import { GroupsService } from '../../../../services/groups.service';
 
 @Component({
   selector: 'app-empty-groups',
   templateUrl: './empty-groups.component.html',
-  styleUrls: ['./empty-groups.component.less']
+  styleUrls: ['./empty-groups.component.less'],
+  providers: [ GroupsService ]
 })
 export class EmptyGroupsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  // Tabular Contents
-  groupsListsHeaders = [
-    'Device name', 'Group', 'Ward No.', 'Pincode'
+  tableDataList: any = [];
+  tableHeaderList = [
+    'Name', 'Device name', 'User', 'UserGroups', 'Description', 'CreatedBy'
   ]
-
-  groupsLists = [
-    {
-      name: 'PG2',
-      group: 'Sahakara nagara',
-      ward: 2,
-      pincode: 236457
-    },
-    {
-      name: 'ER1',
-      group: 'Chikamangaluru',
-      ward: 2,
-      pincode: 564767
-    },
-    {
-      name: 'AG132',
-      group: 'Bhuvaneswar',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 434563
-    },
-    {
-      name: 'MR4',
-      group: 'Midhilapuri',
-      ward: 2,
-      pincode: 546787
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    }
-  ]
-
-  public groupsListData = {
-     tableHeaders: this.groupsListsHeaders,
-     tableData: this.groupsLists,
+  tabularContent = {
+     tableHeaders: this.tableHeaderList,
+     tableData: this.tableDataList,
      pageName : 'emptyGroups'
   }
 
+  constructor( private groupsService: GroupsService, private changeDetect:ChangeDetectorRef ) {
+
+  }
+
+  ngOnInit() {
+  this.changeDetect.detach();
+  this.getEmptyGroupsContent();
+  }
+
+  getEmptyGroupsContent() {
+    this.groupsService.getGroups().subscribe(
+      successData => {
+          // Success response handler
+          this.updateGroups(successData);
+       },
+       error => {
+          // Error response handler
+          this.apiCallFailed(error);
+       }
+    );
+  }
+
+  updateGroups(successData) {
+    this.tabularContent.tableData = successData;
+    this.changeDetect.detectChanges()
+  }
+
+  apiCallFailed(error) {
+    console.log(error)
+  }
 }

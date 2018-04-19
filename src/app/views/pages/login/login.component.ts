@@ -6,11 +6,13 @@ import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppConfigProperties } from '../../../configs/app-config-properties';
-import { ApiService } from '../../../services/api.service';
 import { SimpleEqualHelper } from '../../../helpers/simple-equal-helper';
-import { UserDataModel } from '../../../models/user/user-data.model';
 
+import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/authentication/auth.service';
+
+import { UserDataModel } from '../../../models/user/user-data.model';
+import { AppConstants } from '../../../models/app.constants';
 
 
 @Component({
@@ -22,7 +24,7 @@ import { AuthService } from '../../../services/authentication/auth.service';
 
 export class LoginComponent implements OnInit {
 
-  uiConfigs: any;
+  appConfigs: any;
   userDataModel: any;
   userLoginForm: FormGroup;
   statusClass: string;
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit {
                private simpleEqual: SimpleEqualHelper,
                private _userDataModel: UserDataModel,
                public authService: AuthService ) {
-    this.uiConfigs = AppConfigProperties;
+    this.appConfigs = AppConfigProperties;
     this.createLoginForm();
     this.validateForm();
     this.apiService = _apiService;
@@ -54,8 +56,8 @@ export class LoginComponent implements OnInit {
 
     this.userDataModel = _userDataModel;
 
-    if(this.uiConfigs.isServerUp) {
-      this.loginApiURL = `${this.uiConfigs.buildBaseURL()}user`;
+    if(this.appConfigs.isServerUp) {
+      this.loginApiURL = `${this.appConfigs.buildBaseURL(AppConstants.apiResources.login)}`;
       // this.loginApiURL = 'https://httpbin.org/post';
     }
     this.isRemembered();

@@ -3,6 +3,7 @@ import { HttpModule, Http, Headers, RequestOptions, Response } from '@angular/ht
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import "rxjs/Rx";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class ApiService {
@@ -10,7 +11,7 @@ export class ApiService {
   headers: any;
   options: any;
 
-  constructor( private http: Http) {
+  constructor( private http: Http, private cookieService: CookieService) {
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json; charset=utf-8');
     this.headers.append('accept', 'application/json');
@@ -30,8 +31,9 @@ export class ApiService {
     return Observable.throw(errorMessage);
   }
 
-  get(url: string) {
-    return this.http.get(url, this.headers)
+  get(url: string, headerOptions: any) {
+    this.createHeaders(headerOptions);
+    return this.http.get(url, this.options)
         .map((response: Response) => {
           return response.json()
         }).catch(this.handleError);
@@ -53,5 +55,12 @@ export class ApiService {
       }
     }
     this.options = new RequestOptions({headers: this.headers});
+  }
+
+  getHeaderOptionWithBearerToken() {
+    let token = this.cookieService.get('Token');
+    let headerOption: any = {};
+    headerOption.Authorization = `bearer ${token}`;
+    return headerOption;
   }
 }

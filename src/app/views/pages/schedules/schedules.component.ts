@@ -6,11 +6,13 @@ import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties
 import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 import { schedulesMenuList } from '../../../models/schedulesMenuList';
 
+import { SchedulesService } from '../../../services/schedules.service';
+
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
   styleUrls: ['./schedules.component.less'],
-  providers: [ ColorStateEvaluatorHelper ]
+  providers: [ ColorStateEvaluatorHelper, SchedulesService ]
 })
 export class SchedulesComponent implements OnInit {
 
@@ -22,11 +24,14 @@ export class SchedulesComponent implements OnInit {
   collapsedClass: string = '';
 
   constructor( private colorStateEvaluator: ColorStateEvaluatorHelper,
-               private fb: FormBuilder ) {
+               private fb: FormBuilder, private schedulesService: SchedulesService ) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = colorStateEvaluator;
     this.menuList = schedulesMenuList;
     this.createScheduleUpdateForm();
+
+    console.log(schedulesService);
+
   }
 
   ngAfterViewInit() {
@@ -34,6 +39,25 @@ export class SchedulesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // let schedules = this.schedulesService.getSchedules().subscribe(() => {});
+    this.schedulesService.getTemplates().subscribe(
+    successData => {
+        // Success response handler
+        this.updateTemplates(successData);
+     },
+     error => {
+        // Error response handler
+        this.apiCallFailed(error);
+     }
+    );
+  }
+
+  updateTemplates(resData) {
+    console.log(resData)
+  }
+
+  apiCallFailed(resData) {
+    console.log(resData)
   }
 
   chartCollapsed(event: any): void {

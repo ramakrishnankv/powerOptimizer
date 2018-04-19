@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -7,11 +7,13 @@ import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties
 import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 import { groupsMenuList } from '../../../models/groupsMenuList';
 
+import { GroupsService } from '../../../services/groups.service';
+
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.less'],
-  providers: [ ColorStateEvaluatorHelper ]
+  providers: [ ColorStateEvaluatorHelper, GroupsService ]
 })
 export class GroupsComponent implements OnInit {
 
@@ -25,7 +27,8 @@ export class GroupsComponent implements OnInit {
 
   constructor( private colorStateEvaluator: ColorStateEvaluatorHelper,
                private modalService: BsModalService,
-               private fb: FormBuilder ) {
+               private fb: FormBuilder, private groupsService: GroupsService,
+               private changeDetect:ChangeDetectorRef) {
     this.appUIConf = AppUIConfigProperties;
     this.stateColorEval = colorStateEvaluator;
     this.menuList = groupsMenuList;
@@ -37,6 +40,28 @@ export class GroupsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  /*this.groupsService.getGroups().subscribe(
+    successData => {
+        // Success response handler
+        this.updateGroups(successData);
+
+     },
+     error => {
+        // Error response handler
+        this.apiCallFailed(error);
+     });*/
+  }
+
+  updateGroups(successData) {
+    console.log('will update groups');
+    console.log(successData);
+    this.groupsLists = successData;
+this.changeDetect.detectChanges()
+  }
+
+  apiCallFailed(resData) {
+    console.log(resData)
   }
 
   chartCollapsed(event: any): void {
@@ -64,7 +89,8 @@ export class GroupsComponent implements OnInit {
     'Iss No.', 'Iss Cat', 'Device ID', 'Created by', 'Assigned to'
   ]
 
-  groupsLists = [
+  groupsLists = []
+  /*groupsLists = [
     {
       serial: 1,
       category: 'Schedule',
@@ -108,7 +134,7 @@ export class GroupsComponent implements OnInit {
       assignee: 'Mamu Pachakuthira'
     }
 
-  ]
+  ]*/
 
   public groupsListData = {
      tableHeaders: this.groupsListsHeaders,

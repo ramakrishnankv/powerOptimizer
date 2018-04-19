@@ -1,77 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+
+import { GroupsService } from '../../../../services/groups.service';
 
 @Component({
   selector: 'app-group-devices',
   templateUrl: './group-devices.component.html',
-  styleUrls: ['./group-devices.component.less']
+  styleUrls: ['./group-devices.component.less'],
+  providers: [ GroupsService ]
 })
 export class GroupDevicesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  // Tabular Contents
-  groupsListsHeaders = [
-    'Device name', 'Group', 'Ward No.', 'Pincode'
+  tableDataList: any = [];
+  tableHeaderList = [
+    'Name', 'Device name', 'User', 'UserGroups', 'Description', 'CreatedBy'
   ]
-
-  groupsLists = [
-    {
-      name: 'JH7',
-      group: 'Atttingal',
-      ward: 24,
-      pincode: 234876
-    },
-    {
-      name: 'RT2',
-      group: 'Chikamangaluru',
-      ward: 2,
-      pincode: 345234
-    },
-    {
-      name: 'AG132',
-      group: 'Thiruvananthapuram',
-      ward: 2,
-      pincode: 123435
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 32,
-      pincode: 342356
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 42,
-      pincode: 560002
-    },
-    {
-      name: 'NH7',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    }
-  ]
-
-  public groupsListData = {
-     tableHeaders: this.groupsListsHeaders,
-     tableData: this.groupsLists,
+  tabularContent = {
+     tableHeaders: this.tableHeaderList,
+     tableData: this.tableDataList,
      pageName : 'groupDevices'
   }
 
+  constructor( private groupsService: GroupsService, private changeDetect:ChangeDetectorRef ) {
+
+  }
+
+  ngOnInit() {
+  this.changeDetect.detach();
+  this.getGroupDevicesContent();
+  }
+
+  getGroupDevicesContent() {
+    this.groupsService.getGroups().subscribe(
+      successData => {
+          // Success response handler
+          this.updateGroups(successData);
+       },
+       error => {
+          // Error response handler
+          this.apiCallFailed(error);
+       }
+    );
+  }
+
+  updateGroups(successData) {
+    this.tabularContent.tableData = successData;
+    this.changeDetect.detectChanges()
+  }
+
+  apiCallFailed(error) {
+    console.log(error)
+  }
 }

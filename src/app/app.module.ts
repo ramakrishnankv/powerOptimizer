@@ -51,6 +51,8 @@ import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device
 import { AuthenticationInterceptor } from './services/AuthenticationInterceptor';
 
 import { UserDataModel } from './models/user/user-data.model';
+
+import { ApiService } from './services/api.service';
 import { AuthService } from './services/authentication/auth.service';
 
 @NgModule({
@@ -97,7 +99,7 @@ import { AuthService } from './services/authentication/auth.service';
     BsDatepickerModule.forRoot(),
     ChartsModule
   ],
-  providers: [ UserDataModel, CookieService, AuthService ],
+  providers: [ UserDataModel, CookieService, ApiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -181,6 +181,10 @@ input.ng-invalid.ng-touched.ng-dirty {
 table.table {
   font-size: @size-four;
   margin-bottom: 0;
+  &.table-scrollable {
+    width: auto;
+    max-width: none;
+  }
   tr.header-row {
     background-color: @bg-color-third;
     color: @font-color-four;

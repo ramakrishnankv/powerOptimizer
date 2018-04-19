@@ -1,76 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+
+import { GroupsService } from '../../../../services/groups.service';
 
 @Component({
   selector: 'app-non-group-devices',
   templateUrl: './non-group-devices.component.html',
-  styleUrls: ['./non-group-devices.component.less']
+  styleUrls: ['./non-group-devices.component.less'],
+  providers: [ GroupsService ]
 })
 export class NonGroupDevicesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  tableDataList: any = [];
+  tableHeaderList = [
+    'Name', 'Device name', 'User', 'UserGroups', 'Description', 'CreatedBy'
+  ]
+  tabularContent = {
+     tableHeaders: this.tableHeaderList,
+     tableData: this.tableDataList,
+     pageName : 'nonGroupDevices'
   }
 
-  // Tabular Contents
-  groupsListsHeaders = [
-    'Device name', 'Group', 'Ward No.', 'Pincode'
-  ]
+  constructor( private groupsService: GroupsService, private changeDetect:ChangeDetectorRef ) {
 
-  groupsLists = [
-    {
-      name: 'AG1333',
-      group: 'Atttingal',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Chikamangaluru',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG132',
-      group: 'Thiruvananthapuram',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    }
-  ]
+  }
 
-  public groupsListData = {
-     tableHeaders: this.groupsListsHeaders,
-     tableData: this.groupsLists,
-     pageName : 'nonGroupDevices'
+  ngOnInit() {
+  this.changeDetect.detach();
+  this.getNonGroupDevicesContent();
+  }
+
+  getNonGroupDevicesContent() {
+    this.groupsService.getGroups().subscribe(
+      successData => {
+          // Success response handler
+          this.updateGroups(successData);
+       },
+       error => {
+          // Error response handler
+          this.apiCallFailed(error);
+       }
+    );
+  }
+
+  updateGroups(successData) {
+    this.tabularContent.tableData = successData;
+    this.changeDetect.detectChanges()
+  }
+
+  apiCallFailed(error) {
+    console.log(error)
   }
 }
