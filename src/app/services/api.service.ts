@@ -35,7 +35,7 @@ export class ApiService {
     this.createHeaders(headerOptions);
     return this.http.get(url, this.options)
         .map((response: Response) => {
-          return response.json()
+          return response
         }).catch(this.handleError);
   }
 

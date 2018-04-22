@@ -1,12 +1,5 @@
 export const AppUIConfigProperties = {
 
-  //orange #fb9732
-  //blue #0076a3
-  //lightblue #66cccc
-  //lightgreen #0fb954
-  //light blue 2 #6cc3b6
-  //red #e84649
-
   statusColors: {
     success:  {color: '#0fb954', text: 'success', limitText: 'Minimum'},
     info:     {color: '#66cccc', text: 'info', limitText: 'Average'},
@@ -14,7 +7,23 @@ export const AppUIConfigProperties = {
     danger:   {color: '#e84649', text: 'danger', limitText: 'Maximum'}
   },
   graphProps: {
-    baseColor: '#0076a3',
-    graphCutoutPercentage: 70
+    graphCutoutPercentage: 70,
+    devices: {
+      color1: '#fd9833',
+      color2: '#0074a0'
+    },
+    groups: {
+      color1: '#66cccc',
+      color2: '#f5931d'
+    },
+    issues: {
+      color1: '#e84649',
+      color2: '#6ec5b8',
+      color3: '#f5931d'
+    },
+    schedules: {
+      color1: '#0fb954',
+      color2: '#f5a239'
+    }
   }
 }

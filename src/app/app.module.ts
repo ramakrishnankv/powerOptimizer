@@ -3,13 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http, Headers, RequestOptions} from '@angular/http';
-/*
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule } from '@angular/material';
-*/
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
+
 import { LoginComponent } from './views/pages/login/login.component';
 import { PageNotFoundComponent } from './views/pages/page-not-found/page-not-found.component';
 import { HeaderPrimaryComponent } from './views/components/header-primary/header-primary.component';
@@ -48,9 +45,8 @@ import { AddCustomerComponent } from './views/pages/admin/add-customer/add-custo
 import { AddUserComponent } from './views/pages/admin/add-user/add-user.component';
 import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device.component';
 
-import { AuthenticationInterceptor } from './services/AuthenticationInterceptor';
-
 import { UserDataModel } from './models/user/user-data.model';
+import { ActivitySummaryModel } from './models/activity-summary.model';
 
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/authentication/auth.service';

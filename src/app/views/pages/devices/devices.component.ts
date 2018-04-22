@@ -1,30 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
-import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
+
+import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.less'],
-  providers: [ ColorStateEvaluatorHelper ]
+  providers: [ ActivitySummaryModel ]
 })
 
 export class DevicesComponent implements OnInit {
 
   appUIConf: any;
-  stateColorEval: any;
   router: Router;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
+  activitySummary: ActivitySummaryModel;
+  graphData: any = [];
 
-  constructor( private colorStateEvaluator: ColorStateEvaluatorHelper, private rout: Router ) {
+  constructor( private rout: Router,
+               private changeDetect:ChangeDetectorRef,
+               private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = colorStateEvaluator;
+    this.activitySummary = _activitySummary;
+    this.changeDetect.detach();
   }
 
   ngOnInit() {
     this.router = this.rout;
+    // Update Graph and summary data
+    this.getDeviceScheduleStats();
+  }
+
+  getDeviceScheduleStats() {
+
+    let successData = {
+      TotalLinkedDevices: 14,
+      TotalUnLinkedDevices: 8,
+      TotalGroupedDevices: 14,
+      TotalUnGroupedDevices: 1
+    }
+    setTimeout(() => {this.updateDevicesGraph(successData)}, 1000)
+
+
+    /*this.schedulesService.getDeviceScheduleStats().subscribe(
+    successData => {
+        // Success response handler
+        this.updateDevicesGraph(successData);
+     },
+     error => {
+        // Error response handler
+        this.apiCallFailed(error);
+     }
+    );*/
+  }
+
+  updateDevicesGraph(resData) {
+    this.graphData.push(this.activitySummary.getSummaryGraphData(resData, 'devices'));
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
   }
 
   chartCollapsed(event: any): void {
@@ -108,45 +144,6 @@ export class DevicesComponent implements OnInit {
     lineChartData: this.lineChartData,
     lineChartLabels: this.lineChartLabels,
     maxUnits: 2400
-  }
-
-  devicesData = {
-    activitySummary: [
-      {
-        type: "Device",
-        title: "Inactive",
-        totalCount: 400,
-        activeCount: 25,
-        inactiveCount: 375
-      }
-    ]
-  };
-
-  prepareGraphData(index, graph) {
-    let doughnutChartData: number[] = [graph.activeCount, graph.inactiveCount];
-    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
-    let doughnutChartType:string = 'doughnut';
-    let chartHover = ($event) => {  };
-    let chartClick = ($event) => {  };
-
-    let validCountPerc = graph.activeCount * 100/graph.totalCount;
-    let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
-    let colors:any[] = [{backgroundColor:[doughnutChartColor, this.appUIConf.graphProps.baseColor], borderWidth: 0}];
-    let options:any = {cutoutPercentage: this.appUIConf.graphProps.graphCutoutPercentage,
-      elements: {
-      }
-    };
-
-    graph.doughnutChartData = doughnutChartData;
-    graph.doughnutChartLabels = doughnutChartLabels;
-    graph.doughnutChartType = doughnutChartType;
-    graph.validCountPerc = validCountPerc.toFixed(2);
-    graph.colors = colors;
-    graph.options = options;
-    graph.chartHovered = chartHover;
-    graph.chartClicked = chartClick;
-
-    return graph;
   }
 
   editDevice() {

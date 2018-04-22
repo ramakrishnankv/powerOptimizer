@@ -14,10 +14,10 @@ export class AppComponent {
   constructor( private authService: AuthService,
                private router: Router) {
 
-    this.log()
+    this.verifyLoginStatus()
   }
 
-  log() {
+  verifyLoginStatus() {
     console.log('log called....')
     this.authService.login()
   }

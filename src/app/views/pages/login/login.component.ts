@@ -6,7 +6,6 @@ import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppConfigProperties } from '../../../configs/app-config-properties';
-import { SimpleEqualHelper } from '../../../helpers/simple-equal-helper';
 
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/authentication/auth.service';
@@ -19,7 +18,7 @@ import { AppConstants } from '../../../models/app.constants';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
-  providers: [ ApiService, CookieService, SimpleEqualHelper ]
+  providers: [ ApiService, CookieService ]
 })
 
 export class LoginComponent implements OnInit {
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit {
                private _apiService: ApiService,
                private _router: Router,
                private _cookie: CookieService,
-               private simpleEqual: SimpleEqualHelper,
                private _userDataModel: UserDataModel,
                public authService: AuthService ) {
     this.appConfigs = AppConfigProperties;
@@ -129,7 +127,7 @@ export class LoginComponent implements OnInit {
 
       let headerOption: any = {};
 
-      headerOption.Authorization = `Basic ${userLoginData}`;
+      headerOption.Authorization = `basic ${userLoginData}`;
       this.apiService.post(this.loginApiURL, null, headerOption)
         .subscribe(
            successData => {

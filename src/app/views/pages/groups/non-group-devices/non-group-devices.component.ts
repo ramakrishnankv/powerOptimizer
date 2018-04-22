@@ -25,8 +25,8 @@ export class NonGroupDevicesComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.changeDetect.detach();
-  this.getNonGroupDevicesContent();
+    this.changeDetect.detach();
+    this.getNonGroupDevicesContent();
   }
 
   getNonGroupDevicesContent() {
@@ -44,7 +44,7 @@ export class NonGroupDevicesComponent implements OnInit {
 
   updateGroups(successData) {
     this.tabularContent.tableData = successData;
-    this.changeDetect.detectChanges()
+    this.changeDetect.detectChanges();
   }
 
   apiCallFailed(error) {

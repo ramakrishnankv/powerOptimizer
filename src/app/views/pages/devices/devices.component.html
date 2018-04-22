@@ -18,8 +18,7 @@
             <div class="line-graph-container col-7 col-sm-7 col-md-7 col-lg-7">
               <app-chart-line [lineGraphData]="lineGraphData"></app-chart-line>
             </div>
-            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of devicesData.activitySummary;
-                                                                trackBy: prepareGraphData.bind(this)">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of graphData">
               <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
             </div>
           </div>
@@ -44,10 +43,10 @@
         </nav>
       </div>
       <div class="row">
-        <ul class="product-detail-list list-inline" *ngFor="let counts of devicesData.activitySummary;">
+        <ul class="product-detail-list list-inline" *ngFor="let counts of graphData">
           <li class="list-inline-item">Total: {{counts.totalCount}}</li>
-          <li class="list-inline-item">Active: {{counts.activeCount}}</li>
-          <li class="list-inline-item">Inactive: {{counts.inactiveCount}}</li>
+          <li class="list-inline-item">Active: {{counts.activity1Value}}</li>
+          <li class="list-inline-item">Inactive: {{counts.activity2Value}}</li>
         </ul>
       </div>
     </section>

@@ -12,16 +12,15 @@
              [collapse]="isChartCollapsed"
              class=" ">
           <div class="row graphs-container">
-            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of groupsData.activitySummary;
-                                                                trackBy: prepareGraphData.bind(this)">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of graphData">
               <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
             </div>
           </div>
-          <ul class="product-detail-list list-inline row" *ngFor="let counts of groupsData.activitySummary;">
-            <li class="col-6">Total Groups: {{counts.totalCount}}</li>
-            <li class="col-6 text-right">Grouped Devices: {{counts.groupedDevices}}</li>
-            <li class="col-6">Total Devices: {{counts.totalDevices}}</li>
-            <li class="col-6 text-right">Non-grouped Devices: {{counts.nonGroupedDevices}}</li>
+          <ul class="product-detail-list list-inline row" *ngFor="let counts of graphData">
+            <li class="col-6">Total Linked Devices: {{counts.totalCount}}</li>
+            <li class="col-6 text-right">Total UnLinked Devices: {{counts.activity1Value}}</li>
+            <li class="col-6">Total Grouped Devices: {{counts.activity2Value}}</li>
+            <li class="col-6 text-right">Total UnGrouped Devices: {{counts.activity3Value}}</li>
           </ul>
         </div>
       </div>

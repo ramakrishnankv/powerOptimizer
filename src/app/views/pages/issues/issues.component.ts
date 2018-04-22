@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
-import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
+
+import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 
 @Component({
   selector: 'app-issues',
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.less'],
-  providers: [ ColorStateEvaluatorHelper ]
+  providers: [ ActivitySummaryModel ]
 })
 export class IssuesComponent implements OnInit {
 
   appUIConf: any;
-  stateColorEval: any;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
+  activitySummary: ActivitySummaryModel;
+  graphData: any = [];
 
-  constructor( private colorStateEvaluator: ColorStateEvaluatorHelper ) {
+  constructor( private changeDetect:ChangeDetectorRef,
+               private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
-    this.stateColorEval = colorStateEvaluator;
+    this.activitySummary = _activitySummary;
+    this.changeDetect.detach();
   }
 
   ngAfterViewInit() {
@@ -25,7 +29,37 @@ export class IssuesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Update Graph and summary data
+    this.getIssuesStats();
+  }
 
+  getIssuesStats() {
+
+    let successData = {
+      TotalIssues: 14,
+      Priority1: 8,
+      Priority2: 5,
+      Priority3: 1
+    }
+    setTimeout(() => {this.updateIssuesGraph(successData)}, 1000)
+
+
+    /*this.schedulesService.getDeviceScheduleStats().subscribe(
+    successData => {
+        // Success response handler
+        this.updateIssuesGraph(successData);
+     },
+     error => {
+        // Error response handler
+        this.apiCallFailed(error);
+     }
+    );*/
+  }
+
+  updateIssuesGraph(resData) {
+    this.graphData.push(this.activitySummary.getSummaryGraphData(resData, 'issues'));
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
   }
 
   chartCollapsed(event: any): void {
@@ -91,45 +125,5 @@ export class IssuesComponent implements OnInit {
      tableHeaders: this.issueListsHeaders,
      tableData: this.issueLists,
      pageName : 'issues'
-  }
-
-  issuesData = {
-    activitySummary: [
-      {
-        type: "Issues",
-        title: "Inactive",
-        totalCount: 23,
-        p1Issues: 3,
-        p2Issues: 6,
-        p3Issues: 14
-      }
-    ]
-  };
-
-  prepareGraphData(index, graph) {
-    let doughnutChartData: number[] = [graph.p1Issues+graph.p2Issues, graph.p3Issues];
-    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
-    let doughnutChartType:string = 'doughnut';
-    let chartHover = ($event) => {  };
-    let chartClick = ($event) => { console.log('haaaa'); };
-
-    let validCountPerc = graph.p1Issues * 100/graph.totalCount;
-    let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
-    let colors:any[] = [{backgroundColor:[doughnutChartColor, this.appUIConf.graphProps.baseColor], borderWidth: 0}];
-    let options:any = {cutoutPercentage: this.appUIConf.graphProps.graphCutoutPercentage,
-      elements: {
-      }
-    };
-
-    graph.doughnutChartData = doughnutChartData;
-    graph.doughnutChartLabels = doughnutChartLabels;
-    graph.doughnutChartType = doughnutChartType;
-    graph.validCountPerc = validCountPerc.toFixed(2);
-    graph.colors = colors;
-    graph.options = options;
-    graph.chartHovered = chartHover;
-    graph.chartClicked = chartClick;
-
-    return graph;
   }
 }
