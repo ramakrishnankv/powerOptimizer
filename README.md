@@ -1,3 +1,4 @@
+<<<<<<< 7cdd76c296ddafcd1a19db279cb7388c9cbd77ab
 # PowerOptimizer
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
