@@ -14,23 +14,25 @@ import { AppConstants } from '../models/app.constants';
 export class SchedulesService {
 
   appConfigs: any;
-  deviceScheduleApiURL: string;
+  deviceScheduleStatsApiURL: string;
   scheduleApiURL: string;
-  getTemplateApiURL: string;
+  getTemplateNamesApiURL: string;
+  deleteTemplateScheduleApiURL: string;
 
   constructor( private apiService: ApiService, private cookieService: CookieService ) {
     this.appConfigs = AppConfigProperties;
     this.scheduleApiURL = `${this.appConfigs.buildBaseURL(AppConstants.apiResources.schedules)}`;
     let userId = cookieService.get('UserId');
-    let getTemplateParams = `${userId}&templateNumber=1`
+    let getTemplateParams = `${userId}`;
 
-    this.deviceScheduleApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deviceSchedule}${userId}`);
+    this.deviceScheduleStatsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deviceSchedule}${userId}`);
 
-    this.getTemplateApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getTemplates}${getTemplateParams}`);
+    this.getTemplateNamesApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getTemplateNames}${getTemplateParams}`);
+    this.deleteTemplateScheduleApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deleteTemplateSchedule}`);
   }
 
   getDeviceScheduleStats() {
-    return this.apiService.get(this.deviceScheduleApiURL, this.apiService.getHeaderOptionWithBearerToken())
+    return this.apiService.get(this.deviceScheduleStatsApiURL, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
   }
 
@@ -40,10 +42,14 @@ export class SchedulesService {
   }
 
   /* TODO: Move this to TEMPLATE SERVICE */
-  getTemplates() {
+  getTemplateNames() {
     console.log('calling get templates....');
-    // A.M&templateNumber=1
-    return this.apiService.get(this.getTemplateApiURL, this.apiService.getHeaderOptionWithBearerToken())
+    return this.apiService.get(this.getTemplateNamesApiURL, this.apiService.getHeaderOptionWithBearerToken())
+          .map((res: Response) => res.json());
+  }
+
+  deleteTemplateSchedule(templateId) {
+    return this.apiService.delete(`${this.deleteTemplateScheduleApiURL}${templateId}`, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
   }
 }

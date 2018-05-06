@@ -47,6 +47,14 @@ export class ApiService {
         }).catch(this.handleError);
   }
 
+  delete(url: string, headerOptions: any) {
+    this.createHeaders(headerOptions);
+    return this.http.delete(url, this.options)
+        .map((response: Response) => {
+          return response;
+        }).catch(this.handleError);
+  }
+
   createHeaders(headerOptions) {
     if(headerOptions && typeof headerOptions === 'object') {
       for( let head in headerOptions) {

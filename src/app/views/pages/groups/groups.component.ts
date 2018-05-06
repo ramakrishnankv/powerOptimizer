@@ -46,6 +46,10 @@ export class GroupsComponent implements OnInit {
     this.getDeviceScheduleStats();
   }
 
+  apiCallFailed(resData) {
+    console.log(resData)
+  }
+
   getDeviceScheduleStats() {
 
     let successData = {
@@ -73,10 +77,6 @@ export class GroupsComponent implements OnInit {
     this.graphData.push(this.activitySummary.getSummaryGraphData(resData, 'groups'));
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
-  }
-
-  apiCallFailed(resData) {
-    console.log(resData)
   }
 
   chartCollapsed(event: any): void {

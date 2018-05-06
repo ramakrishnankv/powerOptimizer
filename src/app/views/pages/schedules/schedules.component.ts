@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
 import { schedulesMenuList } from '../../../models/schedulesMenuList';
@@ -18,18 +20,22 @@ export class SchedulesComponent implements OnInit {
 
   appUIConf: any;
   menuList: any;
-  scheduleUpdateForm: FormGroup;
+  scheduleTemplateForm: FormGroup;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
+  modalRef: BsModalRef;
   activitySummary: ActivitySummaryModel;
   graphData: any = [];
+  scheduleTemplateData: any = [];
+  schduleTemplateDefaultOpt: string;
 
-  constructor( private fb: FormBuilder, private schedulesService: SchedulesService,
+  constructor( private modalService: BsModalService,
+               private fb: FormBuilder, private schedulesService: SchedulesService,
                private changeDetect:ChangeDetectorRef,
                private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
     this.menuList = schedulesMenuList;
-    this.createScheduleUpdateForm();
+    this.createscheduleTemplateForm();
     this.activitySummary = _activitySummary;
     this.changeDetect.detach();
   }
@@ -41,8 +47,16 @@ export class SchedulesComponent implements OnInit {
   ngOnInit() {
     // Update Graph and summary data
     this.getDeviceScheduleStats();
+
+    // Populate Template Names select data
+    this.getTemplateNames();
   }
 
+  apiCallFailed(resData) {
+    console.log(resData)
+  }
+
+  // Update Graph and summary data
   getDeviceScheduleStats() {
 
     /*let successData = {
@@ -70,15 +84,6 @@ export class SchedulesComponent implements OnInit {
     this.changeDetect.detectChanges();
   }
 
-  updateTemplates(resData) {
-    console.log(resData)
-    //this.changeDetect.detectChanges();
-  }
-
-  apiCallFailed(resData) {
-    console.log(resData)
-  }
-
   chartCollapsed(event: any): void {
     this.collapsedClass = 'collapsed-content';
   }
@@ -87,10 +92,71 @@ export class SchedulesComponent implements OnInit {
     this.collapsedClass = '';
   }
 
-  createScheduleUpdateForm() {
-    this.scheduleUpdateForm = this.fb.group({
-      searchScheduleSelect: ['', Validators.required]
-    })
+  createscheduleTemplateForm() {
+    this.scheduleTemplateForm = this.fb.group({
+      scheduleTemplateNameSelect: [this.schduleTemplateDefaultOpt, [Validators.required]]
+    });
   }
 
+  // Populate Template Names select data
+  getTemplateNames() {
+
+    let successData = [
+     {
+         TemplateScheduleId: "1",
+         Name: "PowerSaving"
+     },
+     {
+         TemplateScheduleId: "2",
+         Name: "PowerSavingPlus"
+     },
+     {
+         TemplateScheduleId: "4",
+         Name: "PowerSavingPlus"
+     },
+     {
+         TemplateScheduleId: "5",
+         Name: "PowerUnknown"
+     },
+     {
+         TemplateScheduleId: "6",
+         Name: "PowerUnknownn"
+     }
+  ]
+    // setTimeout(() => {this.populateTemplateSelectOptions(successData)}, 1000);
+
+    this.schedulesService.getTemplateNames().subscribe(
+      successData => {
+        // Success response handler
+        this.populateTemplateSelectOptions(successData);
+      }
+    );
+  }
+
+  populateTemplateSelectOptions(resData) {
+    this.scheduleTemplateData = resData;
+    this.schduleTemplateDefaultOpt = resData[0].TemplateScheduleId;
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
+  }
+
+  scheduleTemplateDelete() {
+    let templateId = this.schduleTemplateDefaultOpt;
+    this.schedulesService.deleteTemplateSchedule(templateId).subscribe(
+      successData => {
+        // Success response handler
+        this.deleteAndUpdateTemplateSchedule(successData);
+      }
+    );
+  }
+
+  deleteAndUpdateTemplateSchedule(resData) {
+    this.getTemplateNames();
+  }
+
+  openModal(template: TemplateRef<any>, $event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
 }

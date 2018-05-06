@@ -16,10 +16,8 @@ import { DashboardComponent } from './views/pages/dashboard/dashboard.component'
 import { PagePrimeComponent } from './views/templates/page-prime/page-prime.component';
 import { NavbarPrimeComponent } from './views/components/navbar-prime/navbar-prime.component';
 import { ProgressBarComponent } from './views/components/progress-bar/progress-bar.component';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { ModalModule } from 'ngx-bootstrap';
-import { ProgressbarModule } from 'ngx-bootstrap';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+
+import { CollapseModule, ModalModule, ProgressbarModule, BsDatepickerModule, TimepickerModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { CookieService } from 'ngx-cookie-service';
@@ -50,6 +48,8 @@ import { ActivitySummaryModel } from './models/activity-summary.model';
 
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/authentication/auth.service';
+import { CreateScheduleTemplateComponent } from './views/components/create-schedule-template/create-schedule-template.component';
+import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +81,9 @@ import { AuthService } from './services/authentication/auth.service';
     AddDeviceComponent,
     AddCustomerComponent,
     AddUserComponent,
-    EditDeviceComponent
+    EditDeviceComponent,
+    CreateScheduleTemplateComponent,
+    ModalPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +95,7 @@ import { AuthService } from './services/authentication/auth.service';
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     ChartsModule
   ],
   providers: [ UserDataModel, CookieService, ApiService ],

@@ -2,7 +2,11 @@ export const AppConfigProperties = {
 
   prefix: 'http://cors-anywhere.herokuapp.com/',
   protocol: 'http://',
-  remoteID: '13.232.39.218',
+<<<<<<< Updated upstream
+  remoteID: '13.126.249.100',
+=======
+  remoteID: '13.232.28.195',
+>>>>>>> Stashed changes
   baseURL: '/StreetLight/api/',
   buildBaseURL: function(apiPath) {
     return `${this.prefix}${this.protocol}${this.remoteID}${this.baseURL}${apiPath}`;
