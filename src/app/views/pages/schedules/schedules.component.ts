@@ -9,12 +9,13 @@ import { schedulesMenuList } from '../../../models/schedulesMenuList';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 
 import { SchedulesService } from '../../../services/schedules.service';
+import { TemplatesService } from '../../../services/templates.service';
 
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
   styleUrls: ['./schedules.component.less'],
-  providers: [ SchedulesService, ActivitySummaryModel ]
+  providers: [ SchedulesService, TemplatesService, ActivitySummaryModel ]
 })
 export class SchedulesComponent implements OnInit {
 
@@ -31,6 +32,7 @@ export class SchedulesComponent implements OnInit {
 
   constructor( private modalService: BsModalService,
                private fb: FormBuilder, private schedulesService: SchedulesService,
+               private templatesService: TemplatesService,
                private changeDetect:ChangeDetectorRef,
                private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
@@ -58,14 +60,6 @@ export class SchedulesComponent implements OnInit {
 
   // Update Graph and summary data
   getDeviceScheduleStats() {
-
-    /*let successData = {
-      Total: 14,
-      Scheduled: 1,
-      UnScheduled: 13
-    }
-    setTimeout(() => {this.updateScheduleGraph(successData)}, 1000)*/
-
     this.schedulesService.getDeviceScheduleStats().subscribe(
       successData => {
         // Success response handler
@@ -100,32 +94,7 @@ export class SchedulesComponent implements OnInit {
 
   // Populate Template Names select data
   getTemplateNames() {
-
-    let successData = [
-     {
-         TemplateScheduleId: "1",
-         Name: "PowerSaving"
-     },
-     {
-         TemplateScheduleId: "2",
-         Name: "PowerSavingPlus"
-     },
-     {
-         TemplateScheduleId: "4",
-         Name: "PowerSavingPlus"
-     },
-     {
-         TemplateScheduleId: "5",
-         Name: "PowerUnknown"
-     },
-     {
-         TemplateScheduleId: "6",
-         Name: "PowerUnknownn"
-     }
-  ]
-    // setTimeout(() => {this.populateTemplateSelectOptions(successData)}, 1000);
-
-    this.schedulesService.getTemplateNames().subscribe(
+    this.templatesService.getTemplateNames().subscribe(
       successData => {
         // Success response handler
         this.populateTemplateSelectOptions(successData);
@@ -142,7 +111,7 @@ export class SchedulesComponent implements OnInit {
 
   scheduleTemplateDelete() {
     let templateId = this.schduleTemplateDefaultOpt;
-    this.schedulesService.deleteTemplateSchedule(templateId).subscribe(
+    this.templatesService.deleteTemplateSchedule(templateId).subscribe(
       successData => {
         // Success response handler
         this.deleteAndUpdateTemplateSchedule(successData);

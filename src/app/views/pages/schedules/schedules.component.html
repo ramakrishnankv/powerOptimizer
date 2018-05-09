@@ -36,20 +36,20 @@
                   <div class="row no-gutters">
 
                     <select class="col-9 form-control" id="schedule-template-name-select" name="schedule-template-name-select"
-                            formControlName="scheduleTemplateNameSelect" [(ngModel)]="schduleTemplateDefaultOpt">
+                            formControlName="scheduleTemplateNameSelect" [(ngModel)]="schduleTemplateDefaultOpt" >
 
                       <option *ngFor="let optData of scheduleTemplateData" [value]="optData.TemplateScheduleId" >
                         {{optData.Name}}
                       </option>
                     </select>
-                    <div class="col-3">
+                    <div class="col-sm-2 col-3">
                       <button class="btn icon-box bg-search btn-outline-success" type="button" >
                         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
                       </button>
                     </div>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-sm-3 col-2">
                   <button class="btn icon-box bg-search btn-outline-success" type="button" (click)="scheduleTemplateDelete()">
                     <img class="icon menu-icon" src="assets/icons/svg/si-glyph-trash.svg" />
                   </button>
@@ -135,5 +135,5 @@
   </div>
 </app-page-prime>
 <ng-template #template>
-  <app-create-schedule-template [modalRef]="modalRef"></app-create-schedule-template>
+  <app-create-schedule-template [modalRef]="modalRef" (createTemplateSuccessEvent)="getTemplateNames()"></app-create-schedule-template>
 </ng-template>

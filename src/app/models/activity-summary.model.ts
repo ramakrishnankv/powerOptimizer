@@ -105,8 +105,8 @@ export class ActivitySummaryModel {
     graphDataModel.type = this.activityPageName;
     graphDataModel.totalCount = this.activityTotal;
 
-    graphDataModel.chartHover = ($event) => { console.log('ho will happen???') };
-    graphDataModel.chartClick = ($event) => {  };
+    graphDataModel.chartHovered = ($event) => { console.log('saranam....') };
+    graphDataModel.chartClicked = ($event) => { console.log('unneeeeeeee')  };
 
     // Summary Values
     graphDataModel.activity1Value = this.activity1Value;

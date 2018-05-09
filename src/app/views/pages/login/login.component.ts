@@ -121,10 +121,6 @@ export class LoginComponent implements OnInit {
       }
 
       let userLoginData = window.btoa(`${userId}:${password}`);
-
-      // TODO: Remove the hard coded Token
-      // formData.append('Token', 'YjJiNmRiMmQtNzY1OS00MmViLWIwNWEtODUxYmZkYzJlMjFjOkEuTQ==');
-
       let headerOption: any = {};
 
       headerOption.Authorization = `basic ${userLoginData}`;
