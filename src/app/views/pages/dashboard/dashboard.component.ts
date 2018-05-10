@@ -29,11 +29,8 @@ export class DashboardComponent implements OnInit {
               private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
     this.userDataModel = _userDataModel;
-    console.log(this.userDataModel.userData);
     this.activitySummary = _activitySummary;
     this.changeDetect.detach();
-
-
   }
 
   ngAfterViewInit() {
@@ -88,17 +85,10 @@ export class DashboardComponent implements OnInit {
       UnScheduled: 13
     }
 
-    /*let unda = this.activitySummary.getSummaryGraphData(deviceData, 'devices');
-    let panda = this.activitySummary.getSummaryGraphData(groupsData, 'issues');
-    console.log(unda)
-    console.log(panda)*/
-
     this.graphData.push(this.activitySummary.getSummaryGraphData(deviceData, 'devices'));
     this.graphData.push(this.activitySummary.getSummaryGraphData(groupsData, 'groups'));
     this.graphData.push(this.activitySummary.getSummaryGraphData(issuesData, 'issues'));
     this.graphData.push(this.activitySummary.getSummaryGraphData(scheduleData, 'schedules'));
-
-    console.log(this.graphData)
 
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
@@ -136,32 +126,5 @@ export class DashboardComponent implements OnInit {
       }
     ]
   };
-
-  /*prepareGraphData(index, graph) {
-    let doughnutChartData: number[] = [graph.activeCount, graph.inactiveCount];
-    let doughnutChartLabels: string[] = ['label 1', 'label 2'];
-    let doughnutChartType:string = 'doughnut';
-    let chartHover = ($event) => {  };
-    let chartClick = ($event) => {  };
-
-    let validCountPerc = graph.activeCount * 100/graph.totalCount;
-    let doughnutChartColor: string = this.stateColorEval.provideColorValue(validCountPerc).color;
-    let colors:any[] = [{backgroundColor:[doughnutChartColor, this.appUIConf.graphProps.baseColor], borderWidth: 0}];
-    let options:any = {cutoutPercentage: this.appUIConf.graphProps.graphCutoutPercentage,
-      elements: {
-      }
-    };
-
-    graph.doughnutChartData = doughnutChartData;
-    graph.doughnutChartLabels = doughnutChartLabels;
-    graph.doughnutChartType = doughnutChartType;
-    graph.validCountPerc = validCountPerc.toFixed(2);
-    graph.colors = colors;
-    graph.options = options;
-    graph.chartHovered = chartHover;
-    graph.chartClicked = chartClick;
-
-    return graph;
-  }*/
 
 }

@@ -8,7 +8,9 @@ export const AppConstants = {
     getTemplateNames: 'TemplateNames?userId=',
     deleteTemplateSchedule: 'TemplateSchedule?templateId=',
     addTemplateSchedules: 'TemplateSchedule',
-    getGroups: 'group'
+    group: 'group?userId=',
+    nonScheduleDevices: 'NonScheduledDevices?userId=',
+    scheduledDevices: 'ScheduledDevices?userId='
   }
 
 }

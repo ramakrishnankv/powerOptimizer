@@ -69,31 +69,32 @@
         <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
           <div class="col-3 sec-title-prime">Groups</div>
           <div  class="col-9">
-            <!--<form class="form-inline" name="scheduleUpdateForm2" action="" (submit)="unda" method="post" [formGroup]="scheduleUpdateForm2" novalidate >
+            <form class="form-inline" name="scheduleGroupsForm" action="" method="post" [formGroup]="scheduleGroupsForm" novalidate >
               <div class="form-row row no-gutters form-tight-cell w-100">
                 <div class="col">
                   <div class="row no-gutters">
-                    <select class="col-10 form-control" id="search-schedule-groups" name="search-schedule-groups" formControlName="searchScheduleSelect2">
-                      <option selected="selected">Schedule 1</option>
-                      <option>Schedule 2</option>
-                      <option>Schedule 4</option>
+                    <select class="col-10 form-control" id="search-schedule-groups" name="search-schedule-groups"
+                            formControlName="scheduleGroupsSelect" [(ngModel)]="schduleGroupsDefaultOpt">
+                      <option *ngFor="let optData of scheduleGroupData" [value]="optData.GroupID">
+                        {{optData.GroupName}}
+                      </option>
                     </select>
                     <div class="col-2">
-                      <button class="btn icon-box bg-search btn-outline-success" type="submit">
+                      <button class="btn icon-box bg-search btn-outline-success" type="button">
                         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>-->
+            </form>
           </div>
         </nav>
       </div>
 
       <div class="row product-details-row">
         <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
-          <!--<form class="form-inline" name="scheduleUpdateForm3" action="" (submit)="unda" method="post" [formGroup]="scheduleUpdateForm3" novalidate >
+          <!--<form class="form-inline" name="scheduleUpdateForm3" action="" method="post" [formGroup]="scheduleUpdateForm3" novalidate >
             <div class="form-row row no-gutters w-100">
               &lt;!&ndash;<div class="col-4">
 
@@ -121,9 +122,9 @@
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">SCHEDULE DETAILS</div>
           <div class="col right-container">
-            <a href="#" class="nav-link icon-box selected">
-              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-circle-plus.svg" />
-            </a>
+            <button class="btn icon-box bg-search btn-outline-success" type="button">
+              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+            </button>
           </div>
         </nav>
       </div>

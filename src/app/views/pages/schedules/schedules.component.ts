@@ -10,34 +10,40 @@ import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 
 import { SchedulesService } from '../../../services/schedules.service';
 import { TemplatesService } from '../../../services/templates.service';
+import { GroupsService } from '../../../services/groups.service';
 
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
   styleUrls: ['./schedules.component.less'],
-  providers: [ SchedulesService, TemplatesService, ActivitySummaryModel ]
+  providers: [ SchedulesService, TemplatesService, GroupsService, ActivitySummaryModel ]
 })
 export class SchedulesComponent implements OnInit {
 
   appUIConf: any;
   menuList: any;
   scheduleTemplateForm: FormGroup;
+  scheduleGroupsForm: FormGroup;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
   modalRef: BsModalRef;
   activitySummary: ActivitySummaryModel;
   graphData: any = [];
   scheduleTemplateData: any = [];
+  scheduleGroupData: any = [];
   schduleTemplateDefaultOpt: string;
+  schduleGroupsDefaultOpt: string;
 
   constructor( private modalService: BsModalService,
                private fb: FormBuilder, private schedulesService: SchedulesService,
                private templatesService: TemplatesService,
+               private groupsService: GroupsService,
                private changeDetect:ChangeDetectorRef,
                private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
     this.menuList = schedulesMenuList;
-    this.createscheduleTemplateForm();
+    this.createScheduleTemplateForm();
+    this.createScheduleGroupsForm();
     this.activitySummary = _activitySummary;
     this.changeDetect.detach();
   }
@@ -52,6 +58,9 @@ export class SchedulesComponent implements OnInit {
 
     // Populate Template Names select data
     this.getTemplateNames();
+
+    // Populate Template Names select data
+    this.getGroups();
   }
 
   apiCallFailed(resData) {
@@ -86,7 +95,7 @@ export class SchedulesComponent implements OnInit {
     this.collapsedClass = '';
   }
 
-  createscheduleTemplateForm() {
+  createScheduleTemplateForm() {
     this.scheduleTemplateForm = this.fb.group({
       scheduleTemplateNameSelect: [this.schduleTemplateDefaultOpt, [Validators.required]]
     });
@@ -121,6 +130,29 @@ export class SchedulesComponent implements OnInit {
 
   deleteAndUpdateTemplateSchedule(resData) {
     this.getTemplateNames();
+  }
+
+  // Populate Groups select data
+  createScheduleGroupsForm() {
+    this.scheduleGroupsForm = this.fb.group({
+      scheduleGroupsSelect: [this.schduleGroupsDefaultOpt, [Validators.required]]
+    });
+  }
+
+  getGroups() {
+    this.groupsService.getGroups().subscribe(
+      successData => {
+        // Success response handler
+        this.populateGroupsSelectOptions(successData);
+      }
+    );
+  }
+
+  populateGroupsSelectOptions(resData) {
+    this.scheduleGroupData = resData;
+    this.schduleGroupsDefaultOpt = resData[0].GroupID;
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
   }
 
   openModal(template: TemplateRef<any>, $event) {

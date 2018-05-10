@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NgSwitch } from '@angular/common';
 
 @Component({
@@ -11,7 +11,9 @@ export class TabularContentPrimaryComponent implements OnInit {
   @Input() tabularData: any;
   @Input() rowClickHandler;
 
-  constructor( ) { }
+  constructor( private changeDetect:ChangeDetectorRef ) {
+    /*this.changeDetect.detach();*/
+  }
 
   ngOnInit() {  }
 

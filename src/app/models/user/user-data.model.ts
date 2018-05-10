@@ -15,11 +15,10 @@ export class UserDataModel {
   }
 
   constructor( ) {
-    console.log(this.userData)
+
   }
 
   updateUserData(data: any) {
-    console.log('calling....');
     this.userData = data;
   }
 

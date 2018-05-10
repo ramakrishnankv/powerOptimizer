@@ -12,8 +12,8 @@ export class NonGroupDevicesComponent implements OnInit {
 
   tableDataList: any = [];
   tableHeaderList = [
-    'Name', 'Device name', 'User', 'UserGroups', 'Description', 'CreatedBy'
-  ]
+    'Device name', 'Device ID', 'Group ID', 'Group Name'
+  ];
   tabularContent = {
      tableHeaders: this.tableHeaderList,
      tableData: this.tableDataList,
@@ -34,10 +34,6 @@ export class NonGroupDevicesComponent implements OnInit {
       successData => {
           // Success response handler
           this.updateGroups(successData);
-       },
-       error => {
-          // Error response handler
-          this.apiCallFailed(error);
        }
     );
   }
@@ -47,7 +43,4 @@ export class NonGroupDevicesComponent implements OnInit {
     this.changeDetect.detectChanges();
   }
 
-  apiCallFailed(error) {
-    console.log(error)
-  }
 }

@@ -18,14 +18,12 @@
           <td>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="non-group-{{i}}">
-              <label for="non-group-{{i}}">{{data.Name}}</label>
+              <label for="non-group-{{i}}">{{data.DeviceName}}</label>
             </div>
           </td>
-          <td>{{data.Devices[0]}}</td>
-          <td>{{data.User}}</td>
-          <td>{{data.UserGroups[0]}}</td>
-          <td>{{data.Description}}</td>
-          <td>{{data.CreatedBy}}</td>
+          <td>{{data.DeviceId}}</td>
+          <td>{{data.GroupID}}</td>
+          <td>{{data.GroupName}}</td>
         </ng-template>
         <ng-template [ngSwitchCase]="'groupDevices'">
           <!-- Groups / groupDevices Data -->
@@ -58,9 +56,21 @@
           <td>{{data.ward}}</td>
           <td>{{data.pincode}}</td>
         </ng-template>
+        <ng-template [ngSwitchCase]="'nonScheduleDevices'">
+          <!-- Non Schedule Devices Data -->
+          <td>{{data.DeviceName}}</td>
+          <td>{{data.GroupName}}</td>
+          <td>{{data.DeviceId}}</td>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'allDevices'">
+          <!-- All Devices Data -->
+          <td>{{data.DeviceName}}</td>
+          <td>{{data.GroupName}}</td>
+          <td>{{data.DeviceId}}</td>
+        </ng-template>
       </tr>
     </table>
-    <div class="col icon-bar m-3">
+    <div class="col icon-bar m-3" *ngIf="isLinkAvailable">
       <button class="btn icon-box bg-search" type="submit">
         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-link-right.svg" />
       </button>

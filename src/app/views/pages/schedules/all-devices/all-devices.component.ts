@@ -1,76 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+
+import { SchedulesService } from '../../../../services/schedules.service';
 
 @Component({
   selector: 'app-all-devices',
   templateUrl: './all-devices.component.html',
-  styleUrls: ['./all-devices.component.less']
+  styleUrls: ['./all-devices.component.less'],
+  providers: [ SchedulesService ]
 })
 export class AllDevicesComponent implements OnInit {
 
-  constructor() { }
+  tableDataList: any = [];
+  tableHeaderList = [
+    'Device name', 'Group', 'Manage'
+  ];
+  tabularContent = {
+     tableHeaders: this.tableHeaderList,
+     tableData: this.tableDataList,
+     pageName : 'allDevices'
+  }
+
+  constructor( private schedulesService: SchedulesService, private changeDetect:ChangeDetectorRef ) {
+    this.changeDetect.detach();
+  }
 
   ngOnInit() {
+    this.getAllDevicesContent();
   }
 
-  // Tabular Contents
-  groupsListsHeaders = [
-    'Device name', 'Group', 'Ward No.', 'Pincode'
-  ]
-
-  groupsLists = [
-    {
-      name: 'PG2',
-      group: 'Sahakara nagara',
-      ward: 2,
-      pincode: 236457
-    },
-    {
-      name: 'ER1',
-      group: 'Chikamangaluru',
-      ward: 2,
-      pincode: 564767
-    },
-    {
-      name: 'AG132',
-      group: 'Bhuvaneswar',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 434563
-    },
-    {
-      name: 'MR4',
-      group: 'Midhilapuri',
-      ward: 2,
-      pincode: 546787
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    },
-    {
-      name: 'AG1',
-      group: 'Varanasi',
-      ward: 2,
-      pincode: 560002
-    }
-  ]
-
-  public groupsListData = {
-     tableHeaders: this.groupsListsHeaders,
-     tableData: this.groupsLists,
-     pageName : 'emptyGroups'
+  getAllDevicesContent() {
+    this.schedulesService.getScheduledDevices().subscribe(
+      successData => {
+          // Success response handler
+          this.updateGroups(successData);
+       }
+    );
   }
+
+  updateGroups(successData) {
+    this.tabularContent.tableData = successData;
+    this.changeDetect.detectChanges();
+  }
+
 }

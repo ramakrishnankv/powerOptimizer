@@ -18,11 +18,14 @@ export class GroupsService {
 
   constructor( private apiService: ApiService, private cookieService: CookieService ) {
     this.appConfigs = AppConfigProperties;
-    this.groupsApiURL = `${this.appConfigs.buildBaseURL(AppConstants.apiResources.getGroups)}`;
+    let userId = cookieService.get('UserId');
+
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.group}${userId}`);
   }
 
   getGroups() {
-    return this.apiService.get(this.groupsApiURL, this.apiService.getHeaderOptionWithBearerToken()).map((res: Response) => res );
+    return this.apiService.get(this.groupsApiURL, this.apiService.getHeaderOptionWithBearerToken())
+          .map((res: Response) => res.json());
   }
 
 }

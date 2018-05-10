@@ -31,7 +31,6 @@ export class TemplatesService {
   }
 
   getTemplateNames() {
-    console.log('calling get templates....');
     return this.apiService.get(this.getTemplateNamesApiURL, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
   }

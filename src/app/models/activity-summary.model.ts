@@ -11,7 +11,8 @@ export class ActivitySummaryModel {
     colors: [],
     options: {
       cutoutPercentage: this.appUIConf.graphProps.graphCutoutPercentage,
-      elements: {}
+      elements: {},
+      tooltips: { enabled: false }
     },
     activityPercent: null,
     title: null,
@@ -33,10 +34,7 @@ export class ActivitySummaryModel {
                             schedules: 'M2 Schedule',
                             issues: 'P1-Issues' }
 
-
   constructor() {
-
-
 
   }
 
