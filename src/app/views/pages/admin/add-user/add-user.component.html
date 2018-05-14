@@ -6,57 +6,86 @@
           <span class="form-title">ADMIN - USER</span>
         </div>
         <div class="form-container col-12">
-          <form name="addUserForm" action="" (submit)="unda" method="post" [formGroup]="addUserForm" novalidate >
+          <form name="addUserForm" (submit)="saveUser()"  [formGroup]="addUserForm" novalidate >
+              <input type="hidden" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID">
             <fieldset>
               <table class="table">
                 <tr class="form-group">
                   <td><label for="add-user-userID" >User ID:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-userID" name="add-user-userID" placeholder="" formControlName="addUserFirstName"></td>
+                  <td><input type="text" class="form-control" id="add-user-userID" name="add-user-userID" placeholder="" formControlName="UserID" [ngModel]="userFormData.UserID"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-first-name" >First Name:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-first-name" name="add-user-first-name" placeholder="" formControlName="addUserFirstName"></td>
+                  <td><input type="text" class="form-control" id="add-user-first-name" name="add-user-first-name" placeholder="" formControlName="FirstName" [ngModel]="userFormData.FirstName"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-last-name" >Last Name:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="addUserLastName"></td>
+                  <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="LastName" [ngModel]="userFormData.LastName"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-password" >Password:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="addUserPassword"></td>
+                  <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="Password" [ngModel]="userFormData.Password"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-email-address" >Email Address:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="addUserEmailAddress"></td>
+                  <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="EmailAddress" [ngModel]="userFormData.EmailAddress"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-profile-picture" >Email Address:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="addUserProfilePicture"></td>
+                  <td><label for="add-user-profile-picture" >Profile Picture:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="ProfilePicture" [ngModel]="userFormData.ProfilePicture"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-profile-picture" >MobileNo:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-MobileNo" name="add-user-MobileNo" placeholder="" formControlName="MobileNo" [ngModel]="userFormData.MobileNo"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" placeholder="" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-role" >Role:</label></td>
                   <td>
-                    <select class="form-control" id="add-user-role" name="add-user-role" formControlName="addUserRole">
-                      <option [ngValue]="lined" selected="selected">Linked</option>
-                      <option>Unlinked</option>
-                      <option>Pending</option>
+                    <select class="form-control" id="add-user-role" name="add-user-role" formControlName="Role" [(ngModel)]="userFormData.Role">
+                      <option value="CA" [selected]="userFormData.Role =='CA'">CA</option>
+                      <option value="CU" [selected]="userFormData.Role =='CU'">CU</option>
+                      <option value="GU" [selected]="userFormData.Role =='GU'">GU</option>
+                      <option value="VU" [selected]="userFormData.Role =='VU'">VU</option>
                     </select>
                   </td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-customerID" >Customer ID:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-customerID" name="add-user-customerID" placeholder="" formControlName="addUserCustomerID"></td>
+                  <td><label for="edit-device-status" >Email Opted:</label></td>
+                  <td>
+                      <select class="form-control" id="user-EmailOpted" name="user-EmailOpted" formControlName="EmailOpted" [(ngModel)]="userFormData.EmailOpted">
+                          <option value="1" [selected]="userFormData.EmailOpted==1">Yes</option>
+                          <option value="0" [selected]="userFormData.EmailOpted==0">No</option>
+                       </select>
+                  </td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-status" >Pin Code:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-status" name="add-user-status" placeholder="" formControlName="addUserStauts"></td>
+                  <td><label for="edit-device-status" >SMS Opted:</label></td>
+                  <td>
+                      <select class="form-control" id="user-SMSOpted" name="user-SMSOpted" formControlName="SMSOpted" [(ngModel)]="userFormData.SMSOpted">
+                          <option value="1" [selected]="userFormData.SMSOpted==1">Yes</option>
+                          <option value="0" [selected]="userFormData.SMSOpted==0">No</option>
+                       </select>
+                  </td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-status" >Status:</label></td>
+                  <td>
+                      <select class="form-control" id="user-status" name="user-status" formControlName="IsActive" [(ngModel)]="userFormData.IsActive">
+                          <option value="true" [selected]="userFormData.IsActive==true">Active</option>
+                          <option value="false" [selected]="userFormData.IsActive==false">In Active</option>
+                       </select>
+                  </td>
                 </tr>
                 <tr class="form-group">
                   <td>&nbsp;</td>
                   <td>
                     <div class="mt-2">
-                      <button type="submit" class="btn btn-primary" [routerLink]="['/groups']">Save</button>
-                      <button type="button" class="btn btn-primary" [routerLink]="['/groups']">Cancel</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="!addUserForm.valid">Save</button>
+                      <button type="button" class="btn btn-primary" [routerLink]="['/admin/users']">Cancel</button>
                     </div>
                   </td>
                 </tr>

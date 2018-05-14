@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { NgSwitch } from '@angular/common';
 
 @Component({
@@ -10,11 +10,28 @@ export class TabularContentPrimaryComponent implements OnInit {
 
   @Input() tabularData: any;
   @Input() rowClickHandler;
-
-  constructor( private changeDetect:ChangeDetectorRef ) {
-    /*this.changeDetect.detach();*/
-  }
+  @Output() onRowclick: EventEmitter<any> = new EventEmitter<any>();
+ //isAdminPage:Boolean=false;
+  constructor( ) { }
 
   ngOnInit() {  }
+
+
+  isAdminPage(){
+    if(this.tabularData.pageName=='users' || this.tabularData.pageName=='adminDeviceList')
+    {
+       return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
+  rowSelect(row){
+    this.onRowclick.emit(row);
+  }
+
+
 
 }

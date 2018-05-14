@@ -50,6 +50,8 @@ import { ApiService } from './services/api.service';
 import { AuthService } from './services/authentication/auth.service';
 import { CreateScheduleTemplateComponent } from './views/components/create-schedule-template/create-schedule-template.component';
 import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.component';
+import { UserListComponent } from './views/pages/admin/user-list/user-list.component';
+import { DeviceListComponent } from './views/pages/admin/device-list/device-list.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,9 @@ import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.c
     AddUserComponent,
     EditDeviceComponent,
     CreateScheduleTemplateComponent,
-    ModalPopupComponent
+    ModalPopupComponent,
+	UserListComponent,
+    DeviceListComponent
   ],
   imports: [
     BrowserModule,

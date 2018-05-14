@@ -4,7 +4,8 @@
       <tr class="header-row text-uppercase">
         <th *ngFor="let dataHead of tabularData.tableHeaders">{{dataHead}}</th>
       </tr>
-      <tr (click)="rowClickHandler()" [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+      <!--(click)="rowClickHandler()"-->
+      <tr (click)="rowSelect(data)"   [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
         <ng-template [ngSwitchCase]="'issues'">
           <!-- Issues Data -->
           <td>{{data.serial}}</td>
@@ -67,6 +68,27 @@
           <td>{{data.DeviceName}}</td>
           <td>{{data.GroupName}}</td>
           <td>{{data.DeviceId}}</td>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'users'">
+          <!-- User Data -->
+          <td>{{data.UserID}}</td>
+          <td>{{data.FirstName}} {{data.LastName}}</td>
+          <td>{{data.EmailAddress}}</td>
+          <td>{{data.Role}}</td>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'adminDeviceList'">
+            <!-- User Data -->
+            <td>{{data.Name}}</td>
+            <td>{{data.Group}}</td>
+            <td>{{data.WardNumber}}</td>
+            <td>{{data.PinCode}}</td>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'customers'">
+          <!-- Customer Data -->
+          <td>{{data.name}}</td>
+          <td>{{data.group}}</td>
+          <td>{{data.ward}}</td>
+          <td>{{data.pincode}}</td>
         </ng-template>
       </tr>
     </table>

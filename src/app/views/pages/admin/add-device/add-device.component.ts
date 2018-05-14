@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,8 +10,9 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 export class AddDeviceComponent implements OnInit {
 
   addDeviceForm: FormGroup;
+  UserId:string;
 
-  constructor( private fb: FormBuilder ) {
+  constructor( private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _router:Router ) {
     this.createAddDeviceForm();
   }
 

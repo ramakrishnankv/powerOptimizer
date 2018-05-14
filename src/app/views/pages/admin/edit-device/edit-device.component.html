@@ -6,100 +6,112 @@
           <span class="form-title">ADMIN - EDIT DEVICE</span>
         </div>
         <div class="form-container col-12">
-          <form name="editDeviceForm" action="" (submit)="unda" method="post" [formGroup]="editDeviceForm" novalidate >
+          <form name="editDeviceForm"  (submit)="saveUser()" [formGroup]="editDeviceForm" novalidate >
             <fieldset>
               <table class="table">
-                <tr class="form-group">
+                <!--<tr class="form-group">
                   <td><label for="edit-device-macID" >MacID:</label></td>
                   <td><input type="text" class="form-control" id="edit-device-macID" name="edit-device-macID" [ngModel]="editFormData.macID" formControlName="editDeviceMacID"></td>
-                </tr>
+                </tr>-->
+                <input type="hidden" class="form-control" id="edit-device-id" name="edit-device-id" [ngModel]="editFormData.DeviceID" formControlName="DeviceID">
                 <tr class="form-group">
                   <td><label for="edit-device-name" >Name:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.name" formControlName="editDeviceName"></td>
+                  <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.Name" formControlName="Name"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
-                    <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="editDeviceStatus" >
-                      <option [ngValue]="editFormData.status" [selected]="editFormData.status=='Active'">{{editFormData.status}}</option>
-                      <option>Linked</option>
-                      <option>Unlinked</option>
-                      <option>Pending</option>
-                    </select>
+                      <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
+                          <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
+                          <option value="In Active" [selected]="editFormData.Status =='In Active'">In Active</option>
+                       </select>
                   </td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-description" >Description:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-description" name="edit-device-description" [ngModel]="editFormData.description" formControlName="editDeviceDescription"></td>
+                  <td><input type="text" class="form-control" id="edit-device-description" name="edit-device-description" [ngModel]="editFormData.Description" formControlName="Description"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-ward-name" >WardName:</label></td>
-                  <td>
+                  <td><input type="text" class="form-control" id="edit-device-ward-name" name="edit-device-ward-name" formControlName="WardName" [ngModel]="editFormData.WardName"></td>
+                  <!--<td>
                     <select class="form-control" id="edit-device-ward-name" name="edit-device-ward-name" formControlName="editDeviceWardName">
-                      <option [selected]="editFormData.wardName[0]">{{editFormData.wardName}}</option>
+                      <option [selected]="editFormData.wardName[0]">{{editFormData.WardName}}</option>
                       <option>Ward Name 1</option>
                       <option>Ward Name 2</option>
                     </select>
-                  </td>
+                  </td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-ward-number" >Ward Number:</label></td>
-                  <td>
+                  <td><input type="text" class="form-control" id="edit-device-ward-number" name="edit-device-ward-number" formControlName="WardNumber" [ngModel]="editFormData.WardNumber"></td> 
+                  <!--<td>
                     <select class="form-control" id="edit-device-ward-number" name="edit-device-ward-number" formControlName="editDeviceWardNumber">
                       <option [selected]="editFormData.wardNumber[0]">{{editFormData.wardNumber}}</option>
                       <option>Unlinked</option>
                       <option>Pending</option>
                     </select>
-                  </td>
+                  </td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-division" >Division:</label></td>
-                  <td>
+                  <td><input type="text" class="form-control" id="edit-device-division" name="edit-device-division" formControlName="Division" [ngModel]="editFormData.Division"></td> 
+                  <!--<td>
                     <select class="form-control" id="edit-device-division" name="edit-device-division" formControlName="editDeviceDivision">
                       <option [selected]="editFormData.division[0]">{{editFormData.division}}</option>
                       <option>Division</option>
                       <option>Division</option>
                     </select>
-                  </td>
+                  </td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-sub-division" >Sub Division:</label></td>
-                  <td>
+                  <td><input type="text" class="form-control" id="edit-device-sub-division" name="edit-device-sub-division" formControlName="SubDivision" [ngModel]="editFormData.SubDivision"></td>
+                 <!-- <td>
                     <select class="form-control" id="edit-device-sub-division" name="edit-device-sub-division" formControlName="editDeviceSubDivision">
                       <option [selected]="editFormData.subDivision[0]">{{editFormData.subDivision}}</option>
                       <option>Unlinked</option>
                       <option>Pending</option>
                     </select>
-                  </td>
+                  </td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-zone" >Zone:</label></td>
-                  <td>
+                  <td><input type="text" class="form-control" id="edit-device-zone" name="edit-device-zone" formControlName="Zone" [ngModel]="editFormData.Zone"></td>
+                  <!--<td>
                     <select class="form-control" id="edit-device-zone" name="edit-device-zone" formControlName="editDeviceZone">
                       <option [selected]="editFormData.zone[0]">{{editFormData.zone}}</option>
                       <option>Zone Zone</option>
                       <option>Zone Zone Zone</option>
                     </select>
-                  </td>
+                  </td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-pin-code" >Pin Code:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.pinCode" formControlName="editDevicePinCode"></td>
+                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.PinCode" formControlName="PinCode"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-address" >Address:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-address" name="edit-device-address" [ngModel]="editFormData.address" formControlName="editDeviceAddress"></td>
+                  <td><input type="text" class="form-control" id="edit-device-address" name="edit-device-address" [ngModel]="editFormData.Address" formControlName="Address"></td>
                 </tr>
                 <tr class="form-group">
+                    <td><label for="edit-device-latitude" >Latitude:</label></td>
+                    <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-latitude" [ngModel]="editFormData.Latitude" formControlName="Latitude" [readonly]="true"></td>
+                 </tr>
+                 <tr class="form-group">
+                    <td><label for="edit-device-latitude" >Longitude:</label></td>
+                    <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-longitude" [ngModel]="editFormData.Longitude" formControlName="Longitude" ></td>
+                 </tr>
+                <tr class="form-group">
                   <td><label for="edit-device-customerID" >Customer ID:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.customerID" formControlName="editDeviceCustomerID"></td>
+                  <td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>
                 </tr>
                 <tr class="form-group">
                   <td>&nbsp;</td>
                   <td>
                     <div class="mt-2">
-                      <button type="submit" class="btn btn-primary" [routerLink]="['/devices']">Update</button>
-                      <button type="button" class="btn btn-primary" [routerLink]="['/devices']">Cancel</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="!editDeviceForm.valid">Update</button>
+                      <button type="button" class="btn btn-primary" [routerLink]="['/admin/device']">Cancel</button>
                     </div>
                   </td>
                 </tr>
