@@ -7,7 +7,7 @@
         </div>
         <div class="form-container col-12">
           <form name="addUserForm" (submit)="saveUser()"  [formGroup]="addUserForm" novalidate >
-              <input type="hidden" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID">
+              <input *ngIf="UserForm == 'Edit'" type="hidden" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID">
             <fieldset>
               <table class="table">
                 <tr class="form-group">
@@ -22,10 +22,15 @@
                   <td><label for="add-user-last-name" >Last Name:</label></td>
                   <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="LastName" [ngModel]="userFormData.LastName"></td>
                 </tr>
-                <tr class="form-group">
+                <tr class="form-group" *ngIf="UserForm == 'Create'">
+                  <td><label for="add-user-last-name" >Customer Id:</label></td>
+                  <td> <input type="text" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID"></td>
+                </tr>
+
+                <!--<tr class="form-group">
                   <td><label for="add-user-password" >Password:</label></td>
                   <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="Password" [ngModel]="userFormData.Password"></td>
-                </tr>
+                </tr>-->
                 <tr class="form-group">
                   <td><label for="add-user-email-address" >Email Address:</label></td>
                   <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="EmailAddress" [ngModel]="userFormData.EmailAddress"></td>
@@ -75,8 +80,8 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="user-status" name="user-status" formControlName="IsActive" [(ngModel)]="userFormData.IsActive">
-                          <option value="true" [selected]="userFormData.IsActive==true">Active</option>
-                          <option value="false" [selected]="userFormData.IsActive==false">In Active</option>
+                          <option value="1" [selected]="userFormData.IsActive==1">Active</option>
+                          <option value="0" [selected]="userFormData.IsActive==0">In Active</option>
                        </select>
                   </td>
                 </tr>

@@ -68,7 +68,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
       FirstName: ['', Validators.required],
       CustomerID:[''],
       LastName: ['', Validators.required],
-      Password: ['', Validators.required],
+      /*Password: ['', Validators.required],*/
       EmailAddress: ['', Validators.required],
       ProfilePicture: ['', Validators.required],
       Role: ['', Validators.required],
@@ -100,7 +100,6 @@ export class AddUserComponent implements OnInit,OnDestroy  {
       this._userService.addUser(this.addUserForm.value).subscribe(
         successData => {
          this.router.navigate(['admin/users']);
-         //console.log("sucess");
         },
         error => {
           console.log("error");
