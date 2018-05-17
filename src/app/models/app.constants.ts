@@ -18,7 +18,8 @@ export const AppConstants = {
     addTemplateSchedules: 'TemplateSchedule',
     group: 'group?userId=',
     nonScheduleDevices: 'NonScheduledDevices?userId=',
-    scheduledDevices: 'ScheduledDevices?userId='
+    scheduledDevices: 'ScheduledDevices?userId=',
+    getAllCustomer:'customer?userid='
   }
 
 }

@@ -52,6 +52,8 @@ import { CreateScheduleTemplateComponent } from './views/components/create-sched
 import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.component';
 import { UserListComponent } from './views/pages/admin/user-list/user-list.component';
 import { DeviceListComponent } from './views/pages/admin/device-list/device-list.component';
+import { CustomerListComponent } from './views/pages/admin/customer-list/customer-list.component';
+
 
 @NgModule({
   declarations: [
@@ -86,8 +88,10 @@ import { DeviceListComponent } from './views/pages/admin/device-list/device-list
     EditDeviceComponent,
     CreateScheduleTemplateComponent,
     ModalPopupComponent,
-	UserListComponent,
-    DeviceListComponent
+	  UserListComponent,
+    DeviceListComponent,
+    CustomerListComponent
+
   ],
   imports: [
     BrowserModule,

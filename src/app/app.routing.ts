@@ -20,6 +20,7 @@ import { AddUserComponent } from './views/pages/admin/add-user/add-user.componen
 import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device.component';
 import { UserListComponent } from './views/pages/admin/user-list/user-list.component';
 import { DeviceListComponent } from './views/pages/admin/device-list/device-list.component';
+import { CustomerListComponent } from './views/pages/admin/customer-list/customer-list.component';
 export const AppRoutes: Routes = [
   {path: '', children: [{path: '', component: LoginComponent}, {path: 'login', component: LoginComponent}]},
   {path: 'dashboard', component: DashboardComponent},
@@ -38,7 +39,7 @@ export const AppRoutes: Routes = [
                     {path: 'allDevices', component: AllDevicesComponent}
   ]},
   {path: 'admin/addDevice', component: AddDeviceComponent},
-  {path: 'admin/addCustomer', component: AddCustomerComponent},
+  {path: 'admin/customers', component: CustomerListComponent},
   {path: 'admin/addUser/:ID', component: AddUserComponent},
   {path: 'admin/users', component: UserListComponent},
   {path: 'admin/editDevice/:Id', component: EditDeviceComponent},
