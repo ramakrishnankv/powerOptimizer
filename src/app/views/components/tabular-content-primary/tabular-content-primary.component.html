@@ -4,8 +4,9 @@
       <tr class="header-row text-uppercase">
         <th *ngFor="let dataHead of tabularData.tableHeaders">{{dataHead}}</th>
       </tr>
+      <!--(click)="rowSelect(data)" -->
       <!--(click)="rowClickHandler()"-->
-      <tr (click)="rowSelect(data)"   [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+      <tr  (click)="rowClickHandler(data)"  [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
         <ng-template [ngSwitchCase]="'issues'">
           <!-- Issues Data -->
           <td>{{data.serial}}</td>

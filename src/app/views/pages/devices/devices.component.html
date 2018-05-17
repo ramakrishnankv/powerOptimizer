@@ -51,7 +51,9 @@
       </div>
     </section>
     <section class="product-table">
-      <app-tabular-content-primary [tabularData]="deviceListData" [rowClickHandler]="editDevice.bind(this)"></app-tabular-content-primary>
+      <!--[rowClickHandler]="editDevice.bind(this)"-->
+      <!--(onRowclick)="selectRow($event)"-->
+      <app-tabular-content-primary [tabularData]="deviceListData"  [rowClickHandler]="editDevice.bind(this)"  ></app-tabular-content-primary>
     </section>
   </div>
 </app-page-prime>

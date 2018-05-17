@@ -21,7 +21,7 @@
       </div>
   </section>
   <section class="product-table">
-      <app-tabular-content-primary [tabularData]="customerListData"  (onRowclick)="selectRow($event)" ></app-tabular-content-primary>
+      <app-tabular-content-primary [tabularData]="customerListData"   [rowClickHandler]="selectRow.bind(this)" ></app-tabular-content-primary>
   </section>
   </app-page-prime>
   

@@ -146,8 +146,11 @@ export class DevicesComponent implements OnInit {
     maxUnits: 2400
   }
 
-  editDevice() {
-    this.router.navigate(['admin/editDevice']);
+
+
+
+  editDevice(data) {
+    this.router.navigate(['admin/editDevice',data.name]);
   }
 
 }

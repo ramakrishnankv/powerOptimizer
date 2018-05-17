@@ -10,7 +10,7 @@ export class TabularContentPrimaryComponent implements OnInit {
 
   @Input() tabularData: any;
   @Input() rowClickHandler;
-  @Output() onRowclick: EventEmitter<any> = new EventEmitter<any>();
+ // @Output() onRowclick: EventEmitter<any> = new EventEmitter<any>();
  //isAdminPage:Boolean=false;
   constructor( ) { }
 
@@ -28,9 +28,9 @@ export class TabularContentPrimaryComponent implements OnInit {
     }
   }
 
-  rowSelect(row){
+  /*rowSelect(row){
     this.onRowclick.emit(row);
-  }
+  }*/
 
 
 
