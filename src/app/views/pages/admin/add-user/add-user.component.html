@@ -45,8 +45,18 @@
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" placeholder="" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId"></td>
+                  <td>
+                      <select class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" formControlName="IssueGroupId" [(ngModel)]="userFormData.IssueGroupId">
+                          <option value="L1" [selected]="userFormData.IssueGroupId=='L1'">L1</option>
+                          <option value="L2" [selected]="userFormData.IssueGroupId=='L2'">L2</option>
+						              <option value="L3" [selected]="userFormData.IssueGroupId=='L3'">L3</option>
+                       </select>
+                  </td>
                 </tr>
+                <!--<tr class="form-group">
+                  <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" placeholder="" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId"></td>
+                </tr>-->
                 <tr class="form-group">
                   <td><label for="add-user-role" >Role:</label></td>
                   <td>
