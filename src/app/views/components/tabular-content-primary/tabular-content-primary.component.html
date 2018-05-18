@@ -1,3 +1,8 @@
+
+ <!--<div class="col right-container">
+    <input class="form-control search-input icon-box" type="search" [(ngModel)]="term" placeholder="Search" aria-label="Search">
+  </div>-->
+
 <div class="container-flex">
   <div class="table-container row">
     <table class="table table-scrollable">
@@ -6,7 +11,7 @@
       </tr>
       <!--(click)="rowSelect(data)" -->
       <!--(click)="rowClickHandler()"-->
-      <tr  (click)="rowClickHandler(data)"  [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+      <tr  (click)="rowClickHandler(data)"  [ngSwitch]="tabularData.pageName" *ngFor="let data of tabularData.tableData|customFilter:searchData; let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
         <ng-template [ngSwitchCase]="'issues'">
           <!-- Issues Data -->
           <td>{{data.serial}}</td>

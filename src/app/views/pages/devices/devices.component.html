@@ -30,10 +30,11 @@
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">Device details</div>
           <div class="col right-container">
+            <input class="form-control search-input icon-box" type="search" placeholder="Search"  
+             aria-label="Search" #searchInput>
             <form class="">
-              <input class="form-control search-input icon-box" type="search" placeholder="Search" aria-label="Search">
               <button class="btn icon-box bg-search btn-outline-success" type="submit">
-                <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+                <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" (click)="mySearch(searchInput.value)" />
               </button>
             </form>
             <a href="#" class="nav-link icon-box g-map selected">
@@ -53,7 +54,7 @@
     <section class="product-table">
       <!--[rowClickHandler]="editDevice.bind(this)"-->
       <!--(onRowclick)="selectRow($event)"-->
-      <app-tabular-content-primary [tabularData]="deviceListData"  [rowClickHandler]="editDevice.bind(this)"  ></app-tabular-content-primary>
+      <app-tabular-content-primary [tabularData]="deviceListData" [searchData]="searchString"  [rowClickHandler]="editDevice.bind(this)"  ></app-tabular-content-primary>
     </section>
   </div>
 </app-page-prime>

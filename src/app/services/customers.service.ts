@@ -20,14 +20,11 @@ export class CustomersService {
     this.appConfigs = AppConfigProperties;
     let userId = cookieService.get('UserId');
     this.Id=userId;
-
   }
 
   getCustomers() {
-    //console.log(this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getAllCustomer}${this.Id}`));
     this.customerApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getAllCustomer}${this.Id}`);
         return this.apiService.get(this.customerApiURL, this.apiService.getHeaderOptionWithBearerToken())
               .map((res: Response) => res.json());
       }
-
-}
+  }

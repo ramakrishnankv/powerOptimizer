@@ -12,7 +12,9 @@ import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 })
 
 export class DevicesComponent implements OnInit {
+  
 
+  searchString:any='';
   appUIConf: any;
   router: Router;
   isChartCollapsed: boolean = false;
@@ -147,7 +149,9 @@ export class DevicesComponent implements OnInit {
   }
 
 
-
+  mySearch(search){
+    this.searchString=search;
+  }
 
   editDevice(data) {
     this.router.navigate(['admin/editDevice',data.name]);

@@ -14,6 +14,7 @@ import{DataService} from '../../../../services/data.service';
 })
 export class UserListComponent implements OnInit {
 
+  searchString:any='';
   router: Router;
   userListData={
     tableHeaders:[],
@@ -60,6 +61,10 @@ export class UserListComponent implements OnInit {
 
   myClickHandler(){
     this.router.navigate(['admin/addUser',0]);
+   }
+
+   mySearch(search){
+    this.searchString=search;
    }
 
 

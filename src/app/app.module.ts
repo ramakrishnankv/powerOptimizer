@@ -53,6 +53,7 @@ import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.c
 import { UserListComponent } from './views/pages/admin/user-list/user-list.component';
 import { DeviceListComponent } from './views/pages/admin/device-list/device-list.component';
 import { CustomerListComponent } from './views/pages/admin/customer-list/customer-list.component';
+import { CustomFilterPipe } from './views/components/custom-filter.pipe';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { CustomerListComponent } from './views/pages/admin/customer-list/custome
     ModalPopupComponent,
 	  UserListComponent,
     DeviceListComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    CustomFilterPipe
 
   ],
   imports: [
