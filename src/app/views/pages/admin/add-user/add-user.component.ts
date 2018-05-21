@@ -14,13 +14,14 @@ import{DataService} from '../../../../services/data.service';
 
 })
 export class AddUserComponent implements OnInit,OnDestroy  {
-
+ 
   addUserForm: FormGroup;
   private sub:Subscription;
   userFormData:any;
   userId:any;
   router:Router;
   UserForm:string="Edit";
+  userDataSource:any;
 
   constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService) {
     this.router = this.rout;
@@ -29,11 +30,11 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   }
 
   ngOnInit() {
-
+    this.userDataSource=JSON.parse(localStorage.getItem('userData'));
     this.sub=this._Activatedroute.params.subscribe(params => { 
       this.userId = params['ID'];
       if(this.userId!=0){
-          this.getUser();
+          this.getUserDetail();
       }
       else
       {
@@ -45,19 +46,19 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     
   }
 
-  getUser(){
+  /*getUser(){
     this._userService.getUsers().subscribe(
       successData => {
         this.getUserDetail(successData);
       },
       error => {
       });
-  }
+  }*/
 
-  getUserDetail(param){
+  getUserDetail(){
     
-    this.userFormData=this._userModel.getUser(param,this.userId);
-   
+    //this.userFormData=this._userModel.getUser(param,this.userId);
+    this.userFormData=this._userModel.getUserData(this.userDataSource);
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }
@@ -99,6 +100,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     {
       this._userService.addUser(this.addUserForm.value).subscribe(
         successData => {
+         alert("success");
          this.router.navigate(['admin/users']);
         },
         error => {
@@ -114,6 +116,8 @@ export class AddUserComponent implements OnInit,OnDestroy  {
  }
 
   ngOnDestroy() {
+
+    localStorage.removeItem('userData');
     this.sub.unsubscribe();
   }
 }

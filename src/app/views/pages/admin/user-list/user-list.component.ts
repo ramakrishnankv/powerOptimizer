@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import{UsersService} from '../../../../services/users.service';
 import{UserDataModel} from '../../../../models/user/user-data.model';
@@ -12,7 +12,7 @@ import{DataService} from '../../../../services/data.service';
   styleUrls: ['./user-list.component.less'],
   providers: [ UsersService,UserDataModel,DataService]
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit,OnDestroy {
 
   searchString:any='';
   router: Router;
@@ -55,8 +55,10 @@ export class UserListComponent implements OnInit {
     'UserID', 'Name', 'EmailAddr', 'Role'
   ]
   selectRow(data){
-   
+    localStorage.setItem('userData',JSON.stringify(data) );
     this.router.navigate(['admin/addUser',data.UserID]);
+
+    //this.router.navigate(['admin/addUser',data.UserID],navigationExtras);
   }
 
   myClickHandler(){
@@ -65,6 +67,10 @@ export class UserListComponent implements OnInit {
 
    mySearch(search){
     this.searchString=search;
+   }
+
+   ngOnDestroy(){
+   
    }
 
 

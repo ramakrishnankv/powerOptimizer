@@ -31,13 +31,29 @@ getUserList(param){
   for(this.counter=0;this.counter<param.length;this.counter++)
   {
         let userList = {
-          'UserID': param[this.counter].UserID,
+         /* 'UserID': param[this.counter].UserID,
           'FirstName':param[this.counter].FirstName ,
           'LastName':param[this.counter].LastName ,
           'ProfilePicture':param[this.counter].ProfilePicture ,
           'LastloginDate': param[this.counter].LastloginDate,
           'EmailAddress': param[this.counter].EmailAddress,
-          'Role': param[this.counter].Role
+          'Role': param[this.counter].Role*/
+
+
+          'UserID': param[this.counter].UserID,
+          'CustomerID':param[this.counter].CustomerID ,
+          'FirstName':param[this.counter].FirstName ,
+          'LastName':param[this.counter].LastName ,
+          'ProfilePicture':param[this.counter].ProfilePicture ,
+          'Password':param[this.counter].Password ,
+          'LastloginDate': param[this.counter].LastloginDate,
+          'EmailAddress': param[this.counter].EmailAddress,
+          'EmailOpted':param[this.counter].EmailOpted,
+          'MobileNo':param[this.counter].MobileNo,
+          'SMSOpted':param[this.counter].SMSOpted,
+          'IssueGroupId':param[this.counter].IssueGroupId,
+          'Role': param[this.counter].Role,
+          'IsActive': param[this.counter].IsActive
 
       };
       this.usersData.push(userList);
@@ -45,6 +61,27 @@ getUserList(param){
 
   return this.usersData;
 
+}
+
+
+getUserData(param){
+     let userList = {
+        'UserID': param['UserID'],
+        'CustomerID':param['CustomerID'] ,
+        'FirstName':param['FirstName'] ,
+        'LastName':param['LastName'] ,
+        'ProfilePicture':param['ProfilePicture'] ,
+        'Password':param['Password'] ,
+        'LastloginDate': param['LastloginDate'],
+        'EmailAddress': param['EmailAddress'],
+        'EmailOpted':param['EmailOpted'],
+        'MobileNo':param['MobileNo'],
+        'SMSOpted':param['SMSOpted'],
+        'IssueGroupId':param['IssueGroupId'],
+        'Role': param['Role'],
+        'IsActive': param['IsActive']
+    };
+return userList;
 }
     
 getUser(param,ID)
