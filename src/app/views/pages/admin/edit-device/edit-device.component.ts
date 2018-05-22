@@ -2,6 +2,7 @@ import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import{DeviceService} from '../../../../services/device.service';
+import{CustomersService} from '../../../../services/customers.service';
 import{Device} from '../../../../models/device';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'app-edit-device',
   templateUrl: './edit-device.component.html',
   styleUrls: ['../admin-common.less', './edit-device.component.less'],
-  providers: [ DeviceService,Device]
+  providers: [ DeviceService,Device,CustomersService]
 })
 export class EditDeviceComponent implements OnInit {
   router: Router;
@@ -17,7 +18,10 @@ export class EditDeviceComponent implements OnInit {
   editFormData: any;
   private sub:Subscription;
   private Id:any;
-
+  customerList:any=[{
+    'Name':'',
+    'CustomerID':''
+  }];
   deviceData = {
     'Customer': '',
     'User': '',
@@ -46,11 +50,18 @@ export class EditDeviceComponent implements OnInit {
     'UpdatedDate': ''
 };
 
-  constructor( private fb: FormBuilder,private rout:Router,private _devicesService: DeviceService,private _device:Device,private changeDetect:ChangeDetectorRef,private _Activatedroute:ActivatedRoute ) {
+  constructor( private fb: FormBuilder,
+    private rout:Router,
+    private _devicesService: DeviceService,
+    private _device:Device,
+    private changeDetect:ChangeDetectorRef,
+    private _Activatedroute:ActivatedRoute,
+    private _customerService:CustomersService ) {
     this.createEditDeviceForm();
     this.editFormData = this.deviceData;
   }
     ngOnInit() {
+     
       this.sub=this._Activatedroute.params.subscribe(params => { 
         this.Id = params['Id'];
         if(this.Id!=0){
@@ -58,6 +69,20 @@ export class EditDeviceComponent implements OnInit {
         }
       });
     }
+
+  getCustomerList(){
+    this._customerService.getCustomerList().subscribe(
+      custData => {
+        //console.log(custData);
+       this.customerList=custData;
+       console.log(this.customerList);
+       this.changeDetect.reattach();
+       this.changeDetect.detectChanges();
+      },
+      error => {
+      });
+  }
+
 
   getDevice(param){
     this._devicesService.getDevice(param).subscribe(
@@ -69,9 +94,10 @@ export class EditDeviceComponent implements OnInit {
   }
 
   getDeviceDetail(param){
+
     this.editFormData=this._device.getDevice(param);
-    this.changeDetect.reattach();
-    this.changeDetect.detectChanges();
+    this.getCustomerList();
+    
   }
 
   createEditDeviceForm() {

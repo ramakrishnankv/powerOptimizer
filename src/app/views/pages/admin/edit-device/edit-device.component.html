@@ -14,19 +14,20 @@
                   <td><input type="text" class="form-control" id="edit-device-macID" name="edit-device-macID" [ngModel]="editFormData.macID" formControlName="editDeviceMacID"></td>
                 </tr>-->
                 <input type="hidden" class="form-control" id="edit-device-id" name="edit-device-id" [ngModel]="editFormData.DeviceID" formControlName="DeviceID">
-                <tr class="form-group">
-                  <td><label for="edit-device-name" >Name:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.Name" formControlName="Name"></td>
-                </tr>
-                <tr class="form-group">
-                  <td><label for="edit-device-status" >Status:</label></td>
-                  <td>
-                      <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
-                          <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
-                          <option value="In Active" [selected]="editFormData.Status =='In Active'">In Active</option>
-                       </select>
-                  </td>
-                </tr>
+                  <tr class="form-group">
+                    <td><label for="edit-device-customerID" >Customer ID:</label></td>
+                    <td>
+                        <select class="form-control" id="edit-device-customerID" name="edit-device-customerID" formControlName="CustomerID" [(ngModel)]="editFormData.CustomerID" disabled>
+                            <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID" >{{custList.Name}}</option>
+                        </select>
+                   </td>
+                    <!--<td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>-->
+                  </tr>
+                  <tr class="form-group">
+                    <td><label for="edit-device-name" >Name:</label></td>
+                    <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.Name" formControlName="Name"></td>
+                  </tr>
+
                 <tr class="form-group">
                   <td><label for="edit-device-description" >Description:</label></td>
                   <td><input type="text" class="form-control" id="edit-device-description" name="edit-device-description" [ngModel]="editFormData.Description" formControlName="Description"></td>
@@ -87,12 +88,12 @@
                   </td>-->
                 </tr>
                 <tr class="form-group">
-                  <td><label for="edit-device-pin-code" >Pin Code:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.PinCode" formControlName="PinCode"></td>
-                </tr>
-                <tr class="form-group">
                   <td><label for="edit-device-address" >Address:</label></td>
                   <td><input type="text" class="form-control" id="edit-device-address" name="edit-device-address" [ngModel]="editFormData.Address" formControlName="Address"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="edit-device-pin-code" >Pin Code:</label></td>
+                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.PinCode" formControlName="PinCode"></td>
                 </tr>
                 <tr class="form-group">
                     <td><label for="edit-device-latitude" >Latitude:</label></td>
@@ -100,12 +101,18 @@
                  </tr>
                  <tr class="form-group">
                     <td><label for="edit-device-latitude" >Longitude:</label></td>
-                    <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-longitude" [ngModel]="editFormData.Longitude" formControlName="Longitude" ></td>
+                    <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-longitude" [ngModel]="editFormData.Longitude" formControlName="Longitude" [readonly]="true" ></td>
                  </tr>
-                <tr class="form-group">
-                  <td><label for="edit-device-customerID" >Customer ID:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>
+                 <tr class="form-group">
+                  <td><label for="edit-device-status" >Status:</label></td>
+                  <td>
+                      <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
+                          <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
+                          <option value="In Active" [selected]="editFormData.Status =='In Active'">In Active</option>
+                       </select>
+                  </td>
                 </tr>
+
                 <tr class="form-group">
                   <td>&nbsp;</td>
                   <td>
