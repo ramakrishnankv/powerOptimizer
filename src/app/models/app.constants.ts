@@ -19,7 +19,8 @@ export const AppConstants = {
     group: 'group?userId=',
     nonScheduleDevices: 'NonScheduledDevices?userId=',
     scheduledDevices: 'ScheduledDevices?userId=',
-    getAllCustomer:'customer?userid='
+    getAllCustomer:'customer?userid=',
+    getMasterCustomer:'mastercustomers?userid=',
   }
 
 }

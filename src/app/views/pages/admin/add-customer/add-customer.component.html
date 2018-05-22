@@ -6,49 +6,43 @@
           <span class="form-title">ADMIN - CUSTOMER</span>
         </div>
         <div class="form-container col-12">
-          <form name="addCustomerForm" action="" (submit)="unda" method="post" [formGroup]="addCustomerForm" novalidate >
+          <form name="addCustomerForm" (submit)="saveCustomer()" [formGroup]="addCustomerForm" novalidate >
             <fieldset>
               <table class="table">
                 <tr class="form-group">
-                  <td><label for="add-customer-first-name" >First Name:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-first-name" name="add-customer-first-name" placeholder="" formControlName="addCustomerFirstName"></td>
-                </tr>
-                <tr class="form-group">
-                  <td><label for="add-customer-last-name" >Last Name:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-last-name" name="add-customer-last-name" placeholder="" formControlName="addCustomerLastName"></td>
+                  <td><label for="add-customer-name" >Name:</label></td>
+                  <td><input type="text" class="form-control" id="add-customer-name" name="add-customer-name" placeholder="" formControlName="Name" [ngModel]="customerFormData.Name"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-phone-number" >Phone Number:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-phone-number" name="add-customer-phone-number" placeholder="" formControlName="addCustomerPhoneNumber"></td>
-                </tr>
-                <tr class="form-group">
-                  <td><label for="add-customer-address" >Address:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-address" name="add-customer-address" placeholder="" formControlName="addCustomerAddress"></td>
+                  <td><input type="text" class="form-control" id="add-customer-phone-number" name="add-customer-phone-number" placeholder="" formControlName="PhoneNumber" [ngModel]="customerFormData.PhoneNumber"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-state" >State:</label></td>
-                  <td>
-                    <select class="form-control" id="add-customer-state" name="add-customer-state" formControlName="addCustomerState">
-                      <option selected="selected">Linked</option>
-                      <option>Unlinked</option>
-                      <option>Pending</option>
-                    </select>
-                  </td>
+                  <td><input type="text" class="form-control" id="add-customer-state" name="add-customer-state" placeholder="" formControlName="State" [ngModel]="customerFormData.State"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-city" >City:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-city" name="add-customer-city" placeholder="" formControlName="addCustomerCity"></td>
+                  <td><input type="text" class="form-control" id="add-customer-city" name="add-customer-city" placeholder="" formControlName="City" [ngModel]="customerFormData.City"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-customer-address" >Address:</label></td>
+                  <td><input type="text" class="form-control" id="add-customer-address" name="add-customer-address" placeholder="" formControlName="Address" [ngModel]="customerFormData.Address"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-pin-code" >Pin Code:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-pin-code" name="add-customer-pin-code" placeholder="" formControlName="addCustomerPinCode"></td>
+                  <td><input type="text" class="form-control" id="add-customer-pin-code" name="add-customer-pin-code" placeholder="" formControlName="PinCode" [ngModel]="customerFormData.PinCode"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-type" >Customer Type:</label></td>
+                  <td><input type="text" class="form-control" id="add-customer-type" name="add-customer-type" placeholder="" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="add-customer-status" >Status:</label></td>
                   <td>
-                    <select class="form-control" id="add-customer-type" name="add-customer-type" formControlName="addCustomerType">
-                      <option selected="selected">Admin User</option>
-                      <option>Customer User</option>
+                    <select class="form-control" id="add-customer-status" name="add-customer-status" formControlName="Status" [ngModel]="customerFormData.Status">
+                      <option value="Active" [selected]="customerFormData.Status=='Active'">Active</option>
+                      <option value="In Active" [selected]="customerFormData.Status=='In Active'">In Active</option>
                     </select>
                   </td>
                 </tr>
@@ -56,8 +50,8 @@
                   <td>&nbsp;</td>
                   <td>
                     <div class="mt-2">
-                      <button type="submit" class="btn btn-primary" [routerLink]="['/groups']">Save</button>
-                      <button type="button" class="btn btn-primary" [routerLink]="['/groups']">Cancel</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="!addCustomerForm.valid">Save</button>
+                      <button type="button" class="btn btn-primary" [routerLink]="['/admin/customers']">Cancel</button>
                     </div>
                   </td>
                 </tr>

@@ -22,9 +22,49 @@ export class CustomersService {
     this.Id=userId;
   }
 
-  getCustomers() {
+    getCustomers() {
     this.customerApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getAllCustomer}${this.Id}`);
         return this.apiService.get(this.customerApiURL, this.apiService.getHeaderOptionWithBearerToken())
               .map((res: Response) => res.json());
       }
+
+    getCustomerList(){
+      this.customerApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getMasterCustomer}${this.Id}`);
+          return this.apiService.get(this.customerApiURL, this.apiService.getHeaderOptionWithBearerToken())
+                .map((res: Response) => res.json());
+    }
+
+    /*getCustomer(param){
+
+      this.customerApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deviceDetail}${param}&customerId=${this.Id}`);
+      return this.apiService.get(this.customerApiURL, this.apiService.getHeaderOptionWithBearerToken())
+      .map((res: Response) => res.json());
+    
+    }*/
+    
+    editCustomer(param){
+      console.log(param);
+      this.customerApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getAllCustomer}${this.Id}`);
+      return this.apiService.put(this.customerApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+      .map((res: Response) => res.json());
+    }
+    
+     
+    addCustomer(param){
+      console.log(param);
+      this.customerApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getAllCustomer}${this.Id}`);
+      return this.apiService.post(this.customerApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+      .map((res: Response) => res.json());
+    }
+
+
+
+
+
   }
+
+
+
+
+
+

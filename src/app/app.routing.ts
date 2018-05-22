@@ -40,6 +40,7 @@ export const AppRoutes: Routes = [
   ]},
   {path: 'admin/addDevice', component: AddDeviceComponent},
   {path: 'admin/customers', component: CustomerListComponent},
+  {path: 'admin/addCustomer/:ID', component: AddCustomerComponent},
   {path: 'admin/addUser/:ID', component: AddUserComponent},
   {path: 'admin/users', component: UserListComponent},
   {path: 'admin/editDevice/:Id', component: EditDeviceComponent},
