@@ -52,7 +52,7 @@ export class CustomerListComponent implements OnInit {
     'CustomerID', 'Name', 'Contact No', 'Customer Type'
   ]
   selectRow(data){
-     // window.localStorage.setItem('customerData', JSON.stringify(data));
+      localStorage.setItem('customerData', JSON.stringify(data));
       this.router.navigate(['admin/addCustomer',data.CustomerID]);
   }
 

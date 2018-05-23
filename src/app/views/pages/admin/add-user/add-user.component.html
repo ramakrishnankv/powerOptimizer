@@ -5,10 +5,15 @@
         <div class="form-title-container col-12">
           <span class="form-title">ADMIN - USER</span>
         </div>
+
         <div class="form-container col-12">
           <form name="addUserForm" (submit)="saveUser()"  [formGroup]="addUserForm" novalidate >
               <input *ngIf="UserForm == 'Edit'" type="hidden" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID">
-            <fieldset>
+
+            <fieldset class="{{statusClass}}">
+                <div class="error-message alert alert-danger">
+                    {{errorMsg}}
+                  </div>
               <table class="table">
                 <tr class="form-group">
                   <td><label for="add-user-userID" >User ID:</label></td>

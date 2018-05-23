@@ -22,6 +22,8 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   router:Router;
   UserForm:string="Edit";
   userDataSource:any;
+  errorMsg:any;
+  statusClass: string;
 
   constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService) {
     this.router = this.rout;
@@ -46,7 +48,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     
   }
 
-  /*getUser(){
+ /* getUser(){
     this._userService.getUsers().subscribe(
       successData => {
         this.getUserDetail(successData);
@@ -84,8 +86,6 @@ export class AddUserComponent implements OnInit,OnDestroy  {
 
   saveUser() {
     if (this.addUserForm.dirty && this.addUserForm.valid) {
-
-    
      if(this.UserForm=="Edit"){
        console.log("test="+this.addUserForm.value);
      this._userService.editUser(this.addUserForm.value).subscribe(
@@ -98,13 +98,16 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     }
     else
     {
+      console.log("test="+this.addUserForm.value);
       this._userService.addUser(this.addUserForm.value).subscribe(
         successData => {
-         alert("success");
-         this.router.navigate(['admin/users']);
+          this.statusClass = 'valid';
+          this.errorMsg="";
+          this.router.navigate(['admin/users']);
         },
         error => {
-          console.log("error");
+          this.statusClass = 'error';
+          this.errorMsg="UserID is alraedy Exist";
         });
     }
 

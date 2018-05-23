@@ -20,6 +20,7 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
   customerId:any;
   router:Router;
   CustomerForm:string="Edit";
+  customerDataSource:any;
 
   constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _customerService: CustomersService,private _customerModel:Customer,private changeDetect:ChangeDetectorRef) {
     this.router = this.rout;
@@ -28,11 +29,13 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit() {
+    this.customerDataSource=JSON.parse(localStorage.getItem('customerData'));
     this.sub=this._Activatedroute.params.subscribe(params => { 
     this.customerId = params['ID'];
    
     if(this.customerId!=0){
-        this.getCustomer();
+        //this.getCustomer();
+        this.getCustomerDetail();
     }
     else
     {
@@ -44,18 +47,19 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
   
 }
 
-getCustomer(){
+/*getCustomer(){
   this._customerService.getCustomers().subscribe(
     successData => {
       this.getCustomerDetail(successData);
     },
     error => {
     });
-}
+}*/
 
-getCustomerDetail(param){
+getCustomerDetail(){
 
-  this.customerFormData=this._customerModel.getCustomer(param,this.customerId);
+  //this.customerFormData=this._customerModel.getCustomer(param,this.customerId);
+  this.customerFormData=this._customerModel.getCustomerData(this.customerDataSource);
   this.changeDetect.reattach();
   this.changeDetect.detectChanges();
 }
@@ -105,6 +109,7 @@ getCustomerDetail(param){
  }
 
   ngOnDestroy() {
+    localStorage.removeItem('customerData');
     this.sub.unsubscribe();
   }
 }
