@@ -73,11 +73,8 @@ export class EditDeviceComponent implements OnInit {
   getCustomerList(){
     this._customerService.getCustomerList().subscribe(
       custData => {
-        //console.log(custData);
        this.customerList=custData;
        console.log(this.customerList);
-       this.changeDetect.reattach();
-       this.changeDetect.detectChanges();
       },
       error => {
       });
@@ -97,6 +94,8 @@ export class EditDeviceComponent implements OnInit {
 
     this.editFormData=this._device.getDevice(param);
     this.getCustomerList();
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
     
   }
 

@@ -23,6 +23,7 @@ export class TabularContentPrimaryComponent implements OnInit {
   constructor( ) { }
 
   ngOnInit() { 
+    this.isAdminPage()
 
 
    }
@@ -30,9 +31,9 @@ export class TabularContentPrimaryComponent implements OnInit {
 
   isAdminPage(){
 
-    if(this.tabularData.pageName=='users' || this.tabularData.pageName=='adminDeviceList')
+    if(this.tabularData.pageName=='users' || this.tabularData.pageName=='adminDeviceList' || this.tabularData.pageName=='customers')
     {
-       return false;
+          return false;
     }
     else
     {
