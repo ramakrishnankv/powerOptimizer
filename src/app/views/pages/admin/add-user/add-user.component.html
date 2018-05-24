@@ -27,9 +27,13 @@
                   <td><label for="add-user-last-name" >Last Name:</label></td>
                   <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="LastName" [ngModel]="userFormData.LastName"></td>
                 </tr>
-                <tr class="form-group" *ngIf="UserForm == 'Create'">
-                  <td><label for="add-user-last-name" >Customer Id:</label></td>
-                  <td> <input type="text" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID"></td>
+                <tr class="form-group">
+                  <td><label for="add-user-customerID" >Customer Id:</label></td>
+                  <td>
+                      <select class="form-control" id="add-user-customerID" name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
+                          <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
+                      </select>
+                  </td>
                 </tr>
 
                 <!--<tr class="form-group">
@@ -50,13 +54,19 @@
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>
+
                   <td>
+                    <select class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId">
+                        <option *ngFor="let issue of issueList" [ngValue]="issue.GroupID">{{issue.Name}}</option>
+                    </select>
+                </td>
+                  <!--<td>
                       <select class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" formControlName="IssueGroupId" [(ngModel)]="userFormData.IssueGroupId">
                           <option value="L1" [selected]="userFormData.IssueGroupId=='L1'">L1</option>
                           <option value="L2" [selected]="userFormData.IssueGroupId=='L2'">L2</option>
 						              <option value="L3" [selected]="userFormData.IssueGroupId=='L3'">L3</option>
                        </select>
-                  </td>
+                  </td>-->
                 </tr>
                 <!--<tr class="form-group">
                   <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>

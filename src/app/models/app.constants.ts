@@ -20,7 +20,8 @@ export const AppConstants = {
     nonScheduleDevices: 'NonScheduledDevices?userId=',
     scheduledDevices: 'ScheduledDevices?userId=',
     getAllCustomer:'customer?userid=',
-    getMasterCustomer:'mastercustomers?userid=',
+    getMasterCustomer:'master/customer?userid=',
+    getMasterIssueGroups:'master/issueGroup',
   }
 
 }

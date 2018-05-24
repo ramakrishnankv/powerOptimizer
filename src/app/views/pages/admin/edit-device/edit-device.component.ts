@@ -67,6 +67,9 @@ export class EditDeviceComponent implements OnInit {
         if(this.Id!=0){
           this.getDevice(this.Id);
         }
+        else{
+          this.loadData();
+        }
       });
     }
 
@@ -93,10 +96,14 @@ export class EditDeviceComponent implements OnInit {
   getDeviceDetail(param){
 
     this.editFormData=this._device.getDevice(param);
+    this.loadData();
+    
+  }
+
+  loadData(){
     this.getCustomerList();
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
-    
   }
 
   createEditDeviceForm() {

@@ -87,7 +87,7 @@ return userList;
 getUser(param,ID)
 {
       this.counter=0;
-      let data=param.filter((param)=>param.UserID===ID);
+      let data=param.filter((param)=>param.UserID==ID);
       
 
       let userList = {

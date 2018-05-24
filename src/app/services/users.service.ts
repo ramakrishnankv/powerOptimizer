@@ -36,6 +36,12 @@ getUser(param){
 
 }
 
+getUserList(){
+  this.userApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getMasterCustomer}${this.Id}`);
+      return this.apiService.get(this.userApiURL, this.apiService.getHeaderOptionWithBearerToken())
+            .map((res: Response) => res.json());
+}
+
 editUser(param){
   console.log(param);
   this.userApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.editUser}${this.Id}`);
@@ -48,6 +54,12 @@ addUser(param){
   this.userApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.addUser}${this.Id}`);
   return this.apiService.post(this.userApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
   .map((res: Response) => res.json());
+}
+
+getGroupIssueList(){
+  this.userApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getMasterIssueGroups}`);
+      return this.apiService.get(this.userApiURL, this.apiService.getHeaderOptionWithBearerToken())
+            .map((res: Response) => res.json());
 }
 
 }
