@@ -21,6 +21,10 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
   router:Router;
   CustomerForm:string="Edit";
   customerDataSource:any;
+  customerList:any=[{
+    'Name':'',
+    'CustomerID':''
+  }];
 
   constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _customerService: CustomersService,private _customerModel:Customer,private changeDetect:ChangeDetectorRef) {
     this.router = this.rout;
@@ -40,6 +44,8 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
     else
     {
       this.CustomerForm="Create";
+      this.loadData();
+
     }
 
     
@@ -56,10 +62,19 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
     });
 }*/
 
+
+
 getCustomerDetail(){
 
   //this.customerFormData=this._customerModel.getCustomer(param,this.customerId);
   this.customerFormData=this._customerModel.getCustomerData(this.customerDataSource);
+  this.loadData();
+  //this.changeDetect.reattach();
+ // this.changeDetect.detectChanges();
+}
+
+loadData(){
+
   this.changeDetect.reattach();
   this.changeDetect.detectChanges();
 }

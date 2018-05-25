@@ -40,13 +40,13 @@ export class DeviceListComponent implements OnInit {
  
   // Tabular Contents
   deviceListsHeaders = [
-    'Device name', 'Group', 'Ward No.', 'Pincode'
+    'Device name', 'Sim No.', 'Ward No.', 'Pincode'
   ]
 
   getDeviceList(data){
 
      this.deviceListData.tableData=this._device.getDeviceList(data);
-
+     console.log(this.deviceListData.tableData);
      this.deviceListData.pageName="adminDeviceList";
      this.deviceListData.tableHeaders=this.deviceListsHeaders;
      this.changeDetect.reattach();

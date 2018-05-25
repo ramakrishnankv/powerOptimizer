@@ -28,4 +28,11 @@ export class GroupsService {
           .map((res: Response) => res.json());
   }
 
+
+  getMasterGroups() {
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getMasterGroup}`);
+    return this.apiService.get(this.groupsApiURL, this.apiService.getHeaderOptionWithBearerToken())
+          .map((res: Response) => res.json());
+  }
+
 }

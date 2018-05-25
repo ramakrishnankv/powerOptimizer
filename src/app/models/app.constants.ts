@@ -3,8 +3,8 @@ export const AppConstants = {
   apiResources: {
     login: 'user',
     deviceSchedule: 'DeviceSchedule?userId=',
-    device:'Device/fullDetails?deviceId=All&userId=',
-    deviceDetail:'Device/fullDetails?deviceId=',
+    device:'device/fullDetails?deviceId=All&userId=',
+    deviceDetail:'device/fullDetails?deviceId=',
     deviceEdit:'device?userId=',
     addDevice:'device',
     schedules: 'DeviceSchedule',
@@ -22,6 +22,7 @@ export const AppConstants = {
     getAllCustomer:'customer?userid=',
     getMasterCustomer:'master/customer?userid=',
     getMasterIssueGroups:'master/issueGroup',
+    getMasterGroup:'master/group'
   }
 
 }

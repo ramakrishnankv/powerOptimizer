@@ -8,10 +8,16 @@
         <div class="form-container col-12">
           <form name="addCustomerForm" (submit)="saveCustomer()" [formGroup]="addCustomerForm" novalidate >
             <fieldset>
+                <input  type="hidden" class="form-control" id="add-customer-CustomerID" name="add-customer-CustomerID" placeholder="" formControlName="CustomerID" [ngModel]="customerFormData.CustomerID">
               <table class="table">
                 <tr class="form-group">
                   <td><label for="add-customer-name" >Name*:</label></td>
-                  <td><input  type="text" class="form-control" id="add-customer-name" name="add-customer-name" placeholder="" formControlName="Name" [ngModel]="customerFormData.Name"></td>
+                 <!-- <td>
+                    <select class="form-control" id="add-user-customerID" name="add-user-customerID" formControlName="CustomerID" [ngModel]="customerFormData.CustomerID">
+                        <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
+                    </select>
+                 </td>-->
+                <td><input  type="text" class="form-control" id="add-customer-name" name="add-customer-name" placeholder="" formControlName="Name" [ngModel]="customerFormData.Name"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-phone-number" >Phone Number:</label></td>

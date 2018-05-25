@@ -2,7 +2,10 @@
 export class Device {
 
     public Customer: string;
+
     public User: string;
+    public MacID:string;
+    public SimNo:string;
     public DeviceConsumerTypes:string;
     public Group: string;
     public DeviceID: Number;
@@ -43,6 +46,7 @@ export class Device {
             'DeviceConsumerTypes':param[this.counter].DeviceConsumerTypes ,
             'Group':param[this.counter].Group ,
             'DeviceID': param[this.counter].DeviceID,
+            'SimNo': param[this.counter].SimNo,
             'Name': param[this.counter].Name,
             'Status': param[this.counter].Status,
             'Description': param[this.counter].Description,
@@ -73,11 +77,13 @@ export class Device {
 
     getDevice(param){
        let deviceList = {
+            'DeviceID': param[this.counter].DeviceID, 
+            'MacID': param[this.counter].MacID,
+            'SimNo': param[this.counter].SimNo,
             'Customer': param[this.counter].Customer,
             'User':param[this.counter].User ,
             'DeviceConsumerTypes':param[this.counter].DeviceConsumerTypes ,
             'Group':param[this.counter].Group ,
-            'DeviceID': param[this.counter].DeviceID,
             'Name': param[this.counter].Name,
             'Status': param[this.counter].Status,
             'Description': param[this.counter].Description,

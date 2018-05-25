@@ -33,7 +33,7 @@ export class DeviceService {
   }
 
   getDevices() {
-
+    console.log( this.deviceApiURL);
     return this.apiService.get(this.deviceApiURL, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
   }
@@ -47,14 +47,15 @@ export class DeviceService {
   }
 
   editDevice(param){
-    
-    this.deviceApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deviceEdit}&userId=${this.Id}`);
-    return this.apiService.post(this.deviceApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+    console.log(param);
+    this.deviceApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deviceEdit}${this.Id}`);
+    return this.apiService.put(this.deviceApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
     .map((res: Response) => res.json());
   }
 
   addDevice(param){
-    this.deviceApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.addDevice}`);
+    console.log(param);
+    this.deviceApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deviceEdit}${this.Id}`);
     return this.apiService.post(this.deviceApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
     .map((res: Response) => res.json());
   }

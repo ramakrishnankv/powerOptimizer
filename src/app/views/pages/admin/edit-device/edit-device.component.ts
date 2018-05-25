@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { Router,ActivatedRoute } from '@angular/router';
 import{DeviceService} from '../../../../services/device.service';
 import{CustomersService} from '../../../../services/customers.service';
+import{GroupsService} from '../../../../services/groups.service';
 import{Device} from '../../../../models/device';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'app-edit-device',
   templateUrl: './edit-device.component.html',
   styleUrls: ['../admin-common.less', './edit-device.component.less'],
-  providers: [ DeviceService,Device,CustomersService]
+  providers: [ DeviceService,Device,CustomersService,GroupsService]
 })
 export class EditDeviceComponent implements OnInit {
   router: Router;
@@ -18,9 +19,15 @@ export class EditDeviceComponent implements OnInit {
   editFormData: any;
   private sub:Subscription;
   private Id:any;
+  editForm="Edit";
   customerList:any=[{
     'Name':'',
     'CustomerID':''
+  }];
+  groupList:any=[{
+    'GroupID':'',
+    'Name':'',
+    'Description':''
   }];
   deviceData = {
     'Customer': '',
@@ -47,7 +54,8 @@ export class EditDeviceComponent implements OnInit {
     'CreatedBy':  '',
     'CreatedDate':  '',
     'UpdatedBy':  '',
-    'UpdatedDate': ''
+    'UpdatedDate': '',
+    'SimNo':''
 };
 
   constructor( private fb: FormBuilder,
@@ -56,7 +64,9 @@ export class EditDeviceComponent implements OnInit {
     private _device:Device,
     private changeDetect:ChangeDetectorRef,
     private _Activatedroute:ActivatedRoute,
-    private _customerService:CustomersService ) {
+    private _customerService:CustomersService,
+    private _groupService:GroupsService ) {
+    this.router = this.rout;
     this.createEditDeviceForm();
     this.editFormData = this.deviceData;
   }
@@ -68,6 +78,7 @@ export class EditDeviceComponent implements OnInit {
           this.getDevice(this.Id);
         }
         else{
+          this.editForm="create";
           this.loadData();
         }
       });
@@ -93,6 +104,16 @@ export class EditDeviceComponent implements OnInit {
       });
   }
 
+  getGroups(){
+    this._groupService.getMasterGroups().subscribe(
+      groupData => {
+       this.groupList=groupData;
+       console.log(this.groupList);
+      },
+      error => {
+      });
+  }
+
   getDeviceDetail(param){
 
     this.editFormData=this._device.getDevice(param);
@@ -102,6 +123,7 @@ export class EditDeviceComponent implements OnInit {
 
   loadData(){
     this.getCustomerList();
+    this.getGroups();
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }
@@ -109,6 +131,9 @@ export class EditDeviceComponent implements OnInit {
   createEditDeviceForm() {
     this.editDeviceForm = this.fb.group({
       Name: ['', Validators.required],
+      SimNo: ['', Validators.required],
+      MacID: [''],
+      GroupID: ['', Validators.required],
       Status: ['', Validators.required],
       Description: ['', Validators.required],
       WardName: ['', Validators.required],
@@ -118,16 +143,38 @@ export class EditDeviceComponent implements OnInit {
       Zone: ['', Validators.required],
       PinCode: ['', Validators.required],
       Address: ['', Validators.required],
-      Latitude: ['', Validators.required],
-      Longitude: ['', Validators.required],
+      Latitude: [''],
+      Longitude: [''],
       CustomerID: ['', Validators.required],
       DeviceID: ['']
     })
   }
 
-  saveUser() {
+  saveDevice() {
      if (this.editDeviceForm.dirty && this.editDeviceForm.valid) {
-      this._devicesService.editDevice(this.editDeviceForm.value);
-    }
+
+      if(this.editForm=="Edit") {
+        this._devicesService.editDevice(this.editDeviceForm.value).subscribe(
+          successData => {
+           this.router.navigate(['admin/device']);
+              },
+          error => {
+            console.log("error");
+          });
+      }
+      else{
+        this._devicesService.addDevice(this.editDeviceForm.value).subscribe(
+          successData => {
+           this.router.navigate(['admin/device']);
+              },
+          error => {
+            console.log("error");
+          });
+      }
+
+      }
+
   }
+
 }
+

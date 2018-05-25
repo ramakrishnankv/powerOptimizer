@@ -6,7 +6,7 @@
           <span class="form-title">ADMIN - EDIT DEVICE</span>
         </div>
         <div class="form-container col-12">
-          <form name="editDeviceForm"  (submit)="saveUser()" [formGroup]="editDeviceForm" novalidate >
+          <form name="editDeviceForm"  (submit)="saveDevice()" [formGroup]="editDeviceForm" novalidate >
             <fieldset>
               <table class="table">
                 <!--<tr class="form-group">
@@ -14,15 +14,34 @@
                   <td><input type="text" class="form-control" id="edit-device-macID" name="edit-device-macID" [ngModel]="editFormData.macID" formControlName="editDeviceMacID"></td>
                 </tr>-->
                 <input type="hidden" class="form-control" id="edit-device-id" name="edit-device-id" [ngModel]="editFormData.DeviceID" formControlName="DeviceID">
-                  <tr class="form-group">
+                <tr class="form-group">
+                    <td><label for="edit-device-SimNo" >Sim Number:</label></td>
+                    <td><input type="text" class="form-control" id="edit-device-SimNo" name="edit-device-SimNo" [ngModel]="editFormData.SimNo" formControlName="SimNo"></td>
+                </tr> 
+  
+                <tr class="form-group">
+                    <td><label for="edit-device-MacID" >MacID:</label></td>
+                    <td><input type="text" class="form-control" id="edit-device-MacID" name="edit-device-MacID" [ngModel]="editFormData.MacID" formControlName="MacID"></td>
+                 </tr>  
+                <tr class="form-group">
                     <td><label for="edit-device-customerID" >Customer ID:</label></td>
                     <td>
-                        <select class="form-control" id="edit-device-customerID" name="edit-device-customerID" formControlName="CustomerID" [(ngModel)]="editFormData.CustomerID" disabled>
+                        <select class="form-control" id="edit-device-customerID" name="edit-device-customerID" formControlName="CustomerID" [(ngModel)]="editFormData.CustomerID">
                             <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID" >{{custList.Name}}</option>
                         </select>
                    </td>
                     <!--<td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>-->
                   </tr>
+                  <tr class="form-group">
+                      <td><label for="edit-device-GroupID">Group ID:</label></td>
+                      <td>
+                          <select class="form-control" id="edit-device-GroupID" name="edit-device-GroupID" formControlName="GroupID" [(ngModel)]="parseInt(editFormData.GroupID)">
+                              <option *ngFor="let grList of groupList" [ngValue]="grList.GroupID">{{grList.Name}}</option>
+                          </select>
+                     </td>
+                      <!--<td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>-->
+                    </tr>
+
                   <tr class="form-group">
                     <td><label for="edit-device-name" >Name:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.Name" formControlName="Name"></td>
