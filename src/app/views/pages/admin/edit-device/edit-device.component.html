@@ -35,7 +35,7 @@
                   <tr class="form-group">
                       <td><label for="edit-device-GroupID">Group ID:</label></td>
                       <td>
-                          <select class="form-control" id="edit-device-GroupID" name="edit-device-GroupID" formControlName="GroupID" [(ngModel)]="parseInt(editFormData.GroupID)">
+                          <select class="form-control" id="edit-device-GroupID" name="edit-device-GroupID" formControlName="GroupID" [(ngModel)]="editFormData.GroupID">
                               <option *ngFor="let grList of groupList" [ngValue]="grList.GroupID">{{grList.Name}}</option>
                           </select>
                      </td>
