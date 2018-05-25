@@ -31,7 +31,8 @@
                   <td><label for="add-user-customerID" >Customer Id:</label></td>
                   <td>
                       <select class="form-control" id="add-user-customerID" name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
-                          <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
+                        <option value="">Select Customer</option>  
+                        <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
                       </select>
                   </td>
                 </tr>
@@ -57,7 +58,8 @@
 
                   <td>
                     <select class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId">
-                        <option *ngFor="let issue of issueList" [ngValue]="issue.GroupID">{{issue.Name}}</option>
+                       <option value="">Select GroupID</option>   
+                      <option *ngFor="let issue of issueList" [ngValue]="issue.GroupID">{{issue.Name}}</option>
                     </select>
                 </td>
                   <!--<td>
@@ -76,6 +78,7 @@
                   <td><label for="add-user-role" >Role:</label></td>
                   <td>
                     <select class="form-control" id="add-user-role" name="add-user-role" formControlName="Role" [(ngModel)]="userFormData.Role">
+                      <option value="">Select Role</option>
                       <option value="CA" [selected]="userFormData.Role =='CA'">CA</option>
                       <option value="CU" [selected]="userFormData.Role =='CU'">CU</option>
                       <option value="GU" [selected]="userFormData.Role =='GU'">GU</option>
@@ -87,6 +90,7 @@
                   <td><label for="edit-device-status" >Email Opted:</label></td>
                   <td>
                       <select class="form-control" id="user-EmailOpted" name="user-EmailOpted" formControlName="EmailOpted" [(ngModel)]="userFormData.EmailOpted">
+                          <option value="">Select Email Opted</option>
                           <option value="1" [selected]="userFormData.EmailOpted==1">Yes</option>
                           <option value="0" [selected]="userFormData.EmailOpted==0">No</option>
                        </select>
@@ -96,6 +100,7 @@
                   <td><label for="edit-device-status" >SMS Opted:</label></td>
                   <td>
                       <select class="form-control" id="user-SMSOpted" name="user-SMSOpted" formControlName="SMSOpted" [(ngModel)]="userFormData.SMSOpted">
+                          <option value="">Select SMS Opted</option>
                           <option value="1" [selected]="userFormData.SMSOpted==1">Yes</option>
                           <option value="0" [selected]="userFormData.SMSOpted==0">No</option>
                        </select>
@@ -105,6 +110,7 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="user-status" name="user-status" formControlName="IsActive" [(ngModel)]="userFormData.IsActive">
+                          <option value="">Select Status</option>
                           <option value="1" [selected]="userFormData.IsActive==1">Active</option>
                           <option value="0" [selected]="userFormData.IsActive==0">In Active</option>
                        </select>

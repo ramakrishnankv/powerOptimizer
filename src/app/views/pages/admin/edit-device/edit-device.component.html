@@ -27,7 +27,8 @@
                     <td><label for="edit-device-customerID" >Customer ID:</label></td>
                     <td>
                         <select class="form-control" id="edit-device-customerID" name="edit-device-customerID" formControlName="CustomerID" [(ngModel)]="editFormData.CustomerID">
-                            <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID" >{{custList.Name}}</option>
+                            <option value="" >Select Customer</option>  
+                          <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID" >{{custList.Name}}</option>
                         </select>
                    </td>
                     <!--<td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>-->
@@ -36,7 +37,8 @@
                       <td><label for="edit-device-GroupID">Group ID:</label></td>
                       <td>
                           <select class="form-control" id="edit-device-GroupID" name="edit-device-GroupID" formControlName="GroupID" [(ngModel)]="editFormData.GroupID">
-                              <option *ngFor="let grList of groupList" [ngValue]="grList.GroupID">{{grList.Name}}</option>
+                              <option value="">Select Group</option>    
+                            <option *ngFor="let grList of groupList" [ngValue]="grList.GroupID">{{grList.Name}}</option>
                           </select>
                      </td>
                       <!--<td><input type="text" class="form-control" id="edit-device-customerID" name="edit-device-customerID" [ngModel]="editFormData.CustomerID" formControlName="CustomerID" [readonly]="true" ></td>-->
@@ -126,8 +128,9 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
-                          <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
-                          <option value="In Active" [selected]="editFormData.Status =='In Active'">In Active</option>
+                        <option value="">Select Status</option>  
+                        <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
+                        <option value="In Active" [selected]="editFormData.Status =='In Active'">In Active</option>
                        </select>
                   </td>
                 </tr>

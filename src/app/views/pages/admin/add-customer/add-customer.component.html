@@ -47,6 +47,7 @@
                   <td><label for="add-customer-status" >Status:</label></td>
                   <td>
                     <select class="form-control" id="add-customer-status" name="add-customer-status" formControlName="Status" [ngModel]="customerFormData.Status">
+                      <option value="">Select Status</option>  
                       <option value="Active" [selected]="customerFormData.Status=='Active'">Active</option>
                       <option value="In Active" [selected]="customerFormData.Status=='In Active'">In Active</option>
                     </select>
