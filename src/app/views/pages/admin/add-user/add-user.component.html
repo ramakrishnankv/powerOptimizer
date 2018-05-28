@@ -7,7 +7,7 @@
         </div>
 
         <div class="form-container col-12">
-          <form name="addUserForm" (submit)="saveUser()"  [formGroup]="addUserForm" novalidate >
+          <form name="addUserForm" (submit)="saveUser(template)"  [formGroup]="addUserForm" novalidate >
               <input *ngIf="UserForm == 'Edit'" type="hidden" class="form-control" id="add-user-customer-id" name="add-user-customer-id" [ngModel]="userFormData.CustomerID" formControlName="CustomerID">
 
             <fieldset class="{{statusClass}}">
@@ -16,21 +16,21 @@
                   </div>
               <table class="table">
                 <tr class="form-group">
-                  <td><label for="add-user-userID" >User ID:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-userID" name="add-user-userID" placeholder="" formControlName="UserID" [ngModel]="userFormData.UserID"></td>
+                  <td><label for="add-user-userID" >User ID*:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-userID" required name="add-user-userID" placeholder="" formControlName="UserID" [ngModel]="userFormData.UserID"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-first-name" >First Name:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-first-name" name="add-user-first-name" placeholder="" formControlName="FirstName" [ngModel]="userFormData.FirstName"></td>
+                  <td><label for="add-user-first-name" >First Name*:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-first-name" required name="add-user-first-name" placeholder="" formControlName="FirstName" [ngModel]="userFormData.FirstName"></td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-last-name" >Last Name:</label></td>
                   <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="LastName" [ngModel]="userFormData.LastName"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-customerID" >Customer Id:</label></td>
+                  <td><label for="add-user-customerID" >Customer Id*:</label></td>
                   <td>
-                      <select class="form-control" id="add-user-customerID" name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
+                      <select class="form-control" id="add-user-customerID" required name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
                         <option value="">Select Customer</option>  
                         <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
                       </select>
@@ -42,23 +42,39 @@
                   <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="Password" [ngModel]="userFormData.Password"></td>
                 </tr>-->
                 <tr class="form-group">
-                  <td><label for="add-user-email-address" >Email Address:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="EmailAddress" [ngModel]="userFormData.EmailAddress"></td>
+                  <td><label for="add-user-email-address" >Email Address*:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="EmailAddress" required [pattern]="emailPattern" [ngModel]="userFormData.EmailAddress"></td>
                 </tr>
+                <tr class="validateColor" *ngIf="EmailAddress.errors && (EmailAddress.dirty || EmailAddress.touched)"> 
+                  <td *ngIf="EmailAddress.errors.required">
+                      Email Address Required
+                  </td>      
+                  <td *ngIf="EmailAddress.errors.pattern">
+                        Email not valid.
+                  </td> 
+                 </tr> 
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" >Profile Picture:</label></td>
                   <td><input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="ProfilePicture" [ngModel]="userFormData.ProfilePicture"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-profile-picture" >MobileNo:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-MobileNo" name="add-user-MobileNo" placeholder="" formControlName="MobileNo" [ngModel]="userFormData.MobileNo"></td>
+                  <td><label for="add-user-profile-picture" >Mobile Number*:</label></td>
+                  <td><input type="text" class="form-control" id="add-user-MobileNo" name="add-user-MobileNo" placeholder="" formControlName="MobileNo" required [pattern]="phonePattern" [ngModel]="userFormData.MobileNo"></td>
                 </tr>
+                <tr class="validateColor" *ngIf="MobileNo.errors && (MobileNo.dirty || MobileNo.touched)"> 
+                  <td *ngIf="MobileNo.errors.required">
+                      Mobile Number Required
+                  </td>      
+                  <td *ngIf="MobileNo.errors.pattern">
+                        Mobile Number not valid.
+                  </td> 
+                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>
 
                   <td>
                     <select class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId">
-                       <option value="">Select GroupID</option>   
+                       <!--<option value="">Select GroupID</option>-->   
                       <option *ngFor="let issue of issueList" [ngValue]="issue.GroupID">{{issue.Name}}</option>
                     </select>
                 </td>
@@ -75,9 +91,9 @@
                   <td><input type="text" class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" placeholder="" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId"></td>
                 </tr>-->
                 <tr class="form-group">
-                  <td><label for="add-user-role" >Role:</label></td>
+                  <td><label for="add-user-role" >Role*:</label></td>
                   <td>
-                    <select class="form-control" id="add-user-role" name="add-user-role" formControlName="Role" [(ngModel)]="userFormData.Role">
+                    <select class="form-control" id="add-user-role" required name="add-user-role" formControlName="Role" [(ngModel)]="userFormData.Role">
                       <option value="">Select Role</option>
                       <option value="CA" [selected]="userFormData.Role =='CA'">CA</option>
                       <option value="CU" [selected]="userFormData.Role =='CU'">CU</option>
@@ -90,9 +106,9 @@
                   <td><label for="edit-device-status" >Email Opted:</label></td>
                   <td>
                       <select class="form-control" id="user-EmailOpted" name="user-EmailOpted" formControlName="EmailOpted" [(ngModel)]="userFormData.EmailOpted">
-                          <option value="">Select Email Opted</option>
-                          <option value="1" [selected]="userFormData.EmailOpted==1">Yes</option>
-                          <option value="0" [selected]="userFormData.EmailOpted==0">No</option>
+                          <!--<option value="">Select Email Opted</option>-->
+                          <option value=true [selected]="userFormData.EmailOpted==true">Yes</option>
+                          <option value=false [selected]="userFormData.EmailOpted==false">No</option>
                        </select>
                   </td>
                 </tr>
@@ -100,9 +116,9 @@
                   <td><label for="edit-device-status" >SMS Opted:</label></td>
                   <td>
                       <select class="form-control" id="user-SMSOpted" name="user-SMSOpted" formControlName="SMSOpted" [(ngModel)]="userFormData.SMSOpted">
-                          <option value="">Select SMS Opted</option>
-                          <option value="1" [selected]="userFormData.SMSOpted==1">Yes</option>
-                          <option value="0" [selected]="userFormData.SMSOpted==0">No</option>
+                          <!--<option value="">Select SMS Opted</option>-->
+                          <option value=true [selected]="userFormData.SMSOpted==true">Yes</option>
+                          <option value=false [selected]="userFormData.SMSOpted==false">No</option>
                        </select>
                   </td>
                 </tr>
@@ -110,9 +126,9 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="user-status" name="user-status" formControlName="IsActive" [(ngModel)]="userFormData.IsActive">
-                          <option value="">Select Status</option>
-                          <option value="1" [selected]="userFormData.IsActive==1">Active</option>
-                          <option value="0" [selected]="userFormData.IsActive==0">In Active</option>
+                          <!--<option value="">Select Status</option>-->
+                          <option value=true [selected]="userFormData.IsActive==true">Active</option>
+                          <option value=false [selected]="userFormData.IsActive==false">In Active</option>
                        </select>
                   </td>
                 </tr>
@@ -133,3 +149,14 @@
     </div>
   </section>
 </app-page-prime>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Alert</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    User Record Updated succesfully
+  </div>
+</ng-template>

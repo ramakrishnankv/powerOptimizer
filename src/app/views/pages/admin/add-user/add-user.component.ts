@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy,ChangeDetectorRef} from '@angular/core';
+import { Component,TemplateRef, OnInit,OnDestroy,ChangeDetectorRef} from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +6,8 @@ import{UsersService} from '../../../../services/users.service';
 import{UserDataModel} from '../../../../models/user/user-data.model';
 import{DataService} from '../../../../services/data.service';
 import{CustomersService} from '../../../../services/customers.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-add-user',
@@ -25,6 +27,10 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   userDataSource:any;
   errorMsg:any;
   statusClass: string;
+  template: TemplateRef<any>;
+  modalRef: BsModalRef;
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$";
+  phonePattern="[0-9]{10}";
   customerList:any=[{
     'Name':'',
     'CustomerID':''
@@ -34,7 +40,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     'Name':''
   }];
 
-  constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService,private _customerService:CustomersService) {
+  constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService,private _customerService:CustomersService,private modalService: BsModalService) {
     this.router = this.rout;
     this.userFormData=this._userModel.userData;
     this.createAddCustomerForm();
@@ -115,31 +121,34 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     this.addUserForm = this.fb.group({
       UserID: ['', Validators.required],
       FirstName: ['', Validators.required],
-      CustomerID:[''],
-      LastName: ['', Validators.required],
-      /*Password: ['', Validators.required],*/
-      EmailAddress: ['', Validators.required],
-      ProfilePicture: ['', Validators.required],
+      CustomerID:['', Validators.required],
+      LastName: [''],
+      EmailAddress: ['', Validators.compose([Validators.required,Validators.pattern(this.emailPattern)])],
+      ProfilePicture: [''],
       Role: ['', Validators.required],
-      SMSOpted: ['', Validators.required],
-      MobileNo: ['', Validators.required],
-      EmailOpted: ['', Validators.required],
+      SMSOpted: [''],
+      MobileNo: ['', Validators.compose([Validators.required,Validators.pattern(this.phonePattern)])],
+      EmailOpted: [''],
       IssueGroupId: [''],
-      IsActive: ['', Validators.required]
+      IsActive: ['']
     })
   }
 
 
-  saveUser() {
+  saveUser(template: TemplateRef<any>) {
     if (this.addUserForm.dirty && this.addUserForm.valid) {
      if(this.UserForm=="Edit"){
        console.log("test="+this.addUserForm.value);
      this._userService.editUser(this.addUserForm.value).subscribe(
       successData => {
+        this.openModal(template);
+        this.statusClass = 'valid';
+        this.errorMsg="";
        this.router.navigate(['admin/users']);
           },
       error => {
-        console.log("error");
+        this.statusClass = 'error';
+        this.errorMsg=error;
       });
     }
     else
@@ -153,7 +162,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
         },
         error => {
           this.statusClass = 'error';
-          this.errorMsg="UserID is already Exist";
+          this.errorMsg=error;
         });
     }
 
@@ -163,6 +172,18 @@ export class AddUserComponent implements OnInit,OnDestroy  {
 
 
  }
+
+ openModal(template: TemplateRef<any>) {
+  this.modalRef = this.modalService.show(template);
+ }
+
+  get EmailAddress() {
+      return this.addUserForm.get('EmailAddress');
+  }
+
+  get MobileNo() {
+      return this.addUserForm.get('MobileNo');
+  } 
 
   ngOnDestroy() {
 

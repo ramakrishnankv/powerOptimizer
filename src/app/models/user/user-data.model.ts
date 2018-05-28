@@ -11,7 +11,10 @@ export class UserDataModel {
     LastloginDate: "",
     EmailAddress: "",
     Role: "",
-    Token: ""
+    Token: "",
+    EmailOpted:true,
+    SMSOpted:true,
+    IsActive:true
   }
 
   public counter:any=0;

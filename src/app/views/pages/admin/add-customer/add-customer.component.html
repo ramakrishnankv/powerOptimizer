@@ -6,7 +6,7 @@
           <span class="form-title">ADMIN - CUSTOMER</span>
         </div>
         <div class="form-container col-12">
-          <form name="addCustomerForm" (submit)="saveCustomer()" [formGroup]="addCustomerForm" novalidate >
+          <form name="addCustomerForm" (submit)="saveCustomer(template)" [formGroup]="addCustomerForm" novalidate >
             <fieldset>
                 <input  type="hidden" class="form-control" id="add-customer-CustomerID" name="add-customer-CustomerID" placeholder="" formControlName="CustomerID" [ngModel]="customerFormData.CustomerID">
               <table class="table">
@@ -20,34 +20,34 @@
                 <td><input  type="text" class="form-control" id="add-customer-name" name="add-customer-name" placeholder="" formControlName="Name" [ngModel]="customerFormData.Name"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-phone-number" >Phone Number:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-phone-number" name="add-customer-phone-number" placeholder="" formControlName="PhoneNumber" [ngModel]="customerFormData.PhoneNumber"></td>
+                  <td><label for="add-customer-phone-number" >Mobile Number*:</label></td>
+                  <td><input type="text" class="form-control" id="add-customer-phone-number" name="add-customer-phone-number" placeholder="" formControlName="PhoneNumber" required [pattern]="phonePattern" [ngModel]="customerFormData.PhoneNumber"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-state" >State:</label></td>
+                  <td><label for="add-customer-state" >State*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-state" name="add-customer-state" placeholder="" formControlName="State" [ngModel]="customerFormData.State"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-city" >City:</label></td>
+                  <td><label for="add-customer-city" >City*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-city" name="add-customer-city" placeholder="" formControlName="City" [ngModel]="customerFormData.City"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-address" >Address:</label></td>
+                  <td><label for="add-customer-address" >Address*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-address" name="add-customer-address" placeholder="" formControlName="Address" [ngModel]="customerFormData.Address"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-pin-code" >Pin Code:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-pin-code" name="add-customer-pin-code" placeholder="" formControlName="PinCode" [ngModel]="customerFormData.PinCode"></td>
+                  <td><label for="add-customer-pin-code" >Pin Code*:</label></td>
+                  <td><input type="text" class="form-control" id="add-customer-pin-code" name="add-customer-pin-code" placeholder="" formControlName="PinCode" required [pattern]="pincodePattern" [ngModel]="customerFormData.PinCode"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-type" >Customer Type:</label></td>
+                  <td><label for="add-customer-type" >Customer Type*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-type" name="add-customer-type" placeholder="" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-status" >Status:</label></td>
+                  <td><label for="add-customer-status" >Status*:</label></td>
                   <td>
                     <select class="form-control" id="add-customer-status" name="add-customer-status" formControlName="Status" [ngModel]="customerFormData.Status">
-                      <option value="">Select Status</option>  
+                      <!--<option value="">Select Status</option>-->  
                       <option value="Active" [selected]="customerFormData.Status=='Active'">Active</option>
                       <option value="In Active" [selected]="customerFormData.Status=='In Active'">In Active</option>
                     </select>
@@ -70,3 +70,14 @@
     </div>
   </section>
 </app-page-prime>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Alert</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Customer Record Updated succesfully
+  </div>
+</ng-template>

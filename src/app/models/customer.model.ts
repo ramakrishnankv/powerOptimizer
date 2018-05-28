@@ -13,7 +13,7 @@ export class Customer {
         City: "",
         PinCode: "",
         CustomerType: "",
-        Status: ""
+        Status: "Active"
       }
       public counter:any=0;
       customersData: any = [];

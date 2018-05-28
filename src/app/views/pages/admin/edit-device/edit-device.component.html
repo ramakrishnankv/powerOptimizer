@@ -15,16 +15,16 @@
                 </tr>-->
                 <input type="hidden" class="form-control" id="edit-device-id" name="edit-device-id" [ngModel]="editFormData.DeviceID" formControlName="DeviceID">
                 <tr class="form-group">
-                    <td><label for="edit-device-SimNo" >Sim Number:</label></td>
+                    <td><label for="edit-device-SimNo" >Sim Number*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-SimNo" name="edit-device-SimNo" [ngModel]="editFormData.SimNo" formControlName="SimNo"></td>
                 </tr> 
   
                 <tr class="form-group">
-                    <td><label for="edit-device-MacID" >MacID:</label></td>
+                    <td><label for="edit-device-MacID" >MacID*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-MacID" name="edit-device-MacID" [ngModel]="editFormData.MacID" formControlName="MacID"></td>
                  </tr>  
                 <tr class="form-group">
-                    <td><label for="edit-device-customerID" >Customer ID:</label></td>
+                    <td><label for="edit-device-customerID" >Customer ID*:</label></td>
                     <td>
                         <select class="form-control" id="edit-device-customerID" name="edit-device-customerID" formControlName="CustomerID" [(ngModel)]="editFormData.CustomerID">
                             <option value="" >Select Customer</option>  
@@ -45,7 +45,7 @@
                     </tr>
 
                   <tr class="form-group">
-                    <td><label for="edit-device-name" >Name:</label></td>
+                    <td><label for="edit-device-name" >Name*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.Name" formControlName="Name"></td>
                   </tr>
 
@@ -128,9 +128,9 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
-                        <option value="">Select Status</option>  
+                        <!--<option value="">Select Status</option>--> 
                         <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
-                        <option value="In Active" [selected]="editFormData.Status =='In Active'">In Active</option>
+                        <option value="In Active" [selected]="editFormData.Status =='InActive'">In Active</option>
                        </select>
                   </td>
                 </tr>
@@ -152,3 +152,14 @@
     </div>
   </section>
 </app-page-prime>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Alert</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Device Record Updated succesfully
+  </div>
+</ng-template>

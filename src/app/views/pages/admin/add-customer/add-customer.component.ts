@@ -1,9 +1,11 @@
-import { Component, OnInit,OnDestroy,ChangeDetectorRef } from '@angular/core';
+import { Component,TemplateRef, OnInit,OnDestroy,ChangeDetectorRef } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import{CustomersService} from '../../../../services/customers.service';
 import{Customer} from '../../../../models/customer.model';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 @Component({
@@ -21,12 +23,16 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
   router:Router;
   CustomerForm:string="Edit";
   customerDataSource:any;
+  template: TemplateRef<any>;
+  modalRef: BsModalRef;
+  phonePattern="[0-9]{10}";
+  pincodePattern="[0-9]{6}";
   customerList:any=[{
     'Name':'',
     'CustomerID':''
   }];
 
-  constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _customerService: CustomersService,private _customerModel:Customer,private changeDetect:ChangeDetectorRef) {
+  constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _customerService: CustomersService,private _customerModel:Customer,private changeDetect:ChangeDetectorRef,private modalService: BsModalService,) {
     this.router = this.rout;
     this.customerFormData=this._customerModel.customerData;
     this.createAddCustomerForm();
@@ -84,23 +90,25 @@ loadData(){
     this.addCustomerForm = this.fb.group({
       CustomerID: [''],
       Name: ['', Validators.required],
-      PhoneNumber: ['', Validators.required],
+      PhoneNumber: ['', Validators.compose([Validators.required,Validators.pattern(this.phonePattern)])],
       Address: ['', Validators.required],
       State: ['', Validators.required],
       City: ['', Validators.required],
-      PinCode: ['', Validators.required],
+      PinCode: ['', Validators.compose([Validators.required,Validators.pattern(this.pincodePattern)])],
       CustomerType: ['', Validators.required],
       Status: ['', Validators.required]
     })
   }
 
-  saveCustomer() {
+  saveCustomer(template: TemplateRef<any>) {
     if (this.addCustomerForm.dirty && this.addCustomerForm.valid) {
     
      if(this.CustomerForm=="Edit"){
        console.log("test="+this.addCustomerForm.value);
       this._customerService.editCustomer(this.addCustomerForm.value).subscribe(
       successData => {
+      this.openModal(template);
+      // this.modalService.show('');
        this.router.navigate(['admin/customers']);
           },
       error => {
@@ -121,6 +129,12 @@ loadData(){
    }
 
 
+
+
+ }
+
+ openModal(template: TemplateRef<any>) {
+  this.modalRef = this.modalService.show(template);
  }
 
   ngOnDestroy() {

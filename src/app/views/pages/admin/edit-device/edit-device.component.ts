@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, TemplateRef, OnInit,ChangeDetectorRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 import{DeviceService} from '../../../../services/device.service';
@@ -6,6 +6,8 @@ import{CustomersService} from '../../../../services/customers.service';
 import{GroupsService} from '../../../../services/groups.service';
 import{Device} from '../../../../models/device';
 import { Subscription } from 'rxjs/Subscription';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-edit-device',
@@ -20,6 +22,8 @@ export class EditDeviceComponent implements OnInit {
   private sub:Subscription;
   private Id:any;
   editForm="Edit";
+  template: TemplateRef<any>;
+  modalRef: BsModalRef;
   customerList:any=[{
     'Name':'',
     'CustomerID':''
@@ -65,7 +69,8 @@ export class EditDeviceComponent implements OnInit {
     private changeDetect:ChangeDetectorRef,
     private _Activatedroute:ActivatedRoute,
     private _customerService:CustomersService,
-    private _groupService:GroupsService ) {
+    private _groupService:GroupsService,
+    private modalService: BsModalService ) {
     this.router = this.rout;
     this.createEditDeviceForm();
     this.editFormData = this.deviceData;
@@ -132,17 +137,17 @@ export class EditDeviceComponent implements OnInit {
     this.editDeviceForm = this.fb.group({
       Name: ['', Validators.required],
       SimNo: ['', Validators.required],
-      MacID: [''],
-      GroupID: ['', Validators.required],
-      Status: ['', Validators.required],
-      Description: ['', Validators.required],
-      WardName: ['', Validators.required],
-      WardNumber: ['', Validators.required],
-      Division: ['', Validators.required],
-      SubDivision: ['', Validators.required],
-      Zone: ['', Validators.required],
-      PinCode: ['', Validators.required],
-      Address: ['', Validators.required],
+      MacID: ['', Validators.required],
+      GroupID: [''],
+      Status: [''],
+      Description: [''],
+      WardName: [''],
+      WardNumber: [''],
+      Division: [''],
+      SubDivision: [''],
+      Zone: [''],
+      PinCode: [''],
+      Address: [''],
       Latitude: [''],
       Longitude: [''],
       CustomerID: ['', Validators.required],
@@ -150,12 +155,13 @@ export class EditDeviceComponent implements OnInit {
     })
   }
 
-  saveDevice() {
+  saveDevice(template: TemplateRef<any>) {
      if (this.editDeviceForm.dirty && this.editDeviceForm.valid) {
 
       if(this.editForm=="Edit") {
         this._devicesService.editDevice(this.editDeviceForm.value).subscribe(
           successData => {
+            this.openModal(template);
            this.router.navigate(['admin/device']);
               },
           error => {
@@ -165,6 +171,7 @@ export class EditDeviceComponent implements OnInit {
       else{
         this._devicesService.addDevice(this.editDeviceForm.value).subscribe(
           successData => {
+             this.openModal(template);
            this.router.navigate(['admin/device']);
               },
           error => {
@@ -175,6 +182,9 @@ export class EditDeviceComponent implements OnInit {
       }
 
   }
+  openModal(template: TemplateRef<any>) {
+  this.modalRef = this.modalService.show(template);
+ }
 
 }
 
