@@ -147,6 +147,7 @@ export class LoginComponent implements OnInit {
     if(this.isRememberChecked) {
       // TODO: create a sepaare service for localstore
       window.localStorage.setItem('storedUser', JSON.stringify(this.storedUser));
+      
     }
 
     // set user model
@@ -200,6 +201,7 @@ export class LoginComponent implements OnInit {
   setAuthenticationCookie(responseData) {
     console.log(responseData);
     this.cookieService.set('UserId', responseData.UserId);
+    this.cookieService.set('Role', responseData.Role);
     this.cookieService.set('Token', responseData.Token);
   }
 

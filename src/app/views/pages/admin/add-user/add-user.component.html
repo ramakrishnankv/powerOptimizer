@@ -15,6 +15,15 @@
                     {{errorMsg}}
                   </div>
               <table class="table">
+                  <tr class="form-group">
+                      <td><label for="add-user-customerID" >Customer Id*:</label></td>
+                      <td>
+                          <select class="form-control" id="add-user-customerID" required name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
+                            <!--<option value="">Select Customer</option>-->
+                            <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
+                          </select>
+                      </td>
+                    </tr>
                 <tr class="form-group">
                   <td><label for="add-user-userID" >User ID*:</label></td>
                   <td><input type="text" class="form-control" id="add-user-userID" required name="add-user-userID" placeholder="" formControlName="UserID" [ngModel]="userFormData.UserID"></td>
@@ -27,16 +36,6 @@
                   <td><label for="add-user-last-name" >Last Name:</label></td>
                   <td><input type="text" class="form-control" id="add-user-last-name" name="add-user-last-name" placeholder="" formControlName="LastName" [ngModel]="userFormData.LastName"></td>
                 </tr>
-                <tr class="form-group">
-                  <td><label for="add-user-customerID" >Customer Id*:</label></td>
-                  <td>
-                      <select class="form-control" id="add-user-customerID" required name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
-                        <option value="">Select Customer</option>  
-                        <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
-                      </select>
-                  </td>
-                </tr>
-
                 <!--<tr class="form-group">
                   <td><label for="add-user-password" >Password:</label></td>
                   <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="Password" [ngModel]="userFormData.Password"></td>
@@ -70,7 +69,7 @@
                   </td> 
                  </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-profile-picture" >Issue GroupId:</label></td>
+                  <td><label for="add-user-profile-picture" >Designation:</label></td>
 
                   <td>
                     <select class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId">
@@ -93,14 +92,21 @@
                 <tr class="form-group">
                   <td><label for="add-user-role" >Role*:</label></td>
                   <td>
-                    <select class="form-control" id="add-user-role" required name="add-user-role" formControlName="Role" [(ngModel)]="userFormData.Role">
-                      <option value="">Select Role</option>
-                      <option value="CA" [selected]="userFormData.Role =='CA'">CA</option>
-                      <option value="CU" [selected]="userFormData.Role =='CU'">CU</option>
-                      <option value="GU" [selected]="userFormData.Role =='GU'">GU</option>
-                      <option value="VU" [selected]="userFormData.Role =='VU'">VU</option>
-                    </select>
+                      <select class="form-control" id="add-user-Role" required name="add-user-Role" formControlName="Role" [(ngModel)]="userFormData.Role">
+                        <!--<option value="">Select Customer</option>-->
+                        <option *ngFor="let uRole of userRole" [ngValue]="uRole.Role">{{uRole.Name}}</option>
+                      </select>
                   </td>
+                  <!--<td>
+                    <select class="form-control" id="add-user-role" required name="add-user-role" formControlName="Role" [(ngModel)]="userFormData.Role">
+                        userRole
+                      <option value="">Select Role</option>
+                      <option value="CA" [selected]="userFormData.Role =='CA'">Company Admin</option>
+                      <option value="CU" [selected]="userFormData.Role =='CU'">Company User</option>
+                      <option value="VA" [selected]="userFormData.Role =='VA'">Vendor Admin</option>
+                      <option value="VU" [selected]="userFormData.Role =='VU'">Vendor User</option>
+                    </select>
+                  </td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-status" >Email Opted:</label></td>

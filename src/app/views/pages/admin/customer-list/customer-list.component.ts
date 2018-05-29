@@ -49,7 +49,7 @@ export class CustomerListComponent implements OnInit {
 
    // Tabular Contents
    customerListsHeaders = [
-    'CustomerID', 'Name', 'Contact No', 'Customer Type'
+    'Status', 'Name', 'Contact No', 'Customer Type'
   ]
   selectRow(data){
       localStorage.setItem('customerData', JSON.stringify(data));

@@ -23,6 +23,14 @@
                   <td><label for="add-customer-phone-number" >Mobile Number*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-phone-number" name="add-customer-phone-number" placeholder="" formControlName="PhoneNumber" required [pattern]="phonePattern" [ngModel]="customerFormData.PhoneNumber"></td>
                 </tr>
+                <tr class="validateColor" *ngIf="PhoneNumber.errors && (PhoneNumber.dirty || PhoneNumber.touched)"> 
+                    <td *ngIf="PhoneNumber.errors.required">
+                        Mobile Number Required
+                    </td>      
+                    <td *ngIf="PhoneNumber.errors.pattern">
+                        Mobile Number not valid.
+                    </td> 
+                   </tr> 
                 <tr class="form-group">
                   <td><label for="add-customer-state" >State*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-state" name="add-customer-state" placeholder="" formControlName="State" [ngModel]="customerFormData.State"></td>
@@ -39,9 +47,25 @@
                   <td><label for="add-customer-pin-code" >Pin Code*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-pin-code" name="add-customer-pin-code" placeholder="" formControlName="PinCode" required [pattern]="pincodePattern" [ngModel]="customerFormData.PinCode"></td>
                 </tr>
+                <tr class="validateColor" *ngIf="PinCode.errors && (PinCode.dirty || PinCode.touched)"> 
+                    <td *ngIf="PinCode.errors.required">
+                        Pin Code Required
+                    </td>      
+                    <td *ngIf="PinCode.errors.pattern">
+                        Pin Code not valid
+                    </td> 
+                   </tr> 
                 <tr class="form-group">
                   <td><label for="add-customer-type" >Customer Type*:</label></td>
-                  <td><input type="text" class="form-control" id="add-customer-type" name="add-customer-type" placeholder="" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType"></td>
+                  <!--<td><input type="text" class="form-control" id="add-customer-type" name="add-customer-type" placeholder="" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType"></td>-->
+                  <td>
+                      <select class="form-control" id="add-customer-type" required name="add-customer-type" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType">
+                          <option value="Retail" [selected]="customerFormData.CustomerType=='Retail'">Retail</option>
+                          <option value="Enterprise" [selected]="customerFormData.CustomerType=='Enterprise'">Enterprise</option>
+                        
+                        <!--<option *ngFor="let ctype of customerType" [selected]="customerFormData.CustomerType==ctype.customerType" [ngValue]="ctype.customerType">{{ctype.Name}}</option>-->
+                      </select>
+                  </td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-customer-status" >Status*:</label></td>

@@ -24,6 +24,8 @@ export class EditDeviceComponent implements OnInit {
   editForm="Edit";
   template: TemplateRef<any>;
   modalRef: BsModalRef;
+  simPattern="[0-9]{10}";
+  pincodePattern="[0-9]{6}";
   customerList:any=[{
     'Name':'',
     'CustomerID':''
@@ -185,6 +187,13 @@ export class EditDeviceComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
   this.modalRef = this.modalService.show(template);
  }
+ get SimNo() {
+  return this.editDeviceForm.get('SimNo');
+}
+
+get PinCode() {
+  return this.editDeviceForm.get('PinCode');
+}
 
 }
 

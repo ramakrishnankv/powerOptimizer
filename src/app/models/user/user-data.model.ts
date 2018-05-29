@@ -45,6 +45,7 @@ getUserList(param){
 
           'UserID': param[this.counter].UserID,
           'CustomerID':param[this.counter].CustomerID ,
+          'CustomerName':param[this.counter].CustomerName ,
           'FirstName':param[this.counter].FirstName ,
           'LastName':param[this.counter].LastName ,
           'ProfilePicture':param[this.counter].ProfilePicture ,

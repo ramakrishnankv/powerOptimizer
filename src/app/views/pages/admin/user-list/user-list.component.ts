@@ -52,7 +52,7 @@ export class UserListComponent implements OnInit,OnDestroy {
 
    // Tabular Contents
    userListsHeaders = [
-    'UserID', 'Name', 'EmailAddr', 'Role'
+    'UserID', 'Name', 'Customer', 'Role'
   ]
   selectRow(data){
     localStorage.setItem('userData',JSON.stringify(data) );

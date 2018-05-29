@@ -79,7 +79,7 @@
           <!-- User Data -->
           <td>{{data.UserID}}</td>
           <td>{{data.FirstName}} {{data.LastName}}</td>
-          <td>{{data.EmailAddress}}</td>
+          <td>{{data.CustomerName}}</td>
           <td>{{data.Role}}</td>
         </ng-template>
         <ng-template [ngSwitchCase]="'adminDeviceList'">
@@ -91,7 +91,7 @@
         </ng-template>
         <ng-template [ngSwitchCase]="'customers'">
           <!-- Customer Data -->
-          <td>{{data.CustomerID}}</td>
+          <td>{{data.Status}}</td>
           <td>{{data.Name}}</td>
           <td>{{data.PhoneNumber}}</td>
           <td>{{data.CustomerType}}</td>

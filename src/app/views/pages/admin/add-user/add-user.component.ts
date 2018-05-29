@@ -8,6 +8,7 @@ import{DataService} from '../../../../services/data.service';
 import{CustomersService} from '../../../../services/customers.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-user',
@@ -31,6 +32,33 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   modalRef: BsModalRef;
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$";
   phonePattern="[0-9]{10}";
+  userRole:any=[];
+  companyRole=[{
+    'Role':'CA',
+    'Name':'Company Admin',
+  },
+  {
+    'Role':'CU',
+    'Name':'Company User',
+  },
+  {
+    'Role':'VA',
+    'Name':'Vendor Admin',
+  },
+  {
+    'Role':'VU',
+    'Name':'Vendor User',
+  }];
+
+  vendorRole=[{
+    'Role':'VA',
+    'Name':'Vendor Admin',
+  },
+  {
+    'Role':'VU',
+    'Name':'Vendor User',
+  }];
+
   customerList:any=[{
     'Name':'',
     'CustomerID':''
@@ -40,15 +68,19 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     'Name':''
   }];
 
-  constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService,private _customerService:CustomersService,private modalService: BsModalService) {
+  constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService,private _customerService:CustomersService,private modalService: BsModalService,private cookieService: CookieService) {
     this.router = this.rout;
     this.userFormData=this._userModel.userData;
     this.createAddCustomerForm();
   }
 
   ngOnInit() {
+    let userloggedRole = this.cookieService.get('Role');
+    this.userRole=this.companyRole;
+    if(userloggedRole=='VA'|| userloggedRole=='VU' ){
+      this.userRole=this.vendorRole;
+    }
     this.userDataSource=JSON.parse(localStorage.getItem('userData'));
-
     this.sub=this._Activatedroute.params.subscribe(params => { 
       this.userId = params['ID'];
       if(this.userId!=0){

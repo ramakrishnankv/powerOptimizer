@@ -18,7 +18,14 @@
                     <td><label for="edit-device-SimNo" >Sim Number*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-SimNo" name="edit-device-SimNo" [ngModel]="editFormData.SimNo" formControlName="SimNo"></td>
                 </tr> 
-  
+                <tr class="validateColor" *ngIf="SimNo.errors && (SimNo.dirty || SimNo.touched)"> 
+                    <td *ngIf="SimNo.errors.required">
+                        Sim Number Required
+                    </td>      
+                    <td *ngIf="SimNo.errors.pattern">
+                        Sim Number not valid.
+                    </td> 
+                   </tr> 
                 <tr class="form-group">
                     <td><label for="edit-device-MacID" >MacID*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-MacID" name="edit-device-MacID" [ngModel]="editFormData.MacID" formControlName="MacID"></td>
@@ -116,6 +123,14 @@
                   <td><label for="edit-device-pin-code" >Pin Code:</label></td>
                   <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.PinCode" formControlName="PinCode"></td>
                 </tr>
+                <tr class="validateColor" *ngIf="PinCode.errors && (PinCode.dirty || PinCode.touched)"> 
+                    <td *ngIf="PinCode.errors.required">
+                        Pin Code Required
+                    </td>      
+                    <td *ngIf="PinCode.errors.pattern">
+                        Pin Code not valid
+                    </td> 
+                   </tr> 
                 <tr class="form-group">
                     <td><label for="edit-device-latitude" >Latitude:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-latitude" [ngModel]="editFormData.Latitude" formControlName="Latitude" [readonly]="true"></td>
@@ -128,9 +143,10 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
-                        <!--<option value="">Select Status</option>--> 
                         <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
                         <option value="In Active" [selected]="editFormData.Status =='InActive'">In Active</option>
+                        <option value="Suspended" [selected]="editFormData.Status =='Suspended'">Suspended</option>
+                        <option value="Issued" [selected]="editFormData.Status =='Issued'">Issued</option>
                        </select>
                   </td>
                 </tr>

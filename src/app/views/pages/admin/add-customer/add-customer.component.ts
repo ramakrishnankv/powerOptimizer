@@ -6,6 +6,7 @@ import{CustomersService} from '../../../../services/customers.service';
 import{Customer} from '../../../../models/customer.model';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -27,6 +28,14 @@ export class AddCustomerComponent implements OnInit,OnDestroy {
   modalRef: BsModalRef;
   phonePattern="[0-9]{10}";
   pincodePattern="[0-9]{6}";
+  customerType=[{
+    'Type':'Retail',
+    'Name':'Retail',
+  },
+{
+    'Type':'Enterprise',
+    'Name':'Enterprise',
+}];
   customerList:any=[{
     'Name':'',
     'CustomerID':''
@@ -136,6 +145,14 @@ loadData(){
  openModal(template: TemplateRef<any>) {
   this.modalRef = this.modalService.show(template);
  }
+
+ get PhoneNumber() {
+  return this.addCustomerForm.get('PhoneNumber');
+}
+
+get PinCode() {
+  return this.addCustomerForm.get('PinCode');
+}
 
   ngOnDestroy() {
     localStorage.removeItem('customerData');
