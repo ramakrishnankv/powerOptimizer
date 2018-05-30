@@ -8,6 +8,7 @@ import{Device} from '../../../../models/device';
 import { Subscription } from 'rxjs/Subscription';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-edit-device',
@@ -174,7 +175,7 @@ export class EditDeviceComponent implements OnInit {
         this._devicesService.addDevice(this.editDeviceForm.value).subscribe(
           successData => {
              this.openModal(template);
-           this.router.navigate(['admin/device']);
+             this.router.navigate(['admin/device']);
               },
           error => {
             console.log("error");
@@ -184,16 +185,31 @@ export class EditDeviceComponent implements OnInit {
       }
 
   }
+
   openModal(template: TemplateRef<any>) {
-  this.modalRef = this.modalService.show(template);
- }
- get SimNo() {
-  return this.editDeviceForm.get('SimNo');
+    this.modalRef = this.modalService.show(template);
+  }
+  get SimNo() {
+    return this.editDeviceForm.get('SimNo');
+  }
+  
+  get PinCode() {
+    return this.editDeviceForm.get('PinCode');
+  }
+
+  onCancel(template: TemplateRef<any>){
+    this.modalRef.hide();
+    this.router.navigate(['admin/device']);
+  }
+
+
+  openCancel(template: TemplateRef<any>, $event) {
+    if (this.editDeviceForm.touched){
+       $event.preventDefault();
+       $event.stopPropagation();
+       this.modalRef = this.modalService.show(template);
+    }
+  }
 }
 
-get PinCode() {
-  return this.editDeviceForm.get('PinCode');
-}
-
-}
 

@@ -154,6 +154,20 @@ get PinCode() {
   return this.addCustomerForm.get('PinCode');
 }
 
+onCancel(template: TemplateRef<any>){
+  this.modalRef.hide();
+  this.router.navigate(['admin/customers']);
+}
+
+
+openCancel(template: TemplateRef<any>, $event) {
+  if (this.addCustomerForm.touched){
+     $event.preventDefault();
+     $event.stopPropagation();
+     this.modalRef = this.modalService.show(template);
+  }
+}
+
   ngOnDestroy() {
     localStorage.removeItem('customerData');
     this.sub.unsubscribe();

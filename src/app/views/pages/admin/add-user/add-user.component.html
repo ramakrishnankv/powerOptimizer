@@ -16,7 +16,7 @@
                   </div>
               <table class="table">
                   <tr class="form-group">
-                      <td><label for="add-user-customerID" >Customer Id*:</label></td>
+                      <td><label for="add-user-customerID" class="font-weight-bold">Customer Id*:</label></td>
                       <td>
                           <select class="form-control" id="add-user-customerID" required name="add-user-customerID" formControlName="CustomerID" [ngModel]="userFormData.CustomerID">
                             <!--<option value="">Select Customer</option>-->
@@ -25,11 +25,11 @@
                       </td>
                     </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-userID" >User ID*:</label></td>
+                  <td><label for="add-user-userID" class="font-weight-bold">User ID*:</label></td>
                   <td><input type="text" class="form-control" id="add-user-userID" required name="add-user-userID" placeholder="" formControlName="UserID" [ngModel]="userFormData.UserID"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-first-name" >First Name*:</label></td>
+                  <td><label for="add-user-first-name" class="font-weight-bold">First Name*:</label></td>
                   <td><input type="text" class="form-control" id="add-user-first-name" required name="add-user-first-name" placeholder="" formControlName="FirstName" [ngModel]="userFormData.FirstName"></td>
                 </tr>
                 <tr class="form-group">
@@ -41,7 +41,7 @@
                   <td><input type="text" class="form-control" id="add-user-password" name="add-user-password" placeholder="" formControlName="Password" [ngModel]="userFormData.Password"></td>
                 </tr>-->
                 <tr class="form-group">
-                  <td><label for="add-user-email-address" >Email Address*:</label></td>
+                  <td><label for="add-user-email-address" class="font-weight-bold">Email Address*:</label></td>
                   <td><input type="text" class="form-control" id="add-user-email-address" name="add-user-email-address" placeholder="" formControlName="EmailAddress" required [pattern]="emailPattern" [ngModel]="userFormData.EmailAddress"></td>
                 </tr>
                 <tr class="validateColor" *ngIf="EmailAddress.errors && (EmailAddress.dirty || EmailAddress.touched)"> 
@@ -57,7 +57,7 @@
                   <td><input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="ProfilePicture" [ngModel]="userFormData.ProfilePicture"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-user-profile-picture" >Mobile Number*:</label></td>
+                  <td><label for="add-user-profile-picture" class="font-weight-bold">Mobile Number*:</label></td>
                   <td><input type="text" class="form-control" id="add-user-MobileNo" name="add-user-MobileNo" placeholder="" formControlName="MobileNo" required [pattern]="phonePattern" [ngModel]="userFormData.MobileNo"></td>
                 </tr>
                 <tr class="validateColor" *ngIf="MobileNo.errors && (MobileNo.dirty || MobileNo.touched)"> 
@@ -90,7 +90,7 @@
                   <td><input type="text" class="form-control" id="add-user-IssueGroupId" name="add-user-IssueGroupId" placeholder="" formControlName="IssueGroupId" [ngModel]="userFormData.IssueGroupId"></td>
                 </tr>-->
                 <tr class="form-group">
-                  <td><label for="add-user-role" >Role*:</label></td>
+                  <td><label for="add-user-role" class="font-weight-bold">Role*:</label></td>
                   <td>
                       <select class="form-control" id="add-user-Role" required name="add-user-Role" formControlName="Role" [(ngModel)]="userFormData.Role">
                         <!--<option value="">Select Customer</option>-->
@@ -143,7 +143,7 @@
                   <td>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-primary" [disabled]="!addUserForm.valid">Save</button>
-                      <button type="button" class="btn btn-primary" [routerLink]="['/admin/users']">Cancel</button>
+                      <button type="button" class="btn btn-primary" (click)="openCancel(canceltemplate, $event)" >Cancel</button>
                     </div>
                   </td>
                 </tr>
@@ -166,3 +166,19 @@
     User Record Updated succesfully
   </div>
 </ng-template>
+<ng-template #canceltemplate>
+  
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Alert</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      You have Edited the record,Are you sure want to cancel ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onCancel(canceltemplate)">Yes</button>
+    <button type="submit" class="btn btn-primary" (click)="modalRef.hide()">No</button>
+  </div>
+  </ng-template>

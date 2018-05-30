@@ -2,6 +2,7 @@ import { Component, OnInit , ChangeDetectorRef} from '@angular/core';
 import { Router } from '@angular/router';
 import{DeviceService} from '../../../../services/device.service';
 import{Device} from '../../../../models/device';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-device-list',
@@ -13,6 +14,7 @@ export class DeviceListComponent implements OnInit {
   router: Router;
   deviceData:any;
   deviceModel:Device;
+  userRole:string;
   deviceListData={
       tableHeaders:[],
       tableData: '',
@@ -21,11 +23,12 @@ export class DeviceListComponent implements OnInit {
   };
 
   //adminDeviceList
-  constructor(private rout: Router,private _devicesService: DeviceService,private _device:Device,private changeDetect:ChangeDetectorRef) { 
+  constructor(private rout: Router,private _devicesService: DeviceService,private _device:Device,private changeDetect:ChangeDetectorRef,private cookieService: CookieService) { 
     this.changeDetect.detach();
   }
 
   ngOnInit() {
+    this.userRole=this.cookieService.get('Role');
     this.router = this.rout;
     this._devicesService.getDevices().subscribe(
       successData => {

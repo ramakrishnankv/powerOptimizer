@@ -11,7 +11,7 @@
                 <input  type="hidden" class="form-control" id="add-customer-CustomerID" name="add-customer-CustomerID" placeholder="" formControlName="CustomerID" [ngModel]="customerFormData.CustomerID">
               <table class="table">
                 <tr class="form-group">
-                  <td><label for="add-customer-name" >Name*:</label></td>
+                  <td><label for="add-customer-name" class="font-weight-bold">Name*:</label></td>
                  <!-- <td>
                     <select class="form-control" id="add-user-customerID" name="add-user-customerID" formControlName="CustomerID" [ngModel]="customerFormData.CustomerID">
                         <option *ngFor="let custList of customerList" [ngValue]="custList.CustomerID">{{custList.Name}}</option>
@@ -20,7 +20,7 @@
                 <td><input  type="text" class="form-control" id="add-customer-name" name="add-customer-name" placeholder="" formControlName="Name" [ngModel]="customerFormData.Name"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-phone-number" >Mobile Number*:</label></td>
+                  <td><label for="add-customer-phone-number" class="font-weight-bold">Mobile Number*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-phone-number" name="add-customer-phone-number" placeholder="" formControlName="PhoneNumber" required [pattern]="phonePattern" [ngModel]="customerFormData.PhoneNumber"></td>
                 </tr>
                 <tr class="validateColor" *ngIf="PhoneNumber.errors && (PhoneNumber.dirty || PhoneNumber.touched)"> 
@@ -32,19 +32,19 @@
                     </td> 
                    </tr> 
                 <tr class="form-group">
-                  <td><label for="add-customer-state" >State*:</label></td>
+                  <td><label for="add-customer-state" class="font-weight-bold">State*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-state" name="add-customer-state" placeholder="" formControlName="State" [ngModel]="customerFormData.State"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-city" >City*:</label></td>
+                  <td><label for="add-customer-city" class="font-weight-bold">City*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-city" name="add-customer-city" placeholder="" formControlName="City" [ngModel]="customerFormData.City"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-address" >Address*:</label></td>
+                  <td><label for="add-customer-address" class="font-weight-bold">Address*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-address" name="add-customer-address" placeholder="" formControlName="Address" [ngModel]="customerFormData.Address"></td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-pin-code" >Pin Code*:</label></td>
+                  <td><label for="add-customer-pin-code" class="font-weight-bold">Pin Code*:</label></td>
                   <td><input type="text" class="form-control" id="add-customer-pin-code" name="add-customer-pin-code" placeholder="" formControlName="PinCode" required [pattern]="pincodePattern" [ngModel]="customerFormData.PinCode"></td>
                 </tr>
                 <tr class="validateColor" *ngIf="PinCode.errors && (PinCode.dirty || PinCode.touched)"> 
@@ -56,7 +56,7 @@
                     </td> 
                    </tr> 
                 <tr class="form-group">
-                  <td><label for="add-customer-type" >Customer Type*:</label></td>
+                  <td><label for="add-customer-type" class="font-weight-bold">Customer Type*:</label></td>
                   <!--<td><input type="text" class="form-control" id="add-customer-type" name="add-customer-type" placeholder="" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType"></td>-->
                   <td>
                       <select class="form-control" id="add-customer-type" required name="add-customer-type" formControlName="CustomerType" [ngModel]="customerFormData.CustomerType">
@@ -68,7 +68,7 @@
                   </td>
                 </tr>
                 <tr class="form-group">
-                  <td><label for="add-customer-status" >Status*:</label></td>
+                  <td><label for="add-customer-status" class="font-weight-bold">Status*:</label></td>
                   <td>
                     <select class="form-control" id="add-customer-status" name="add-customer-status" formControlName="Status" [ngModel]="customerFormData.Status">
                       <!--<option value="">Select Status</option>-->  
@@ -82,7 +82,7 @@
                   <td>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-primary" [disabled]="!addCustomerForm.valid">Save</button>
-                      <button type="button" class="btn btn-primary" [routerLink]="['/admin/customers']">Cancel</button>
+                      <button type="button" class="btn btn-primary" (click)="openCancel(canceltemplate, $event)" >Cancel</button>
                     </div>
                   </td>
                 </tr>
@@ -103,5 +103,20 @@
   </div>
   <div class="modal-body">
     Customer Record Updated succesfully
+  </div>
+</ng-template>
+<ng-template #canceltemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Alert</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      You have Edited the record,Are you sure want to cancel ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onCancel(canceltemplate)">Yes</button>
+    <button type="submit" class="btn btn-primary" (click)="modalRef.hide()">No</button>
   </div>
 </ng-template>

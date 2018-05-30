@@ -217,6 +217,20 @@ export class AddUserComponent implements OnInit,OnDestroy  {
       return this.addUserForm.get('MobileNo');
   } 
 
+  onCancel(template: TemplateRef<any>){
+    this.modalRef.hide();
+    this.router.navigate(['admin/users']);
+  }
+  
+  
+  openCancel(template: TemplateRef<any>, $event) {
+    if (this.addUserForm.touched){
+       $event.preventDefault();
+       $event.stopPropagation();
+       this.modalRef = this.modalService.show(template);
+    }
+  }
+
   ngOnDestroy() {
 
     localStorage.removeItem('userData');

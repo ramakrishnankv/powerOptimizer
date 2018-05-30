@@ -15,23 +15,23 @@
                 </tr>-->
                 <input type="hidden" class="form-control" id="edit-device-id" name="edit-device-id" [ngModel]="editFormData.DeviceID" formControlName="DeviceID">
                 <tr class="form-group">
-                    <td><label for="edit-device-SimNo" >Sim Number*:</label></td>
-                    <td><input type="text" class="form-control" id="edit-device-SimNo" name="edit-device-SimNo" [ngModel]="editFormData.SimNo" formControlName="SimNo"></td>
+                    <td><label for="edit-device-SimNo" class="font-weight-bold">Sim Number*:</label></td>
+                    <td><input type="text" class="form-control" id="edit-device-SimNo" name="edit-device-SimNo" required [pattern]="simPattern" [ngModel]="editFormData.SimNo" formControlName="SimNo"></td>
                 </tr> 
                 <tr class="validateColor" *ngIf="SimNo.errors && (SimNo.dirty || SimNo.touched)"> 
-                    <td *ngIf="SimNo.errors.required">
-                        Sim Number Required
-                    </td>      
-                    <td *ngIf="SimNo.errors.pattern">
-                        Sim Number not valid.
-                    </td> 
-                   </tr> 
+                  <td *ngIf="SimNo.errors.required">
+                      Sim Number Required
+                  </td>      
+                  <td *ngIf="SimNo.errors.pattern">
+                      Sim Number not valid
+                  </td> 
+                 </tr>
                 <tr class="form-group">
-                    <td><label for="edit-device-MacID" >MacID*:</label></td>
+                    <td><label for="edit-device-MacID" class="font-weight-bold">MacID*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-MacID" name="edit-device-MacID" [ngModel]="editFormData.MacID" formControlName="MacID"></td>
                  </tr>  
                 <tr class="form-group">
-                    <td><label for="edit-device-customerID" >Customer ID*:</label></td>
+                    <td><label for="edit-device-customerID" class="font-weight-bold">Customer ID*:</label></td>
                     <td>
                         <select class="form-control" id="edit-device-customerID" name="edit-device-customerID" formControlName="CustomerID" [(ngModel)]="editFormData.CustomerID">
                             <option value="" >Select Customer</option>  
@@ -52,7 +52,7 @@
                     </tr>
 
                   <tr class="form-group">
-                    <td><label for="edit-device-name" >Name*:</label></td>
+                    <td><label for="edit-device-name" class="font-weight-bold">Name*:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-name" name="edit-device-name" [ngModel]="editFormData.Name" formControlName="Name"></td>
                   </tr>
 
@@ -121,21 +121,18 @@
                 </tr>
                 <tr class="form-group">
                   <td><label for="edit-device-pin-code" >Pin Code:</label></td>
-                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" [ngModel]="editFormData.PinCode" formControlName="PinCode"></td>
+                  <td><input type="text" class="form-control" id="edit-device-pin-code" name="edit-device-pin-code" required [pattern]="pincodePattern" [ngModel]="editFormData.PinCode" formControlName="PinCode"></td>
                 </tr>
-                <tr class="validateColor" *ngIf="PinCode.errors && (PinCode.dirty || PinCode.touched)"> 
-                    <td *ngIf="PinCode.errors.required">
-                        Pin Code Required
-                    </td>      
-                    <td *ngIf="PinCode.errors.pattern">
-                        Pin Code not valid
-                    </td> 
-                   </tr> 
-                <tr class="form-group">
+                <tr class="validateColor" *ngIf="PinCode.errors && (PinCode.dirty || PinCode.touched)">       
+                  <td *ngIf="PinCode.errors.pattern">
+                      Pin Code not valid
+                  </td> 
+                 </tr>
+                <tr class="form-group" *ngIf="editForm=='Edit'">
                     <td><label for="edit-device-latitude" >Latitude:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-latitude" [ngModel]="editFormData.Latitude" formControlName="Latitude" [readonly]="true"></td>
                  </tr>
-                 <tr class="form-group">
+                 <tr class="form-group" *ngIf="editForm=='Edit'">
                     <td><label for="edit-device-latitude" >Longitude:</label></td>
                     <td><input type="text" class="form-control" id="edit-device-latitude" name="edit-device-longitude" [ngModel]="editFormData.Longitude" formControlName="Longitude" [readonly]="true" ></td>
                  </tr>
@@ -143,6 +140,7 @@
                   <td><label for="edit-device-status" >Status:</label></td>
                   <td>
                       <select class="form-control" id="edit-device-status" name="edit-device-status" formControlName="Status" [(ngModel)]="editFormData.Status">
+                        <!--<option value="">Select Status</option>--> 
                         <option value="Active" [selected]="editFormData.Status =='Active'">Active</option>
                         <option value="In Active" [selected]="editFormData.Status =='InActive'">In Active</option>
                         <option value="Suspended" [selected]="editFormData.Status =='Suspended'">Suspended</option>
@@ -156,7 +154,7 @@
                   <td>
                     <div class="mt-2">
                       <button type="submit" class="btn btn-primary" [disabled]="!editDeviceForm.valid">Update</button>
-                      <button type="button" class="btn btn-primary" [routerLink]="['/admin/device']">Cancel</button>
+                      <button type="button" class="btn btn-primary" (click)="openCancel(canceltemplate, $event)" >Cancel</button>
                     </div>
                   </td>
                 </tr>
@@ -176,6 +174,21 @@
     </button>
   </div>
   <div class="modal-body">
-    Device Record Updated succesfully
+      Device Record Updated succesfully
+  </div>
+</ng-template>
+<ng-template #canceltemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Alert</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      You have Edited the record,Are you sure want to cancel ?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onCancel(canceltemplate)">Yes</button>
+    <button type="submit" class="btn btn-primary" (click)="modalRef.hide()">No</button>
   </div>
 </ng-template>
