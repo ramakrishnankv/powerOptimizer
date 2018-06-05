@@ -204,11 +204,15 @@ export class EditDeviceComponent implements OnInit {
 
 
   openCancel(template: TemplateRef<any>, $event) {
-    if (this.editDeviceForm.touched){
-       $event.preventDefault();
-       $event.stopPropagation();
-       this.modalRef = this.modalService.show(template);
-    }
+      if (!this.editDeviceForm.touched){
+        this.router.navigate(['admin/device']);
+      }
+      else{
+        $event.preventDefault();
+        $event.stopPropagation();
+        this.modalRef = this.modalService.show(template);
+      }
+
   }
 }
 

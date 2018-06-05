@@ -67,6 +67,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     'GroupID':'',
     'Name':''
   }];
+  selectedFile:File=null;
 
   constructor(private rout: Router,private fb: FormBuilder,private _Activatedroute:ActivatedRoute,private _userService: UsersService,private _userModel:UserDataModel,private changeDetect:ChangeDetectorRef,private _userData: DataService,private _customerService:CustomersService,private modalService: BsModalService,private cookieService: CookieService) {
     this.router = this.rout;
@@ -124,6 +125,10 @@ export class AddUserComponent implements OnInit,OnDestroy  {
       });
   }
 
+  onFileSelected(event){
+    this.selectedFile=<File>event.target.files[0];
+  }
+
   getGroupIssueList(){
     this._userService.getGroupIssueList().subscribe(
       issueData=>{
@@ -167,7 +172,18 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   }
 
 
+  onupload(){
+    const fd=new FormData();
+    fd.append('image',this.selectedFile,this.selectedFile.name);
+    this._userService.onUpload(fd);
+  }
+
+
+
   saveUser(template: TemplateRef<any>) {
+
+
+
     if (this.addUserForm.dirty && this.addUserForm.valid) {
      if(this.UserForm=="Edit"){
        console.log("test="+this.addUserForm.value);
@@ -224,11 +240,21 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   
   
   openCancel(template: TemplateRef<any>, $event) {
-    if (this.addUserForm.touched){
+
+    if (!this.addUserForm.touched){
+      this.router.navigate(['admin/device']);
+    }
+    else{
+      $event.preventDefault();
+      $event.stopPropagation();
+      this.modalRef = this.modalService.show(template);
+    }
+    
+    /*if (this.addUserForm.touched){
        $event.preventDefault();
        $event.stopPropagation();
        this.modalRef = this.modalService.show(template);
-    }
+    }*/
   }
 
   ngOnDestroy() {

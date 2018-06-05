@@ -54,7 +54,11 @@
                  </tr> 
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" >Profile Picture:</label></td>
-                  <td><input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="ProfilePicture" [ngModel]="userFormData.ProfilePicture"></td>
+                  <td>
+                    <input type="file" (change)="onFileSelected($event)">
+                    <!--<input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="ProfilePicture" [ngModel]="userFormData.ProfilePicture">-->
+                  
+                  </td>
                 </tr>
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" class="font-weight-bold">Mobile Number*:</label></td>

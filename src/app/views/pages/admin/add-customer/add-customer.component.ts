@@ -161,11 +161,19 @@ onCancel(template: TemplateRef<any>){
 
 
 openCancel(template: TemplateRef<any>, $event) {
-  if (this.addCustomerForm.touched){
+  if (!this.addCustomerForm.touched){
+    this.router.navigate(['admin/device']);
+  }
+  else{
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+  /*if (this.addCustomerForm.touched){
      $event.preventDefault();
      $event.stopPropagation();
      this.modalRef = this.modalService.show(template);
-  }
+  }*/
 }
 
   ngOnDestroy() {
