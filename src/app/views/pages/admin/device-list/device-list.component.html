@@ -1,5 +1,6 @@
 
 <app-page-prime>
+    <div class="content-wrapper-module admin-module">
     <section class="product-details">
         <div class="row product-details-row">
             <nav class="navbar navbar-light bg-light icon-bar">
@@ -25,4 +26,6 @@
             (onRowclick)="selectRow($event)"-->
         <app-tabular-content-primary [tabularData]="deviceListData"  [rowClickHandler]="selectRow.bind(this)" ></app-tabular-content-primary>
     </section>
+</div>
     </app-page-prime>
+

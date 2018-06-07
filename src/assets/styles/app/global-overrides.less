@@ -167,10 +167,16 @@ input.ng-invalid.ng-touched.ng-dirty {
     }
   }
 }
+
 .table-container {
   background-color: @bg-color-four;
   overflow: scroll;
   max-height: 250px;
+}
+.admin-module {
+  .table-container {
+    min-height: 74vh;
+  }
 }
 .issues-module {
   .table-container {
