@@ -42,7 +42,7 @@
               </button>
             </form>
             <a href="#" class="nav-link icon-box g-map selected">
-              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-google-map.svg" />
+              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-google-map.svg" (click)="openModal(template, $event)" />
             </a>
           </div>
         </nav>
@@ -62,3 +62,6 @@
     </section>
   </div>
 </app-page-prime>
+<ng-template #template>
+  <app-map [modalRef]="modalRef" ></app-map>
+</ng-template>

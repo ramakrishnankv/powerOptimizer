@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component,TemplateRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
@@ -8,6 +8,8 @@ import{Device} from '../../../models/device';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common';
 import { DATE } from 'ngx-bootstrap/chronos/units/constants';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class DevicesComponent implements OnInit {
   searchString:any='';
   appUIConf: any;
   router: Router;
+  modalRef: BsModalRef;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
   activitySummary: ActivitySummaryModel;
@@ -36,7 +39,8 @@ export class DevicesComponent implements OnInit {
                private _devicesService: DeviceService,
                private _device:Device ,
                private datePipe: DatePipe,
-              private _graphService:GraphService) {
+               private _graphService:GraphService,
+               private modalService: BsModalService) {
     this.appUIConf = AppUIConfigProperties;
     this.activitySummary = _activitySummary;
     this.changeDetect.detach();
@@ -74,21 +78,16 @@ export class DevicesComponent implements OnInit {
     maxUnits: 2400
   }*/
 
-
-
   getPowerConsumptionStats(){
     console.log(this.deviceGraphData);
      this._devicesService.getDevicePowerConsumption(this.deviceGraphData).subscribe(
       successData => {
-        console.log("rest1="+successData['PowerConsumptionStats'].TotalExpectedPowerConsumption);
-        console.log("rest1="+successData['PowerConsumptionStats'].TotalActualPowerConsumption);
         this.prepareChartData(successData);
       },
       error => {
 
       });
   }
-
 
   prepareChartData(data){
     console.log("result="+data);
@@ -100,16 +99,14 @@ export class DevicesComponent implements OnInit {
       lineChartLabels: resultData.date,
       maxUnits: data['PowerConsumptionStats'].TotalExpectedPowerConsumption
      }
-
-     this.actualConsumption=data['PowerConsumptionStats'].TotalActualPowerConsumption;
-     this.expectedConsumption=data['PowerConsumptionStats'].TotalExpectedPowerConsumption;
+    this.actualConsumption=data['PowerConsumptionStats'].TotalActualPowerConsumption;
+    this.expectedConsumption=data['PowerConsumptionStats'].TotalExpectedPowerConsumption;
     this.isChartAvailable=true;
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }
 
   ngOnInit() {
-  
     this.router = this.rout;
     this.getDeviceList();
     this.getPowerConsumptionStats();
@@ -148,10 +145,7 @@ export class DevicesComponent implements OnInit {
 
     this._graphService.getGraphData().subscribe(
       successData => {
-        console.log(successData['DeviceStats']);
         this.updateDevicesGraph(successData['DeviceStats'])
-        //console.log("dashboard="+successData['DeviceStats'].ActiveDevices);
-        //this.prepareChartData(successData);
       },
       error => {
 
@@ -176,7 +170,6 @@ export class DevicesComponent implements OnInit {
   }
 
   updateDevicesGraph(resData) {
-
     this.graphData.push(this.activitySummary.getSummaryGraphData(resData, 'devices'));
     //this.changeDetect.reattach();
     //this.changeDetect.detectChanges();
@@ -276,7 +269,6 @@ export class DevicesComponent implements OnInit {
   }*/
 
   selectRow(data){
-    alert(data.DeviceID);
     this.router.navigate(['admin/editDevice',data.DeviceID]);
    }
 
@@ -287,6 +279,12 @@ export class DevicesComponent implements OnInit {
 
   editDevice(data) {
     this.router.navigate(['admin/editDevice',data.name]);
+  }
+
+  openModal(template: TemplateRef<any>, $event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
   }
 
 }

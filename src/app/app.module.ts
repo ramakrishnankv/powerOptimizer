@@ -54,6 +54,8 @@ import { UserListComponent } from './views/pages/admin/user-list/user-list.compo
 import { DeviceListComponent } from './views/pages/admin/device-list/device-list.component';
 import { CustomerListComponent } from './views/pages/admin/customer-list/customer-list.component';
 import { CustomFilterPipe } from './views/components/custom-filter.pipe';
+import { MapComponent } from './views/components/map/map.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -92,7 +94,8 @@ import { CustomFilterPipe } from './views/components/custom-filter.pipe';
 	  UserListComponent,
     DeviceListComponent,
     CustomerListComponent,
-    CustomFilterPipe
+    CustomFilterPipe,
+    MapComponent
 
   ],
   imports: [
@@ -106,7 +109,11 @@ import { CustomFilterPipe } from './views/components/custom-filter.pipe';
     ProgressbarModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyAi5E_iWyS12-xUP2mCM3EXWyL3nEUTl4Y'
+     
+    })
   ],
   providers: [ UserDataModel, CookieService, ApiService ],
   bootstrap: [AppComponent]
