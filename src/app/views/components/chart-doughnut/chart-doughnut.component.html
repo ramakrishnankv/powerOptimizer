@@ -20,6 +20,6 @@
 </div>
 
 <div *ngIf="showTotal; then total else type"></div>
-<ng-template #total><div class="graph-bottom-content equipment-total text-right">Actual: {{doughnutGraphData.totalCount}} Units</div></ng-template>
+<!--<ng-template #total><div class="graph-bottom-content equipment-total text-right">Actual: {{doughnutGraphData.totalCount}} Units</div></ng-template>-->
 <ng-template #type><div class="graph-bottom-content equipment-type text-center text-uppercase" >{{doughnutGraphData.type}}</div></ng-template>
 

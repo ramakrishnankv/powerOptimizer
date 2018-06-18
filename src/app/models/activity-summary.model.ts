@@ -53,10 +53,10 @@ export class ActivitySummaryModel {
   }
 
   graphDataForDevicesPage(data) {
-    this.activityTotal = data.TotalLinkedDevices;
-    this.activity1Value = data.TotalUnLinkedDevices;
-    this.activity2Value = data.TotalGroupedDevices;
-    this.activity3Value = data.TotalUnGroupedDevices;
+    this.activityTotal = data.ActiveDevices+data.InActiveDevices;
+    this.activity1Value = data.InActiveDevices;
+    this.activity2Value =  data.ActiveDevices;
+    this.activity3Value = data.ActualPowerConsumption;
     return this.generateGraphData();
   }
 

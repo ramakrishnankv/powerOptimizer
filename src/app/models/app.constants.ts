@@ -22,7 +22,9 @@ export const AppConstants = {
     getAllCustomer:'customer?userid=',
     getMasterCustomer:'master/customer?userid=',
     getMasterIssueGroups:'master/issueGroup',
-    getMasterGroup:'master/group'
+    getMasterGroup:'master/group',
+    powerConsumptionGraph:'PowerConsumptionGraph?userid=',
+    dashBoard:'dashboard?UserId='
   }
 
 }

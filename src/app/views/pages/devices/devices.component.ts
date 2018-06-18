@@ -1,19 +1,27 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
-
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
+import{DeviceService} from '../../../services/device.service';
+import{GraphService} from '../../../services/graph.service';
+import{Device} from '../../../models/device';
+import { CookieService } from 'ngx-cookie-service';
+import { DatePipe } from '@angular/common';
+import { DATE } from 'ngx-bootstrap/chronos/units/constants';
+
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.less'],
-  providers: [ ActivitySummaryModel ]
+  providers: [ ActivitySummaryModel,DeviceService,Device,DatePipe,GraphService ]
 })
 
 export class DevicesComponent implements OnInit {
   
-
+  isChartAvailable:boolean = false;
+  actualConsumption=0;
+  expectedConsumption=0;
   searchString:any='';
   appUIConf: any;
   router: Router;
@@ -24,29 +32,137 @@ export class DevicesComponent implements OnInit {
 
   constructor( private rout: Router,
                private changeDetect:ChangeDetectorRef,
-               private _activitySummary: ActivitySummaryModel ) {
+               private _activitySummary: ActivitySummaryModel,
+               private _devicesService: DeviceService,
+               private _device:Device ,
+               private datePipe: DatePipe,
+              private _graphService:GraphService) {
     this.appUIConf = AppUIConfigProperties;
     this.activitySummary = _activitySummary;
     this.changeDetect.detach();
   }
+   startDate;
+   endDate;
+   date:Date;
+
+   public deviceGraphData = {
+    DeviceIds: "All",
+    StartDate:"2017-01-01",
+    EndDate:"2018-12-01",
+   // StartDate: this.datePipe.transform(new Date(),"yyyy-MM-dd"),
+    //EndDate: this.datePipe.transform((new Date().setDate(new Date().getDate() + 7)),"yyyy-MM-dd"),
+    Type: "Monthly"
+  }
+
+
+  public lineChartData:Array<any> = [
+    {data: [20, 59, 80, 81], label: 'Series A'}
+  ];
+
+  public lineChartLabels:Array<any> = ['31 DEC', '01 JAN', '02 FEB', '03 MAR'];
+
+  public lineGraphData = {
+    lineChartData: this.lineChartData,
+    lineChartLabels: this.lineChartLabels,
+    maxUnits: 0
+  }
+  //public lineChartLabels:Array<any> ;
+  /*public lineGraphData = {};*/
+  /*public lineGraphData = {
+    lineChartData: '',
+    lineChartLabels: '',
+    maxUnits: 2400
+  }*/
+
+
+
+  getPowerConsumptionStats(){
+    console.log(this.deviceGraphData);
+     this._devicesService.getDevicePowerConsumption(this.deviceGraphData).subscribe(
+      successData => {
+        console.log("rest1="+successData['PowerConsumptionStats'].TotalExpectedPowerConsumption);
+        console.log("rest1="+successData['PowerConsumptionStats'].TotalActualPowerConsumption);
+        this.prepareChartData(successData);
+      },
+      error => {
+
+      });
+  }
+
+
+  prepareChartData(data){
+    console.log("result="+data);
+    let resultData=this._device.prepareChartDataModel(data['ListPowerConsumptionGraphAxis']);
+    console.log("saving="+data['PowerConsumptionStats'].TotalExpectedPowerConsumption+"sctual="+data['PowerConsumptionStats'].TotalActualPowerConsumption);
+    console.log("date="+resultData.date);
+    this.lineGraphData = {
+      lineChartData: [{data: resultData.saving,label: 'Series A'}],
+      lineChartLabels: resultData.date,
+      maxUnits: data['PowerConsumptionStats'].TotalExpectedPowerConsumption
+     }
+
+     this.actualConsumption=data['PowerConsumptionStats'].TotalActualPowerConsumption;
+     this.expectedConsumption=data['PowerConsumptionStats'].TotalExpectedPowerConsumption;
+    this.isChartAvailable=true;
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
+  }
 
   ngOnInit() {
+  
     this.router = this.rout;
-    // Update Graph and summary data
+    this.getDeviceList();
+    this.getPowerConsumptionStats();
     this.getDeviceScheduleStats();
   }
 
+
+
+  getDeviceList(){
+
+    this._devicesService.getDevices().subscribe(
+      successData => {
+        console.log(successData);
+        this.getDeviceDetails(successData);
+            // Success response handler
+      },
+      error => {
+        // Error response handler
+      });
+  }
+
+  getDeviceDetails(data){
+
+    this.deviceListData.tableData=this._device.getDeviceList(data);
+    console.log(this.deviceListData.tableData);
+    this.deviceListData.pageName="adminDeviceList";
+    this.deviceListData.tableHeaders=this.deviceListsHeaders;
+    this.changeDetect.reattach();
+    this.changeDetect.detectChanges();
+  }
+
+
+
+
   getDeviceScheduleStats() {
 
+    this._graphService.getGraphData().subscribe(
+      successData => {
+        console.log(successData['DeviceStats']);
+        this.updateDevicesGraph(successData['DeviceStats'])
+        //console.log("dashboard="+successData['DeviceStats'].ActiveDevices);
+        //this.prepareChartData(successData);
+      },
+      error => {
+
+      });
     let successData = {
       TotalLinkedDevices: 14,
       TotalUnLinkedDevices: 8,
       TotalGroupedDevices: 14,
       TotalUnGroupedDevices: 1
     }
-    setTimeout(() => {this.updateDevicesGraph(successData)}, 1000)
-
-
+    //setTimeout(() => {this.updateDevicesGraph(successData)}, 1000)
     /*this.schedulesService.getDeviceScheduleStats().subscribe(
     successData => {
         // Success response handler
@@ -60,9 +176,10 @@ export class DevicesComponent implements OnInit {
   }
 
   updateDevicesGraph(resData) {
+
     this.graphData.push(this.activitySummary.getSummaryGraphData(resData, 'devices'));
-    this.changeDetect.reattach();
-    this.changeDetect.detectChanges();
+    //this.changeDetect.reattach();
+    //this.changeDetect.detectChanges();
   }
 
   chartCollapsed(event: any): void {
@@ -76,7 +193,8 @@ export class DevicesComponent implements OnInit {
 
   // Tabular Contents
   deviceListsHeaders = [
-    'Device name', 'Group', 'Ward No.', 'Pincode'
+    'Device name', 'Sim No.', 'Ward No.', 'Pincode'
+    //'Device name', 'Group', 'Ward No.', 'Pincode'
   ]
 
   deviceLists = [
@@ -136,17 +254,31 @@ export class DevicesComponent implements OnInit {
      pageName : 'devices'
   }
 
-  // lineChart
-  public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81], label: 'Series A'}
-  ];
-  public lineChartLabels:Array<any> = ['31 DEC', '01 JAN', '02 FEB', '03 MAR'];
 
-  public lineGraphData = {
+
+  
+
+  // lineChart
+  /*public lineChartData:Array<any> = [
+    {data: [20, 59, 80, 81], label: 'Series A'}
+  ];
+  public lineChartLabels:Array<any> = ['31 DEC', '01 JAN', '02 FEB', '03 MAR'];*/
+
+
+  /*public lineChartDataGraph(){
+
+  }*/
+
+  /*public lineGraphData = {
     lineChartData: this.lineChartData,
     lineChartLabels: this.lineChartLabels,
     maxUnits: 2400
-  }
+  }*/
+
+  selectRow(data){
+    alert(data.DeviceID);
+    this.router.navigate(['admin/editDevice',data.DeviceID]);
+   }
 
 
   mySearch(search){

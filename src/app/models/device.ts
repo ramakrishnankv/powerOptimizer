@@ -1,6 +1,8 @@
 
 export class Device {
 
+    monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
     public Customer: string;
 
     public User: string;
@@ -109,5 +111,26 @@ export class Device {
 
 
         return deviceList;
+    }
+
+
+    prepareChartDataModel(param){
+        let dateSet=[];
+        let savingSet=[];
+        let result;
+        let i=0;
+        for(i=0;i<param.length;i++){
+            let dateObj = new Date(param[i].Date);
+            
+            dateSet.push(dateObj.getDate()+" "+this.monthNames[dateObj.getMonth()]);
+            savingSet.push(param[i].SavingsInPercent);
+        }
+
+        result={
+            date:dateSet,
+            saving:savingSet
+        }
+
+        return result;
     }
 }

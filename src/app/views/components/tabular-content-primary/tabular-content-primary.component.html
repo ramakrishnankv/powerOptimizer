@@ -61,10 +61,15 @@
         </ng-template>
         <ng-template [ngSwitchCase]="'devices'">
           <!-- Devices Data -->
-          <td>{{data.name}}</td>
+          <td>{{data.Name}}</td>
+          <td>{{data.SimNo}}</td>
+          <td>{{data.WardNumber}}</td>
+          <td>{{data.PinCode}}</td>
+
+          <!--<td>{{data.name}}</td>
           <td>{{data.group}}</td>
           <td>{{data.ward}}</td>
-          <td>{{data.pincode}}</td>
+          <td>{{data.pincode}}</td>-->
         </ng-template>
         <ng-template [ngSwitchCase]="'nonScheduleDevices'">
           <!-- Non Schedule Devices Data -->

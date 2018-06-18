@@ -61,6 +61,14 @@ export class DeviceService {
   }
 
 
+  getDevicePowerConsumption(param){
+
+    this.deviceApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.powerConsumptionGraph}${this.Id}`);
+    return this.apiService.post(this.deviceApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+    .map((res: Response) => res.json());
+  }
+
+
 
 
 }

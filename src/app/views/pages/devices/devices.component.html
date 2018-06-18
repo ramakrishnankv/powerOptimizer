@@ -15,12 +15,16 @@
              [collapse]="isChartCollapsed"
              class=" ">
           <div class="row graphs-container">
-            <div class="line-graph-container col-7 col-sm-7 col-md-7 col-lg-7">
+            <div class="line-graph-container col-7 col-sm-7 col-md-7 col-lg-7" *ngIf="isChartAvailable">
               <app-chart-line [lineGraphData]="lineGraphData"></app-chart-line>
             </div>
             <div class="col-5 col-sm-5 col-md-5 col-lg-5" *ngFor="let graph of graphData">
               <app-chart-doughnut [doughnutGraphData]="graph" [showTotal]="true"></app-chart-doughnut>
             </div>
+          </div>
+          <div class="row">
+                <div class="power-stats">Expected:{{expectedConsumption}} Units</div>
+                <div class="power-stats float-left text-right">Actual:{{actualConsumption}} Units</div>
           </div>
         </div>
       </div>
@@ -46,15 +50,15 @@
       <div class="row">
         <ul class="product-detail-list list-inline" *ngFor="let counts of graphData">
           <li class="list-inline-item">Total: {{counts.totalCount}}</li>
-          <li class="list-inline-item">Active: {{counts.activity1Value}}</li>
-          <li class="list-inline-item">Inactive: {{counts.activity2Value}}</li>
+          <li class="list-inline-item">Active: {{counts.activity2Value}}</li>
+          <li class="list-inline-item">Inactive: {{counts.activity1Value}}</li>
         </ul>
       </div>
     </section>
     <section class="product-table">
       <!--[rowClickHandler]="editDevice.bind(this)"-->
       <!--(onRowclick)="selectRow($event)"-->
-      <app-tabular-content-primary [tabularData]="deviceListData" [searchData]="searchString"  [rowClickHandler]="editDevice.bind(this)"  ></app-tabular-content-primary>
+      <app-tabular-content-primary [tabularData]="deviceListData" [searchData]="searchString"  [rowClickHandler]="selectRow.bind(this)"  ></app-tabular-content-primary>
     </section>
   </div>
 </app-page-prime>
