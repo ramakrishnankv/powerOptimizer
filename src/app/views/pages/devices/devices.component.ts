@@ -32,6 +32,7 @@ export class DevicesComponent implements OnInit {
   collapsedClass: string = '';
   activitySummary: ActivitySummaryModel;
   graphData: any = [];
+  deviceDataSource:any=[];
 
   constructor( private rout: Router,
                private changeDetect:ChangeDetectorRef,
@@ -116,7 +117,6 @@ export class DevicesComponent implements OnInit {
 
 
   getDeviceList(){
-
     this._devicesService.getDevices().subscribe(
       successData => {
         console.log(successData);
@@ -129,8 +129,8 @@ export class DevicesComponent implements OnInit {
   }
 
   getDeviceDetails(data){
-
-    this.deviceListData.tableData=this._device.getDeviceList(data);
+    this.deviceDataSource=this._device.getDeviceList(data);
+    this.deviceListData.tableData=this.deviceDataSource;
     console.log(this.deviceListData.tableData);
     this.deviceListData.pageName="adminDeviceList";
     this.deviceListData.tableHeaders=this.deviceListsHeaders;

@@ -9,13 +9,8 @@ export class MapComponent implements OnInit {
 
   constructor() { }
   @Input() modalRef;
+  @Input() deviceData;
   ngOnInit() {
-
-    
+     console.log(this.deviceData);
   }
-
-  title: string = 'My first AGM project';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-
 }

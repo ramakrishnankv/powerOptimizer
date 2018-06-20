@@ -1,5 +1,5 @@
 <app-modal-popup [modalRef]="modalRef" [modalHeader]="modalHeader">
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<agm-map [zoom]=12 [latitude]="12.937" [longitude]="77.5684">
+  <agm-marker *ngFor="let device of deviceData;" [latitude]="device.Latitude" [longitude]="device.Longitude" [label]="device.Name"></agm-marker>
 </agm-map>
 </app-modal-popup>

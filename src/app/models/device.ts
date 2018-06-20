@@ -19,8 +19,8 @@ export class Device {
     public Division: string;
     public SubDivision: string;
     public Zone: string;
-    public Latitude: string;
-    public Longitude: string;
+    public Latitude: Number;
+    public Longitude: Number;
     public PinCode: string;
     public Address: string;
     public GroupID: Number;
@@ -57,6 +57,10 @@ export class Device {
             'Division': param[this.counter].Division,
             'SubDivision': param[this.counter].SubDivision,
             'Zone': param[this.counter].Zone,
+           // 'Latitude':51.678418,
+          //  'Longitude':7.809007,
+            //lat: number = 51.678418;
+ // lng: number = 7.809007;
             'Latitude':param[this.counter].Latitude,
             'Longitude':param[this.counter].Longitude,
             'PinCode':param[this.counter].PinCode,
