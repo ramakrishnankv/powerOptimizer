@@ -43,6 +43,7 @@ export class Device {
     for(this.counter=0;this.counter<param.length;this.counter++)
     {
           let deviceList = {
+            'page':'device',
             'Customer': param[this.counter].Customer,
             'User':param[this.counter].User ,
             'DeviceConsumerTypes':param[this.counter].DeviceConsumerTypes ,

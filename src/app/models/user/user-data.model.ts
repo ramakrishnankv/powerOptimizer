@@ -42,7 +42,7 @@ getUserList(param){
           'EmailAddress': param[this.counter].EmailAddress,
           'Role': param[this.counter].Role*/
 
-
+          'page': 'user',
           'UserID': param[this.counter].UserID,
           'CustomerID':param[this.counter].CustomerID ,
           'CustomerName':param[this.counter].CustomerName ,

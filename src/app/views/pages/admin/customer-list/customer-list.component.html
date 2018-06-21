@@ -7,9 +7,9 @@
                 <div class="col sec-title-prime">Customer Details</div>
                 <div class="col right-container">
                     <form class="">
-                    <input class="form-control search-input icon-box" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control search-input icon-box" type="search" placeholder="Search" aria-label="Search" #searchInput>
                     <button class="btn icon-box bg-search btn-outline-success" type="submit">
-                        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+                        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" (click)="mySearch(searchInput.value)" />
                     </button>
                     </form>
                 </div>
@@ -22,7 +22,7 @@
             </div>
         </section>
         <section class="product-table">
-            <app-tabular-content-primary [tabularData]="customerListData"   [rowClickHandler]="selectRow.bind(this)" ></app-tabular-content-primary>
+            <app-tabular-content-primary [tabularData]="customerListData"  [searchData]="searchString" [rowClickHandler]="selectRow.bind(this)" ></app-tabular-content-primary>
         </section>
   </div>
   </app-page-prime>

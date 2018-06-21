@@ -32,6 +32,7 @@ export class Customer {
     for(this.counter=0;this.counter<param.length;this.counter++)
     {
             let customerList = {
+            'page':'customer',
             'CustomerID': param[this.counter].CustomerID,
             'Name':param[this.counter].Name ,
             'PhoneNumber':param[this.counter].PhoneNumber ,

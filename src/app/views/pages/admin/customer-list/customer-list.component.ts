@@ -13,6 +13,7 @@ import{Customer} from '../../../../models/customer.model';
 export class CustomerListComponent implements OnInit {
 
   router: Router;
+  searchString:any='';
   customerListData={
     tableHeaders:[],
     tableData: '',
@@ -59,6 +60,10 @@ export class CustomerListComponent implements OnInit {
   myClickHandler(){
     this.router.navigate(['admin/addCustomer',0]);
    }
+
+   mySearch(search){
+    this.searchString=search;
+  }
 
 
 }
