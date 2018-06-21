@@ -15,6 +15,7 @@ export class DeviceListComponent implements OnInit {
   deviceData:any;
   deviceModel:Device;
   userRole:string;
+  searchString:any='';
   deviceListData={
       tableHeaders:[],
       tableData: '',
@@ -62,6 +63,10 @@ export class DeviceListComponent implements OnInit {
 
  myClickHandler(){
   this.router.navigate(['admin/editDevice',0]);
+ }
+
+ mySearch(search){
+  this.searchString=search;
  }
 
 
