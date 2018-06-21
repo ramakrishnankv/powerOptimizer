@@ -132,7 +132,7 @@ export class DevicesComponent implements OnInit {
     this.deviceDataSource=this._device.getDeviceList(data);
     this.deviceListData.tableData=this.deviceDataSource;
     console.log(this.deviceListData.tableData);
-    this.deviceListData.pageName="adminDeviceList";
+    this.deviceListData.pageName="devices";
     this.deviceListData.tableHeaders=this.deviceListsHeaders;
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
@@ -269,6 +269,7 @@ export class DevicesComponent implements OnInit {
   }*/
 
   selectRow(data){
+    
     this.router.navigate(['admin/editDevice',data.DeviceID]);
    }
 
