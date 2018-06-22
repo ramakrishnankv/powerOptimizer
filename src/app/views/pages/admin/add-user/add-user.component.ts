@@ -30,6 +30,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   statusClass: string;
   template: TemplateRef<any>;
   modalRef: BsModalRef;
+  /*emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$"; */
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$";
   phonePattern="[0-9]{10}";
   userRole:any=[];
