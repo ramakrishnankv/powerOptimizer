@@ -4,7 +4,6 @@ import { Component, OnInit, ElementRef,
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
 import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 
-import { UserDataModel } from '../../../models/user/user-data.model';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 
 import { DashboardService } from '../../../services/dashboard.service';
@@ -19,19 +18,17 @@ import { DashboardService } from '../../../services/dashboard.service';
 export class DashboardComponent implements OnInit {
 
   appUIConf: any;
-  userDataModel: any;
   activitySummary: ActivitySummaryModel;
   graphData: any = [];
+  consumptionData: any = [];
 
   herculis: ActivitySummaryModel;
 
   constructor(private elem: ElementRef,
-              private _userDataModel: UserDataModel,
               private changeDetect:ChangeDetectorRef,
               private _activitySummary: ActivitySummaryModel,
               private dashboardService: DashboardService ) {
     this.appUIConf = AppUIConfigProperties;
-    this.userDataModel = _userDataModel;
     this.activitySummary = _activitySummary;
     this.changeDetect.detach();
   }
@@ -63,6 +60,9 @@ export class DashboardComponent implements OnInit {
     let issuesData = resData.IssueStats;
     let scheduleData = resData.ScheduleStats;
 
+    // Prepare consumption Progress Bar data
+    this.prepareProgressBarData(deviceData);
+
     this.graphData.push(this.activitySummary.getSummaryGraphData(deviceData, 'devices'));
     this.graphData.push(this.activitySummary.getSummaryGraphData(groupsData, 'groups'));
     this.graphData.push(this.activitySummary.getSummaryGraphData(issuesData, 'issues'));
@@ -70,6 +70,15 @@ export class DashboardComponent implements OnInit {
 
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
+  }
+
+  prepareProgressBarData(data: any) {
+    let consumData: {[k: string]: any} = {};
+    consumData.consumed = data.ActualPowerConsumption;
+    consumData.max = data.ExpectedPowerConsumption;
+    consumData.unit = 'KWh';
+    consumData.percent = data.SavingInPercent;
+    this.consumptionData.push(consumData);
   }
 
 }

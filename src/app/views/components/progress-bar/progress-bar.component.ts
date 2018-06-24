@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluator-helper';
 import { ProgressbarModule } from 'ngx-bootstrap';
 
@@ -11,12 +11,10 @@ import { ProgressbarModule } from 'ngx-bootstrap';
 })
 export class ProgressBarComponent implements OnInit {
 
+  @Input() progressBarData: any[];
+
   stateColorEval: any;
-  consumptions = [
-    {consumed: 300, unit: 'KWh', max: 300},
-    {consumed: 50, unit: 'KWh', max: 50},
-    {consumed: 370, unit: 'KWh', max: 370}
-  ]
+
 
   constructor(private colorStateEvaluator: ColorStateEvaluatorHelper) {
     this.stateColorEval = colorStateEvaluator;
@@ -27,7 +25,7 @@ export class ProgressBarComponent implements OnInit {
   }
 
   constructProgressBar(index, consume) {
-    let consPer: number = Math.ceil(consume.consumed * 100 / consume.max);
+    let consPer: number = consume.percent;
     let consLimits: string;
     let type: string;
     let status: any = this.stateColorEval.provideColorValue(consPer);

@@ -1,14 +1,13 @@
 <div class="progress-bar-module">
   <div class="font-weight-bold text-uppercase mt-2 progress-title">Power Consumption & Saving Summary</div>
   <div class="row mt-3">
-    <div class="col-4" *ngFor="let consume of consumptions; trackBy: constructProgressBar.bind(this)">
+    <div class="col" *ngFor="let consume of progressBarData; trackBy: constructProgressBar.bind(this)">
       <progressbar title="{{consume.consPer}}%" class="progress-striped active" [animate]=true
                    [value]="consume.consPer"
                    [type]="consume.type">&nbsp;</progressbar>
       <div class="progress-content mt-3">
-        <div>{{consume.consumed}} {{consume.unit}}</div>
-        <div>{{consume.consLimits}}</div>
-        <div>Consumption</div>
+        <div>{{consume.consumed}} {{consume.unit}} Consumption with savings of {{consume.consPer}}%</div>
+        <div>Score of consumption is {{consume.consLimits}}</div>
       </div>
     </div>
   </div>
