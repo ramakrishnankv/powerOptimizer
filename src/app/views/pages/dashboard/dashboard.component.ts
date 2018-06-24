@@ -7,11 +7,13 @@ import { ColorStateEvaluatorHelper } from '../../../helpers/color-state-evaluato
 import { UserDataModel } from '../../../models/user/user-data.model';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 
+import { DashboardService } from '../../../services/dashboard.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
-  providers: [ ActivitySummaryModel ]
+  providers: [ ActivitySummaryModel, DashboardService ]
 })
 
 export class DashboardComponent implements OnInit {
@@ -26,7 +28,8 @@ export class DashboardComponent implements OnInit {
   constructor(private elem: ElementRef,
               private _userDataModel: UserDataModel,
               private changeDetect:ChangeDetectorRef,
-              private _activitySummary: ActivitySummaryModel ) {
+              private _activitySummary: ActivitySummaryModel,
+              private dashboardService: DashboardService ) {
     this.appUIConf = AppUIConfigProperties;
     this.userDataModel = _userDataModel;
     this.activitySummary = _activitySummary;
@@ -42,48 +45,23 @@ export class DashboardComponent implements OnInit {
   }
 
   getDashboardActivities() {
-
-    let resData = {}
-    setTimeout(() => {this.updateDashboardGraph(resData)}, 1000)
-
-
-    /*this.schedulesService.getDeviceScheduleStats().subscribe(
+    this.dashboardService.getDashboardStats().subscribe(
     successData => {
         // Success response handler
-        this.updateGroupsGraph(successData);
-     },
-     error => {
+        this.updateDashboardGraph(successData);
+    },
+    error => {
         // Error response handler
-        this.apiCallFailed(error);
-     }
-    );*/
+        //this.apiCallFailed(error);
+    });
   }
 
   updateDashboardGraph(resData) {
-    let deviceData = {
-      TotalLinkedDevices: 14,
-      TotalUnLinkedDevices: 8,
-      TotalGroupedDevices: 14,
-      TotalUnGroupedDevices: 1
-    }
-    let groupsData = {
-      TotalLinkedDevices: 14,
-      TotalUnLinkedDevices: 0,
-      TotalGroupedDevices: 14,
-      TotalUnGroupedDevices: 1
-    }
-    let issuesData = {
-      TotalIssues: 14,
-      Priority1: 8,
-      Priority2: 5,
-      Priority3: 1
-    }
 
-    let scheduleData = {
-      Total: 14,
-      Scheduled: 1,
-      UnScheduled: 13
-    }
+    let deviceData = resData.DeviceStats;
+    let groupsData = resData.GroupStats;
+    let issuesData = resData.IssueStats;
+    let scheduleData = resData.ScheduleStats;
 
     this.graphData.push(this.activitySummary.getSummaryGraphData(deviceData, 'devices'));
     this.graphData.push(this.activitySummary.getSummaryGraphData(groupsData, 'groups'));
@@ -93,38 +71,5 @@ export class DashboardComponent implements OnInit {
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }
-
-  dashboardData = {
-    activitySummary: [
-      {
-        type: "Devices",
-        title: "Inactive",
-        totalCount: 400,
-        activeCount: 25,
-        inactiveCount: 375
-      },
-      {
-        type: "Groups",
-        title: "Unlinked",
-        totalCount: 400,
-        activeCount: 200,
-        inactiveCount: 200
-      },
-      {
-        type: "Schedules",
-        title: "M2 Schedule",
-        totalCount: 400,
-        activeCount: 300,
-        inactiveCount: 100
-      },
-      {
-        type: "Issues",
-        title: "P1-Issues",
-        totalCount: 400,
-        activeCount: 390,
-        inactiveCount: 10
-      }
-    ]
-  };
 
 }

@@ -25,5 +25,14 @@ export const AppUIConfigProperties = {
       color1: '#0fb954',
       color2: '#f5a239'
     }
+  },
+  tableSearchFilterColumns: {
+    nonScheduleDevices: [ 'DeviceName', 'GroupName', 'DeviceId' ],
+    allDevices: [ 'DeviceName', 'GroupName', 'DeviceId' ],
+    devices: [ 'name', 'group', 'ward', 'pincode' ],
+    emptyGroups: [ 'name', 'group', 'ward', 'pincode' ],
+    groupDevices: [ 'name', 'group', 'ward', 'pincode' ],
+    nonGroupDevices: [ 'DeviceName', 'DeviceId', 'GroupID', 'GroupName' ],
+    issues: [ 'serial', 'category', 'deviceID', 'createdBy', 'assignee' ]
   }
 }

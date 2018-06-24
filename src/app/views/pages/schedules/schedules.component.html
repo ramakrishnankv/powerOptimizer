@@ -32,25 +32,18 @@
           <div  class="col-7">
             <form class="form-inline" name="scheduleTemplateForm" method="post" [formGroup]="scheduleTemplateForm" novalidate >
               <div class="form-row row no-gutters form-tight-cell w-100">
-                <div class="col-9">
+                <div class="col-sm-9 col-10">
                   <div class="row no-gutters">
-
-                    <select class="col-9 form-control" id="schedule-template-name-select" name="schedule-template-name-select"
+                    <select class="col form-control" id="schedule-template-name-select" name="schedule-template-name-select"
                             formControlName="scheduleTemplateNameSelect" [(ngModel)]="schduleTemplateDefaultOpt" >
-
                       <option *ngFor="let optData of scheduleTemplateData" [value]="optData.TemplateScheduleId" >
                         {{optData.Name}}
                       </option>
                     </select>
-                    <div class="col-sm-2 col-3">
-                      <button class="btn icon-box bg-search btn-outline-success" type="button" >
-                        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
-                      </button>
-                    </div>
                   </div>
                 </div>
                 <div class="col-sm-3 col-2">
-                  <button class="btn icon-box bg-search btn-outline-success" type="button" (click)="scheduleTemplateDelete()">
+                  <button class="btn icon-box bg-search btn-outline-success" [disabled]="schduleTemplateDefaultOpt==2" type="button" (click)="scheduleTemplateDelete()">
                     <img class="icon menu-icon" src="assets/icons/svg/si-glyph-trash.svg" />
                   </button>
                 </div>
@@ -69,21 +62,12 @@
         <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
           <div class="col-3 sec-title-prime">Groups</div>
           <div  class="col-9">
-            <form class="form-inline" name="scheduleGroupsForm" action="" method="post" [formGroup]="scheduleGroupsForm" novalidate >
+            <!-- [formGroup]="scheduleGroupsForm" -->
+            <form class="form-inline" name="scheduleGroupsForm" action="" [formGroup]="scheduleGroupsForm" method="post" novalidate >
               <div class="form-row row no-gutters form-tight-cell w-100">
                 <div class="col">
                   <div class="row no-gutters">
-                    <select class="col-10 form-control" id="search-schedule-groups" name="search-schedule-groups"
-                            formControlName="scheduleGroupsSelect" [(ngModel)]="schduleGroupsDefaultOpt">
-                      <option *ngFor="let optData of scheduleGroupData" [value]="optData.GroupID">
-                        {{optData.GroupName}}
-                      </option>
-                    </select>
-                    <div class="col-2">
-                      <button class="btn icon-box bg-search btn-outline-success" type="button">
-                        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
-                      </button>
-                    </div>
+                    <app-tree-select [treeData]="scheduleGroupData"></app-tree-select>
                   </div>
                 </div>
               </div>
@@ -122,9 +106,7 @@
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">SCHEDULE DETAILS</div>
           <div class="col right-container">
-            <button class="btn icon-box bg-search btn-outline-success" type="button">
-              <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
-            </button>
+            <app-tabular-search-field></app-tabular-search-field>
           </div>
         </nav>
       </div>

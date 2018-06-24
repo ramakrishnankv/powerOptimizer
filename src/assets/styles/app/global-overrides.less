@@ -34,6 +34,11 @@ app-root:before, app-root:after {
     border-radius: 1.3em;
   }
 }
+.gray-theme {
+  .form-control {
+      color: @font-color-third;
+    }
+}
 .form-control::-webkit-input-placeholder { color: @font-color-third; }  /* WebKit, Blink, Edge */
 .form-control:-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 4 to 18 */
 .form-control::-moz-placeholder { color: @font-color-third; }  /* Mozilla Firefox 19+ */
@@ -248,6 +253,24 @@ table.table {
 }
 .modal-dialog {
   color: @font-color-prime;
+}
+.select-content {
+  *:before, *:after {
+    display: inline;
+  }
+  .angular-tree-component {
+    vertical-align: top;
+    text-align: center;
+  }
+  .toggle-children-placeholder {
+    width: 0px;
+  }
+  .toggle-children {
+    margin-left: 2px;
+  }
+  .tree-node-checkbox {
+    margin-top: 5px;
+  }
 }
 
 @media (min-width: 576px) {

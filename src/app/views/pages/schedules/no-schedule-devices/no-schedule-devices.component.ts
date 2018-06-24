@@ -21,7 +21,7 @@ export class NoScheduleDevicesComponent implements OnInit {
   }
 
   constructor( private schedulesService: SchedulesService, private changeDetect:ChangeDetectorRef ) {
-    this.changeDetect.detach();
+
   }
 
   ngOnInit() {

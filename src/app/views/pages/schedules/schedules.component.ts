@@ -7,16 +7,18 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
 import { schedulesMenuList } from '../../../models/schedulesMenuList';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
+import { TreeSelectModel } from '../../../models/tree-select.model';
 
 import { SchedulesService } from '../../../services/schedules.service';
 import { TemplatesService } from '../../../services/templates.service';
 import { GroupsService } from '../../../services/groups.service';
+import { TreeSelectComponent } from '../../components/tree-select/tree-select.component';
 
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
   styleUrls: ['./schedules.component.less'],
-  providers: [ SchedulesService, TemplatesService, GroupsService, ActivitySummaryModel ]
+  providers: [ SchedulesService, TemplatesService, GroupsService, ActivitySummaryModel, TreeSelectModel ]
 })
 export class SchedulesComponent implements OnInit {
 
@@ -31,7 +33,7 @@ export class SchedulesComponent implements OnInit {
   graphData: any = [];
   scheduleTemplateData: any = [];
   scheduleGroupData: any = [];
-  schduleTemplateDefaultOpt: string;
+  schduleTemplateDefaultOpt: number = 2; // Default Public Template is the default template
   schduleGroupsDefaultOpt: string;
 
   constructor( private modalService: BsModalService,
@@ -39,12 +41,15 @@ export class SchedulesComponent implements OnInit {
                private templatesService: TemplatesService,
                private groupsService: GroupsService,
                private changeDetect:ChangeDetectorRef,
-               private _activitySummary: ActivitySummaryModel ) {
+               private _activitySummary: ActivitySummaryModel,
+               private treeSelectModel: TreeSelectModel ) {
     this.appUIConf = AppUIConfigProperties;
     this.menuList = schedulesMenuList;
     this.createScheduleTemplateForm();
     this.createScheduleGroupsForm();
     this.activitySummary = _activitySummary;
+
+
     this.changeDetect.detach();
   }
 
@@ -59,7 +64,7 @@ export class SchedulesComponent implements OnInit {
     // Populate Template Names select data
     this.getTemplateNames();
 
-    // Populate Template Names select data
+    // Populate Group Tree data
     this.getGroups();
   }
 
@@ -113,7 +118,6 @@ export class SchedulesComponent implements OnInit {
 
   populateTemplateSelectOptions(resData) {
     this.scheduleTemplateData = resData;
-    this.schduleTemplateDefaultOpt = resData[0].TemplateScheduleId;
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }
@@ -135,7 +139,7 @@ export class SchedulesComponent implements OnInit {
   // Populate Groups select data
   createScheduleGroupsForm() {
     this.scheduleGroupsForm = this.fb.group({
-      scheduleGroupsSelect: [this.schduleGroupsDefaultOpt, [Validators.required]]
+      // scheduleGroupsSelect: [this.schduleGroupsDefaultOpt, [Validators.required]]
     });
   }
 
@@ -149,8 +153,9 @@ export class SchedulesComponent implements OnInit {
   }
 
   populateGroupsSelectOptions(resData) {
-    this.scheduleGroupData = resData;
-    this.schduleGroupsDefaultOpt = resData[0].GroupID;
+    this.scheduleGroupData = this.treeSelectModel.prepareDataForTree(
+        resData, 'GroupName', ['GroupName', 'GroupID'],
+        ['DeviceName', 'DeviceId'], ['GroupName', 'DeviceName'] );
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }

@@ -21,6 +21,7 @@ import { CollapseModule, ModalModule, ProgressbarModule, BsDatepickerModule, Tim
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { CookieService } from 'ngx-cookie-service';
+import { TreeModule } from 'angular-tree-component';
 
 import { NavbarIconicComponent } from './views/components/navbar-iconic/navbar-iconic.component';
 import { ChartLineComponent } from './views/components/chart-line/chart-line.component';
@@ -46,7 +47,10 @@ import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device
 import { UserDataModel } from './models/user/user-data.model';
 import { ActivitySummaryModel } from './models/activity-summary.model';
 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 import { ApiService } from './services/api.service';
+import { DataPublishService } from './services/data-publish.service';
 import { AuthService } from './services/authentication/auth.service';
 import { CreateScheduleTemplateComponent } from './views/components/create-schedule-template/create-schedule-template.component';
 import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.component';
@@ -56,7 +60,9 @@ import { CustomerListComponent } from './views/pages/admin/customer-list/custome
 import { CustomFilterPipe } from './views/components/custom-filter.pipe';
 import { MapComponent } from './views/components/map/map.component';
 import { AgmCoreModule } from '@agm/core';
-
+import { TabularDataSearchFilterPipe } from './helpers/tabular-data-search-filter.pipe';
+import { TabularSearchFieldComponent } from './views/components/tabular-search-field/tabular-search-field.component';
+import { TreeSelectComponent } from './views/components/tree-select/tree-select.component';
 
 @NgModule({
   declarations: [
@@ -95,8 +101,10 @@ import { AgmCoreModule } from '@agm/core';
     DeviceListComponent,
     CustomerListComponent,
     CustomFilterPipe,
-    MapComponent
-
+    MapComponent,
+    TabularDataSearchFilterPipe,
+    TabularSearchFieldComponent,
+    TreeSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -112,10 +120,11 @@ import { AgmCoreModule } from '@agm/core';
     ChartsModule,
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyAi5E_iWyS12-xUP2mCM3EXWyL3nEUTl4Y'
-     
-    })
+
+    }),
+    TreeModule
   ],
-  providers: [ UserDataModel, CookieService, ApiService ],
+  providers: [ UserDataModel, CookieService, ApiService, DataPublishService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -53,10 +53,10 @@ export class ActivitySummaryModel {
   }
 
   graphDataForDevicesPage(data) {
-    this.activityTotal = data.ActiveDevices+data.InActiveDevices;
+    this.activityTotal = data.ActiveDevices + data.InActiveDevices;
     this.activity1Value = data.InActiveDevices;
-    this.activity2Value =  data.ActiveDevices;
-    this.activity3Value = data.ActualPowerConsumption;
+    this.activity2Value = data.ActiveDevices;
+    this.activity3Value = 0;
     return this.generateGraphData();
   }
 
@@ -69,7 +69,11 @@ export class ActivitySummaryModel {
   }
 
   graphDataForIssuesPage(data) {
-    this.activityTotal = data.TotalIssues;
+    // Base value needed
+    if((data.Priority1 <= 0) && (data.Priority2 <= 0) && (data.Priority3 <= 0)) {
+      data.Priority3 = 1;
+    }
+    this.activityTotal = data.Priority1 + data.Priority2 + data.Priority3;
     this.activity1Value = data.Priority1;
     this.activity2Value = data.Priority2;
     this.activity3Value = data.Priority3;

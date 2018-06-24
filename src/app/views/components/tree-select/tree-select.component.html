@@ -1,0 +1,9 @@
+<div class="tree-select {{selectClassName}}" >
+  <div #selectTrigger class="select-trigger" (click)="isOpen = !isOpen; selectClick()">
+    <span class="select-placeholder">Group and Devices</span>
+    <img class="select-arrow pull-right" src="assets/icons/svg/si-glyph-triangle-down.svg" />
+  </div>
+  <div #selectContent class="select-content">
+    <tree-root [nodes]="treeData" [options]="options"></tree-root>
+  </div>
+</div>

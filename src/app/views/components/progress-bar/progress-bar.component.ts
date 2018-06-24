@@ -14,8 +14,8 @@ export class ProgressBarComponent implements OnInit {
   stateColorEval: any;
   consumptions = [
     {consumed: 300, unit: 'KWh', max: 300},
-    {consumed: 50, unit: 'KWh', max: 100},
-    {consumed: 370, unit: 'KWh', max: 500}
+    {consumed: 50, unit: 'KWh', max: 50},
+    {consumed: 370, unit: 'KWh', max: 370}
   ]
 
   constructor(private colorStateEvaluator: ColorStateEvaluatorHelper) {

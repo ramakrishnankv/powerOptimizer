@@ -1,0 +1,67 @@
+:host {
+  width: 100%;
+}
+.tree-select {
+  min-width: 150px;
+}
+.select-trigger {
+  border: 1px solid #999999;
+  border-radius: 3px;
+  padding: 6px 8px;
+  text-align: left;
+  position: relative;
+  height: 37px;
+  cursor: pointer;
+  user-select: none;
+}
+.select-placeholder {
+  display: block;
+  margin-right: 12px;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: clip;
+  font-size: 14px;
+  color: #464a4c;
+}
+.select-arrow {
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  right: 6px;
+  top: 41%;
+}
+.select-content {
+  height: 200px;
+  position: absolute;
+  top: 37px;
+  text-align: left;
+  z-index: 1000;
+  width: 110px;
+  overflow: hidden;
+  background-color: #FFF;
+  padding: 6px 8px;
+  font-size: 14px;
+  color: #464a4c;
+  border: 1px solid #999999;
+  display: none;
+}
+.select-open {
+  .select-content {
+    display: block;
+  }
+}
+.select-close {
+  .select-content {
+    display: none;
+  }
+}
+
+tree-node-checkbox {
+  padding: 5px;
+}
+
+tree-node-expander {
+  display: inherit;
+}
+
+

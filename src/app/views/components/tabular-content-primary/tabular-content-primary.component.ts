@@ -1,31 +1,40 @@
-import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { NgSwitch } from '@angular/common';
 import { CustomFilterPipe } from "../custom-filter.pipe";
+
+import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
+import { DataPublishService } from '../../../services/data-publish.service';
 
 @Component({
   selector: 'app-tabular-content-primary',
   templateUrl: './tabular-content-primary.component.html',
   styleUrls: ['./tabular-content-primary.component.less']
-
 })
 export class TabularContentPrimaryComponent implements OnInit {
 
   @Input() tabularData: any;
   @Input() rowClickHandler;
   @Input() searchData;
-  //@Input('') searchData;
 
   //@Output() searchData: EventEmitter<any> = new EventEmitter<any>();
- 
 
- // @Output() onRowclick: EventEmitter<any> = new EventEmitter<any>();
- //isAdminPage:Boolean=false;
-  constructor( ) { }
+  // @Output() onRowclick: EventEmitter<any> = new EventEmitter<any>();
+  //isAdminPage:Boolean=false;
 
-  ngOnInit() { 
+  public searchContent = '';
+  appUIConf: any;
+  searchFilterColumn: any;
+
+  constructor( private dataPublishService: DataPublishService ) {
+    this.appUIConf = AppUIConfigProperties;
+    this.dataPublishService.getData.subscribe((data) => {
+      this.searchContent = data;
+    });
+  }
+
+  ngOnInit() {
+    this.searchFilterColumn = this.appUIConf.tableSearchFilterColumns[this.tabularData.pageName];
     this.isAdminPage()
-
-
    }
 
 
@@ -45,7 +54,7 @@ export class TabularContentPrimaryComponent implements OnInit {
   //onSearchData(data){
    // this.searchData.emit(data);
  // }
-  
+
   /*rowSelect(row){
     this.onRowclick.emit(row);
   }*/

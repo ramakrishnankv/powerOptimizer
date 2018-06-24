@@ -24,7 +24,8 @@ export const AppConstants = {
     getMasterIssueGroups:'master/issueGroup',
     getMasterGroup:'master/group',
     powerConsumptionGraph:'PowerConsumptionGraph?userid=',
-    dashBoard:'dashboard?UserId='
+    dashBoard:'dashboard?UserId=',
+    dashboard: 'dashboard?UserId='
   }
 
 }
