@@ -243,7 +243,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
   openCancel(template: TemplateRef<any>, $event) {
 
     if (!this.addUserForm.touched){
-      this.router.navigate(['admin/device']);
+      this.router.navigate(['admin/users']);
     }
     else{
       $event.preventDefault();

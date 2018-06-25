@@ -29,10 +29,14 @@ export const AppUIConfigProperties = {
   tableSearchFilterColumns: {
     nonScheduleDevices: [ 'DeviceName', 'GroupName', 'DeviceId' ],
     allDevices: [ 'DeviceName', 'GroupName', 'DeviceId' ],
-    devices: [ 'name', 'group', 'ward', 'pincode' ],
+    devices: [ 'Name', 'SimNo', 'WardNumber', 'PinCode' ],
     emptyGroups: [ 'name', 'group', 'ward', 'pincode' ],
     groupDevices: [ 'name', 'group', 'ward', 'pincode' ],
     nonGroupDevices: [ 'DeviceName', 'DeviceId', 'GroupID', 'GroupName' ],
-    issues: [ 'serial', 'category', 'deviceID', 'createdBy', 'assignee' ]
+    issues: [ 'serial', 'category', 'deviceID', 'createdBy', 'assignee' ],
+    users: [ 'UserID', 'FirstName', 'LastName', 'CustomerName', 'Role' ],
+    customers: [ 'Status', 'Name', 'PhoneNumber', 'CustomerType'],
+    adminDeviceList: [ 'Name', 'SimNo', 'WardNumber', 'PinCode' ],
+
   }
 }

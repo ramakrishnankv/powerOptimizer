@@ -162,7 +162,7 @@ onCancel(template: TemplateRef<any>){
 
 openCancel(template: TemplateRef<any>, $event) {
   if (!this.addCustomerForm.touched){
-    this.router.navigate(['admin/device']);
+    this.router.navigate(['admin/customers']);
   }
   else{
     $event.preventDefault();

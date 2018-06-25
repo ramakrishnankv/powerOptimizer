@@ -13,9 +13,9 @@
       <!--(click)="rowSelect(data)" -->
       <!--(click)="rowClickHandler()"-->
       <tbody>
-      <tr (click)="rowClickHandler()" [ngSwitch]="tabularData.pageName"
+  <tr (click)="rowClickHandler(data)" [ngSwitch]="tabularData.pageName"
           *ngFor="let data of tabularData.tableData | tabularDataSearchFilter : searchFilterColumn : searchContent;
-          let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+           let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
         <ng-template [ngSwitchCase]="'issues'">
           <!-- Issues Data -->
           <td>{{data.serial}}</td>
