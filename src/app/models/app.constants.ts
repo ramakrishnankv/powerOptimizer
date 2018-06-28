@@ -25,7 +25,9 @@ export const AppConstants = {
     getMasterGroup:'master/group',
     powerConsumptionGraph:'PowerConsumptionGraph?userid=',
     dashBoard:'dashboard?UserId=',
-    dashboard: 'dashboard?UserId='
+    dashboard: 'dashboard?UserId=',
+    addGroup:'group',
+    deleteGroup:'group?groupid='
   }
 
 }

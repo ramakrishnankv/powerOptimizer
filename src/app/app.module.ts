@@ -63,6 +63,7 @@ import { AgmCoreModule } from '@agm/core';
 import { TabularDataSearchFilterPipe } from './helpers/tabular-data-search-filter.pipe';
 import { TabularSearchFieldComponent } from './views/components/tabular-search-field/tabular-search-field.component';
 import { TreeSelectComponent } from './views/components/tree-select/tree-select.component';
+import { AddGroupTemplateComponent } from './views/components/add-group-template/add-group-template.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { TreeSelectComponent } from './views/components/tree-select/tree-select.
     MapComponent,
     TabularDataSearchFilterPipe,
     TabularSearchFieldComponent,
-    TreeSelectComponent
+    TreeSelectComponent,
+    AddGroupTemplateComponent
   ],
   imports: [
     BrowserModule,

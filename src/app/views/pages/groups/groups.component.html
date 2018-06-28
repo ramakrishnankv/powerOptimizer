@@ -34,11 +34,15 @@
               <div class="form-row row no-gutters form-tight-cell w-100">
                 <div class="col-9">
                   <div class="row no-gutters">
-                    <select class="col-9 form-control" id="search-groups-select" name="search-groups-select" formControlName="searchGroupsSelect">
+                    <select  class="col-9 form-control" id="search-groups-select" name="search-groups-select" formControlName="searchGroupsSelect"  [(ngModel)]="groupDefaultOpt">
+                        <option value="">Select Group</option>    
+                        <option *ngFor="let grList of groupList" [ngValue]="grList.GroupID">{{grList.Name}}</option>
+                     </select>
+                    <!--<select class="col-9 form-control" id="search-groups-select" name="search-groups-select" formControlName="searchGroupsSelect">
                       <option selected="selected">Groups 1</option>
                       <option>Groups 2</option>
                       <option>Groups 4</option>
-                    </select>
+                    </select>-->
                     <div class="col-3">
                       <button class="btn icon-box bg-search btn-outline-success" type="submit">
                         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
@@ -48,7 +52,7 @@
                 </div>
                 <div class="col-3">
                   <button class="btn icon-box bg-search btn-outline-success" type="submit">
-                    <img class="icon menu-icon" src="assets/icons/svg/si-glyph-trash.svg" />
+                    <img class="icon menu-icon" src="assets/icons/svg/si-glyph-trash.svg"  (click)="deleteGroup()"/>
                   </button>
                 </div>
               </div>
@@ -82,13 +86,17 @@
   </div>
 </app-page-prime>
 <ng-template #template>
+  <app-add-group-template [modalRef]="modalRef" (createTemplateSuccessEvent)="getPopulateGroup()"  ></app-add-group-template>
+</ng-template>
+
+<!--<ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
+    <h4 class="modal-title pull-left">Group</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    This is a modal.
+   
   </div>
-</ng-template>
+</ng-template>-->

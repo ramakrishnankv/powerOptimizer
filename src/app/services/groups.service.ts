@@ -35,4 +35,17 @@ export class GroupsService {
           .map((res: Response) => res.json());
   }
 
+  addGroup(param){
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.addGroup}`);
+    return this.apiService.post(this.groupsApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+    .map((res: Response) => res.json());
+
+  }
+
+  deleteGroup(param){
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deleteGroup}`);
+    return this.apiService.delete(`${this.groupsApiURL}${param}`, this.apiService.getHeaderOptionWithBearerToken())
+          .map((res: Response) => res.json());
+  }
+
 }
