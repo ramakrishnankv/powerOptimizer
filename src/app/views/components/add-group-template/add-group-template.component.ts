@@ -14,9 +14,9 @@ export class AddGroupTemplateComponent implements OnInit {
   groupFormData:any;
 
   groupData = {
-    groupid: "",
-    name: "",
-    description: ""
+    GroupID: "",
+    Name: "",
+    Description: ""
 
   }
   constructor(private fb: FormBuilder,private _groupService:GroupsService) {
@@ -24,32 +24,60 @@ export class AddGroupTemplateComponent implements OnInit {
    }
   @Output() createTemplateSuccessEvent = new EventEmitter();
   @Input() modalRef;
+  @Input() selectedGroup;
   ngOnInit() {
-   
+    this.viewGroupData();
     this.createAddGroupForm();
   }
-
+  viewGroupData(){
+    if(this.selectedGroup){
+      this.groupFormData=this.selectedGroup[0];
+    }
+    else
+    {
+      this.groupFormData=this.groupData;
+    }
+  }
 
   createAddGroupForm() {
     this.addGroupForm = this.fb.group({
-      groupid: [''],
-      name: ['', Validators.required],
-      description: ['', Validators.required]
+      GroupID: [''],
+      Name: ['', Validators.required],
+      Description: ['', Validators.required]
     })
   }
-
+  
   saveGroup(){
     if (this.addGroupForm.dirty && this.addGroupForm.valid) {
-      this._groupService.addGroup(this.addGroupForm.value).subscribe(
-        successData => {
-          this.createTemplateSuccessEvent.emit(null);
-          this.modalRef.hide();
-        },
-        error => {
-          console.log("error");
-        });
+    
+      if(!this.selectedGroup) {
+        this._groupService.addGroup(this.addGroupForm.value).subscribe(
+          successData => {
+            this.createTemplateSuccessEvent.emit(null);
+            this.modalRef.hide();
+          },
+          error => {
+            console.log("error");
+          });
+      }
+      else
+      {
+        this._groupService.editGroup(this.addGroupForm.value).subscribe(
+          successData => {
+            this.createTemplateSuccessEvent.emit(null);
+            this.modalRef.hide();
+          },
+          error => {
+            console.log("error");
+          });
+      }
+
 
     }
+  }
+
+  openCancel(){
+    this.modalRef.hide();
   }
 
   

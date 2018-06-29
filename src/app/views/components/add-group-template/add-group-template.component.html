@@ -1,22 +1,22 @@
 <app-modal-popup [modalRef]="modalRef" [modalHeader]="modalHeader">
               <form name="addGroupForm" (submit)="saveGroup()" [formGroup]="addGroupForm" novalidate >
                 <fieldset>
-                    <input  type="hidden" class="form-control" id="add-group-groupid" name="add-group-groupid" placeholder="" formControlName="groupid" [ngModel]="groupFormData.groupid">
+                    <input  type="hidden" class="form-control" id="add-group-groupid" name="add-group-groupid" placeholder="" formControlName="GroupID" [ngModel]="groupFormData.GroupID">
                   <table class="table">
                     <tr class="form-group">
                       <td><label for="add-group-name" class="font-weight-bold">Name*:</label></td>
-                      <td><input  type="text" class="form-control" id="add-customer-name" name="add-group-name" placeholder="" formControlName="name" [ngModel]="groupFormData.name"></td>
+                      <td><input  type="text" class="form-control" id="add-group-name" name="add-group-name" placeholder="" formControlName="Name" [ngModel]="groupFormData.Name"></td>
                     </tr>
                     <tr class="form-group">
                       <td><label for="add-group-description" class="font-weight-bold">Description*:</label></td>
-                      <td><input type="text" class="form-control" id="add-group-description" name="add-group-description" placeholder="" formControlName="description" required [ngModel]="groupFormData.description"></td>
+                      <td><input type="text" class="form-control" id="add-group-description" name="add-group-description" placeholder="" formControlName="Description" required [ngModel]="groupFormData.Description"></td>
                     </tr>
                     <tr class="form-group">
                       <td>&nbsp;</td>
                       <td>
                         <div class="mt-2">
                           <button type="submit" class="btn btn-primary" [disabled]="!addGroupForm.valid">Save</button>
-                          <button type="button" class="btn btn-primary" (click)="openCancel(canceltemplate, $event)" >Cancel</button>
+                          <button type="button" class="btn btn-primary" (click)="openCancel()">Cancel</button>
                         </div>
                       </td>
                     </tr>

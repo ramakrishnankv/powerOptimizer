@@ -45,7 +45,7 @@
                     </select>-->
                     <div class="col-3">
                       <button class="btn icon-box bg-search btn-outline-success" type="submit">
-                        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
+                        <img class="icon menu-icon" (click)="updateGroup(template, $event)" src="assets/icons/svg/si-glyph-text-search.svg" />
                       </button>
                     </div>
                   </div>
@@ -69,12 +69,13 @@
         <nav class="navbar navbar-light bg-light icon-bar">
           <div class="col sec-title-prime">DEVICES IN THE GROUPS</div>
           <div class="col right-container">
-            <form class="">
+              <app-tabular-search-field></app-tabular-search-field>
+            <!--<form class="">
               <input class="form-control search-input icon-box" type="search" placeholder="Search" aria-label="Search">
               <button class="btn icon-box bg-search btn-outline-success" type="submit">
                 <img class="icon menu-icon" src="assets/icons/svg/si-glyph-text-search.svg" />
               </button>
-            </form>
+            </form>-->
           </div>
         </nav>
       </div>
@@ -86,7 +87,7 @@
   </div>
 </app-page-prime>
 <ng-template #template>
-  <app-add-group-template [modalRef]="modalRef" (createTemplateSuccessEvent)="getPopulateGroup()"  ></app-add-group-template>
+  <app-add-group-template [modalRef]="modalRef" [selectedGroup]="selectedGroup" (createTemplateSuccessEvent)="getPopulateGroup()"  ></app-add-group-template>
 </ng-template>
 
 <!--<ng-template #template>

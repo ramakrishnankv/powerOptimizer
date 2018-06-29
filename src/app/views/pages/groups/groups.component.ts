@@ -27,6 +27,8 @@ export class GroupsComponent implements OnInit {
   graphData: any = [];
   groupForm:FormGroup;
   groupDefaultOpt='';
+  selectedGroup='';
+  searchString;
 
   constructor( private modalService: BsModalService,
                private fb: FormBuilder, 
@@ -43,6 +45,14 @@ export class GroupsComponent implements OnInit {
 
   ngAfterViewInit() {
 
+  }
+
+
+  updateGroup(template: TemplateRef<any>, $event){
+   let param=this.groupList;
+   let data=param.filter((param)=>param.GroupID==this.groupDefaultOpt);
+   this.selectedGroup=data;
+   this.modalRef =this.modalService.show(template);
   }
 
   ngOnInit() {
@@ -98,7 +108,6 @@ export class GroupsComponent implements OnInit {
   getGroups(){
     this.groupsService.getMasterGroups().subscribe(
       groupData => {
-
        this.groupList=groupData;
        console.log(this.groupList);
       },
@@ -119,36 +128,35 @@ export class GroupsComponent implements OnInit {
   chartExpanded(event: any): void {
     this.collapsedClass = '';
   }
-
   openModal(template: TemplateRef<any>, $event) {
+    this.selectedGroup='';
     $event.preventDefault();
     $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
   }
-
-
   // Populate Template Names select data
   getPopulateGroup() {
     this.getGroups();
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
-  
   }
-
-
   deleteGroup(){
     let groupId = this.groupDefaultOpt;
     this.groupsService.deleteGroup(groupId).subscribe(
       successData => {
+        this.groupDefaultOpt='';
         this.getPopulateGroup();
       }
     );
 
   }
-
   createGroupsUpdateForm() {
     this.groupsUpdateForm = this.fb.group({
       searchGroupsSelect: [this.groupDefaultOpt, Validators.required]
     })
+  }
+
+  mySearch(search){
+    this.searchString=search;
   }
 }

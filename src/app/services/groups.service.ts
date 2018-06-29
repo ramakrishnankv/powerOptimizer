@@ -36,7 +36,7 @@ export class GroupsService {
   }
 
   addGroup(param){
-    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.addGroup}`);
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.manageGroup}`);
     return this.apiService.post(this.groupsApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
     .map((res: Response) => res.json());
 
@@ -45,6 +45,12 @@ export class GroupsService {
   deleteGroup(param){
     this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.deleteGroup}`);
     return this.apiService.delete(`${this.groupsApiURL}${param}`, this.apiService.getHeaderOptionWithBearerToken())
+          .map((res: Response) => res.json());
+  }
+
+  editGroup(param){
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.manageGroup}`);
+    return this.apiService.put(this.groupsApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
   }
 
