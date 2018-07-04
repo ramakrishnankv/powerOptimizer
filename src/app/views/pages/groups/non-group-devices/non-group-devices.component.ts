@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
+import { Component, OnInit, ChangeDetectorRef,Input } from '@angular/core';
+import { DataService } from '../../../../services/data.service';
 import { GroupsService } from '../../../../services/groups.service';
 
 @Component({
@@ -9,18 +9,24 @@ import { GroupsService } from '../../../../services/groups.service';
   providers: [ GroupsService ]
 })
 export class NonGroupDevicesComponent implements OnInit {
-
+  
   tableDataList: any = [];
-  tableHeaderList = [
-    'Device name', 'Device ID', 'Group ID', 'Group Name'
-  ];
+  selectedGroup:any;
+  tableHeaderList = ['Device name', 'Device ID', 'Group ID', 'Group Name'];
   tabularContent = {
      tableHeaders: this.tableHeaderList,
      tableData: this.tableDataList,
      pageName : 'nonGroupDevices'
   }
 
-  constructor( private groupsService: GroupsService, private changeDetect:ChangeDetectorRef ) {
+  constructor(
+    private dataService: DataService, 
+    private groupsService: GroupsService,
+    private changeDetect:ChangeDetectorRef ) {
+
+      this.dataService.getData.subscribe((data) => {
+        this.selectedGroup = data;
+  });
 
   }
 
@@ -32,7 +38,6 @@ export class NonGroupDevicesComponent implements OnInit {
   getNonGroupDevicesContent() {
     this.groupsService.getGroups().subscribe(
       successData => {
-          // Success response handler
           this.updateGroups(successData);
        }
     );
@@ -42,5 +47,23 @@ export class NonGroupDevicesComponent implements OnInit {
     this.tabularContent.tableData = successData;
     this.changeDetect.detectChanges();
   }
+  
+  selectRow(data){
+   //alert(data.DeviceId);
+  }
+
+
+  onselectedDevice(data){
+   // this.selectedDevice=data;
+  }
+
+  linkedDevice(data){
+    alert(data.length);
+    alert(this.selectedGroup);
+  }
+
+
+
+  
 
 }

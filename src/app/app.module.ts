@@ -51,6 +51,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { ApiService } from './services/api.service';
 import { DataPublishService } from './services/data-publish.service';
+import { DataService } from './services/data.service';
 import { AuthService } from './services/authentication/auth.service';
 import { CreateScheduleTemplateComponent } from './views/components/create-schedule-template/create-schedule-template.component';
 import { ModalPopupComponent } from './views/templates/modal-popup/modal-popup.component';
@@ -126,7 +127,7 @@ import { AddGroupTemplateComponent } from './views/components/add-group-template
     }),
     TreeModule
   ],
-  providers: [ UserDataModel, CookieService, ApiService, DataPublishService ],
+  providers: [ UserDataModel, CookieService, ApiService, DataPublishService,DataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

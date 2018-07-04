@@ -12,8 +12,8 @@ export class GroupDevicesComponent implements OnInit {
 
   tableDataList: any = [];
   tableHeaderList = [
-    'Name', 'Device name', 'User', 'UserGroups', 'Description', 'CreatedBy'
-  ]
+    'Device name', 'Device ID', 'Group ID', 'Group Name'
+  ];
   tabularContent = {
      tableHeaders: this.tableHeaderList,
      tableData: this.tableDataList,
@@ -32,6 +32,7 @@ export class GroupDevicesComponent implements OnInit {
   getGroupDevicesContent() {
     this.groupsService.getGroups().subscribe(
       successData => {
+       //console.log(successData);
           // Success response handler
           this.updateGroups(successData);
        },

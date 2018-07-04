@@ -8,7 +8,7 @@ import { groupsMenuList } from '../../../models/groupsMenuList';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 import{GraphService} from '../../../services/graph.service';
 import { GroupsService } from '../../../services/groups.service';
-
+import { DataService } from '../../../services/data.service';
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
@@ -26,7 +26,7 @@ export class GroupsComponent implements OnInit {
   activitySummary: ActivitySummaryModel;
   graphData: any = [];
   groupForm:FormGroup;
-  groupDefaultOpt='';
+  groupDefaultOpt="";
   selectedGroup='';
   searchString;
 
@@ -35,6 +35,7 @@ export class GroupsComponent implements OnInit {
                private groupsService: GroupsService,
                private changeDetect:ChangeDetectorRef,
                private _graphService:GraphService,
+               private dataService: DataService,
                private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
     this.menuList = groupsMenuList;
@@ -83,33 +84,13 @@ export class GroupsComponent implements OnInit {
       error => {
 
       });
-
-    /*let successData = {
-      TotalLinkedDevices: 14,
-      TotalUnLinkedDevices: 0,
-      TotalGroupedDevices: 14,
-      TotalUnGroupedDevices: 1
-    }
-    setTimeout(() => {this.updateGroupsGraph(successData)}, 1000)*/
-
-
-    /*this.schedulesService.getDeviceScheduleStats().subscribe(
-    successData => {
-        // Success response handler
-        this.updateGroupsGraph(successData);
-     },
-     error => {
-        // Error response handler
-        this.apiCallFailed(error);
-     }
-    );*/
+  
   }
 
   getGroups(){
     this.groupsService.getMasterGroups().subscribe(
       groupData => {
        this.groupList=groupData;
-       console.log(this.groupList);
       },
       error => {
       });
@@ -151,12 +132,14 @@ export class GroupsComponent implements OnInit {
 
   }
   createGroupsUpdateForm() {
-    this.groupsUpdateForm = this.fb.group({
-      searchGroupsSelect: [this.groupDefaultOpt, Validators.required]
-    })
+      this.groupsUpdateForm = this.fb.group(
+      {
+          searchGroupsSelect: [this.groupDefaultOpt,Validators.required]
+      })
   }
 
-  mySearch(search){
-    this.searchString=search;
+  selectGroup(){
+       this.dataService.sendData(this.groupDefaultOpt);
   }
+
 }

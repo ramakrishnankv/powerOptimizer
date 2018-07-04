@@ -34,7 +34,7 @@
               <div class="form-row row no-gutters form-tight-cell w-100">
                 <div class="col-9">
                   <div class="row no-gutters">
-                    <select  class="col-9 form-control" id="search-groups-select" name="search-groups-select" formControlName="searchGroupsSelect"  [(ngModel)]="groupDefaultOpt">
+                    <select  #group_id class="col-9 form-control" id="search-groups-select" name="search-groups-select" formControlName="searchGroupsSelect"  (change)="selectGroup()" [(ngModel)]="groupDefaultOpt">
                         <option value="">Select Group</option>    
                         <option *ngFor="let grList of groupList" [ngValue]="grList.GroupID">{{grList.Name}}</option>
                      </select>
@@ -87,10 +87,11 @@
   </div>
 </app-page-prime>
 <ng-template #template>
-  <app-add-group-template [modalRef]="modalRef" [selectedGroup]="selectedGroup" (createTemplateSuccessEvent)="getPopulateGroup()"  ></app-add-group-template>
+  <app-add-group-template [modalRef]="modalRef" [selectedGroup]="selectedGroup" (createTemplateSuccessEvent)="getPopulateGroup()"></app-add-group-template>
 </ng-template>
 
-<!--<ng-template #template>
+<!--
+<ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Group</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -98,6 +99,6 @@
     </button>
   </div>
   <div class="modal-body">
-   
-  </div>
-</ng-template>-->
+   </div>
+</ng-template>
+-->

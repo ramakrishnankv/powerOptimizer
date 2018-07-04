@@ -62,7 +62,7 @@ export class CustomerListComponent implements OnInit {
    }
 
    mySearch(search){
-    this.searchString=search;
+    //this.searchString=search;
   }
 
 

@@ -66,7 +66,7 @@ export class DeviceListComponent implements OnInit {
  }
 
  mySearch(search){
-  this.searchString=search;
+  //this.searchString=search;
  }
 
 
