@@ -49,7 +49,8 @@ export class TabularContentPrimaryComponent implements OnInit {
       let index = deviceFormArray.controls.findIndex(x => x.value == data)
       deviceFormArray.removeAt(index);
     }
-    this.selectedDevice=deviceFormArray;
+
+    this.selectedDevice=deviceFormArray.value;
   }
 
   isAdminPage(){

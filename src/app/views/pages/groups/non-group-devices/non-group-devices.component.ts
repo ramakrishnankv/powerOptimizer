@@ -12,6 +12,7 @@ export class NonGroupDevicesComponent implements OnInit {
   
   tableDataList: any = [];
   selectedGroup:any;
+  selectedDevice:any='';
   tableHeaderList = ['Device name', 'Device ID', 'Group ID', 'Group Name'];
   tabularContent = {
      tableHeaders: this.tableHeaderList,
@@ -58,7 +59,12 @@ export class NonGroupDevicesComponent implements OnInit {
   }
 
   linkedDevice(data){
-    alert(data.length);
+    this.selectedDevice="";
+    for (let elem in data) {
+      this.selectedDevice+=","+data[elem];
+    }
+
+    alert(this.selectedDevice.substr(1));
     alert(this.selectedGroup);
   }
 
