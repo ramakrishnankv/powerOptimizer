@@ -12,7 +12,7 @@ export class EmptyGroupsComponent implements OnInit {
 
   tableDataList: any = [];
   tableHeaderList = [
-    'Name', 'Device name', 'User', 'UserGroups', 'Description', 'CreatedBy'
+    'Name', 'Description'
   ]
   tabularContent = {
      tableHeaders: this.tableHeaderList,
@@ -30,7 +30,7 @@ export class EmptyGroupsComponent implements OnInit {
   }
 
   getEmptyGroupsContent() {
-    this.groupsService.getGroups().subscribe(
+    this.groupsService.getEmptyGroup().subscribe(
       successData => {
           // Success response handler
           this.updateGroups(successData);
@@ -50,4 +50,8 @@ export class EmptyGroupsComponent implements OnInit {
   apiCallFailed(error) {
     console.log(error)
   }
+
+  selectRow(data){
+    //alert(data.DeviceId);
+   }
 }

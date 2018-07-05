@@ -1,1 +1,1 @@
-<app-tabular-content-primary [tabularData]="tabularContent"></app-tabular-content-primary>
+<app-tabular-content-primary (unLinkedDevice)="unLinkedDevice($event)" [tabularData]="tabularContent" [rowClickHandler]="selectRow.bind(this)"></app-tabular-content-primary>

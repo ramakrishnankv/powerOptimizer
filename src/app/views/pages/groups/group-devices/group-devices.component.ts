@@ -11,9 +11,9 @@ import { GroupsService } from '../../../../services/groups.service';
 export class GroupDevicesComponent implements OnInit {
 
   tableDataList: any = [];
-  tableHeaderList = [
-    'Device name', 'Device ID', 'Group ID', 'Group Name'
-  ];
+  selectedDevice:any;
+  tableHeaderList = ['Device name','Group Name'];
+
   tabularContent = {
      tableHeaders: this.tableHeaderList,
      tableData: this.tableDataList,
@@ -41,6 +41,30 @@ export class GroupDevicesComponent implements OnInit {
           this.apiCallFailed(error);
        }
     );
+  }
+
+  selectRow(data){
+    //alert(data.DeviceId);
+   }
+
+  getSelectedDevice(data){
+    this.selectedDevice="";
+    for (let elem in data) {
+      this.selectedDevice+=","+data[elem];
+    }
+
+    return this.selectedDevice.substr(1);
+  }
+  
+  unLinkedDevice(data){
+   // alert(data);
+    this.selectedDevice=this.getSelectedDevice(data);
+    this.groupsService.unassignGroup(this.selectedDevice).subscribe(
+      successdata => {
+       console.log(successdata);
+      },
+      error => {
+      });
   }
 
   updateGroups(successData) {

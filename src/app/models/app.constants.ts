@@ -27,7 +27,10 @@ export const AppConstants = {
     dashBoard:'dashboard?UserId=',
     dashboard: 'dashboard?UserId=',
     manageGroup:'group',
-    deleteGroup:'group?groupid='
+    deleteGroup:'group?groupid=',
+    unassignedGroup:'group?deviceids=',
+    emptyGroup:'group/emptyGroup?userid=',
+    nondevice:'device/nonGroupDevices?userId='
   }
 
 }

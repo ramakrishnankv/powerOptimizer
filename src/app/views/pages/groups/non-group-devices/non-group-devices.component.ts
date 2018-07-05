@@ -13,7 +13,7 @@ export class NonGroupDevicesComponent implements OnInit {
   tableDataList: any = [];
   selectedGroup:any;
   selectedDevice:any='';
-  tableHeaderList = ['Device name', 'Device ID', 'Group ID', 'Group Name'];
+  tableHeaderList = ['Device name','Description'];
   tabularContent = {
      tableHeaders: this.tableHeaderList,
      tableData: this.tableDataList,
@@ -37,7 +37,7 @@ export class NonGroupDevicesComponent implements OnInit {
   }
 
   getNonGroupDevicesContent() {
-    this.groupsService.getGroups().subscribe(
+    this.groupsService.getNonDevice().subscribe(
       successData => {
           this.updateGroups(successData);
        }
@@ -58,15 +58,31 @@ export class NonGroupDevicesComponent implements OnInit {
    // this.selectedDevice=data;
   }
 
-  linkedDevice(data){
+
+  getSelectedDevice(data){
     this.selectedDevice="";
     for (let elem in data) {
       this.selectedDevice+=","+data[elem];
     }
 
-    alert(this.selectedDevice.substr(1));
-    alert(this.selectedGroup);
+    return this.selectedDevice.substr(1);
   }
+
+  linkedDevice(data){
+      this.selectedDevice=this.getSelectedDevice(data);
+      alert(this.selectedGroup);
+      alert(this.selectedDevice);
+     /* this.groupsService.assignGroup(this.selectedGroup,this.selectedDevice).subscribe(
+      successdata => {
+       console.log(successdata);
+      },
+      error => {
+      });*/
+
+   // alert(this.selectedDevice.substr(1));
+   // alert(this.selectedGroup);
+  }
+
 
 
 

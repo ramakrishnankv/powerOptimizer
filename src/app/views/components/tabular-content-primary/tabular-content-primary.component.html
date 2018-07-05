@@ -24,7 +24,7 @@
           <td>{{data.createdBy}}</td>
           <td>{{data.assignee}}</td>
         </ng-template>
-        <ng-template [ngSwitchCase]="'nonGroupDevices'">
+        <ng-template [ngSwitchCase]="'groupDevices'">
           <!-- Groups / nonGroupDevices Data -->
          
          <td>
@@ -35,36 +35,24 @@
             </div>
           </form>
           </td>
-         
-          <!--<td>{{data.DeviceName}}</td>-->
-          <td>{{data.DeviceId}}</td>
-          <td>{{data.GroupID}}</td>
           <td>{{data.GroupName}}</td>
         </ng-template>
-        <ng-template [ngSwitchCase]="'groupDevices'">
+        <ng-template [ngSwitchCase]="'nonGroupDevices'">
           <!-- Groups / groupDevices Data -->
-          <!--<td>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="non-group-{{i}}">
-              <label for="non-group-{{i}}">{{data.DeviceName}}</label>
-            </div>
-          </td>-->
-          <td>{{data.DeviceName}}</td>
-          <td>{{data.DeviceId}}</td>
-          <td>{{data.GroupID}}</td>
-          <td>{{data.GroupName}}</td>
+        <td>
+          <form [formGroup]="myForm">
+          <div class="form-check">
+            <input type="checkbox"  (change)="onChange(data.DeviceId, $event.target.checked)"  class="form-check-input" id="group-{{i}}">
+            <label for="group-{{i}}">{{data.Name}}</label>
+          </div>
+        </form>
+        </td>
+          <td>{{data.Description}}</td>
         </ng-template>
         <ng-template [ngSwitchCase]="'emptyGroups'">
           <!-- Groups / emptyGroups Data -->
-          <td>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="group-{{i}}">
-              <label for="group-{{i}}">{{data.name}}</label>
-            </div>
-          </td>
-          <td>{{data.group}}</td>
-          <td>{{data.ward}}</td>
-          <td>{{data.pincode}}</td>
+          <td>{{data.Name}}</td>
+          <td>{{data.Description}}</td>
         </ng-template>
         <ng-template [ngSwitchCase]="'devices'">
           <!-- Devices Data -->
@@ -119,7 +107,7 @@
         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-link-right.svg" (click)="onLinked()"/>
       </button>
       <button class="btn icon-box bg-search" type="submit">
-        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-link-break-right.svg" />
+        <img class="icon menu-icon" src="assets/icons/svg/si-glyph-link-break-right.svg" (click)="onUnLinked()" />
       </button>
     </div>
   </div>

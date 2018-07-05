@@ -50,6 +50,8 @@ export class TabularContentPrimaryComponent implements OnInit {
       deviceFormArray.removeAt(index);
     }
 
+
+
     this.selectedDevice=deviceFormArray.value;
   }
 
@@ -66,6 +68,12 @@ export class TabularContentPrimaryComponent implements OnInit {
 
   }
   onLinked(){
-    this.linkedDevice.emit(this.selectedDevice)
+    this.linkedDevice.emit(this.selectedDevice);
+  }
+
+
+  onUnLinked(){
+    //alert(this.selectedDevice);
+    this.unLinkedDevice.emit(this.selectedDevice);
   }
 }
