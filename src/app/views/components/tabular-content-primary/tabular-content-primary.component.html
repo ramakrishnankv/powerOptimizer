@@ -102,11 +102,11 @@
       </tr>
     </tbody>
     </table>
-   <div class="col icon-bar m-3" *ngIf="isAdminPage()">
-      <button class="btn icon-box bg-search" type="submit">
+   <div class="col icon-bar m-3">
+      <button  *ngIf="tabularData.pageName === 'nonGroupDevices'" class="btn icon-box bg-search" type="submit">
         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-link-right.svg" (click)="onLinked()"/>
       </button>
-      <button class="btn icon-box bg-search" type="submit">
+      <button *ngIf="tabularData.pageName === 'groupDevices'" class="btn icon-box bg-search" type="submit">
         <img class="icon menu-icon" src="assets/icons/svg/si-glyph-link-break-right.svg" (click)="onUnLinked()" />
       </button>
     </div>

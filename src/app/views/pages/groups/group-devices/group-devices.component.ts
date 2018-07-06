@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
+import { DataService } from '../../../../services/data.service';
 import { GroupsService } from '../../../../services/groups.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class GroupDevicesComponent implements OnInit {
 
   tableDataList: any = [];
   selectedDevice:any;
+  selectedGroup:any;
   tableHeaderList = ['Device name','Group Name'];
 
   tabularContent = {
@@ -20,7 +21,15 @@ export class GroupDevicesComponent implements OnInit {
      pageName : 'groupDevices'
   }
 
-  constructor( private groupsService: GroupsService, private changeDetect:ChangeDetectorRef ) {
+  constructor(
+    private dataService: DataService,  
+    private groupsService: GroupsService,
+    private changeDetect:ChangeDetectorRef ) {
+
+      this.dataService.getData.subscribe((data) => {
+          this.selectedGroup = data;
+          this.getGroupDevicesContent();
+      });
 
   }
 
@@ -32,8 +41,7 @@ export class GroupDevicesComponent implements OnInit {
   getGroupDevicesContent() {
     this.groupsService.getGroups().subscribe(
       successData => {
-       //console.log(successData);
-          // Success response handler
+         // Success response handler
           this.updateGroups(successData);
        },
        error => {
@@ -57,17 +65,20 @@ export class GroupDevicesComponent implements OnInit {
   }
   
   unLinkedDevice(data){
-   // alert(data);
     this.selectedDevice=this.getSelectedDevice(data);
     this.groupsService.unassignGroup(this.selectedDevice).subscribe(
       successdata => {
        console.log(successdata);
       },
       error => {
+        this.apiCallFailed(error);
       });
   }
 
   updateGroups(successData) {
+    if(this.selectedGroup){
+      successData=successData.filter((successData)=>successData.GroupID==this.selectedGroup);
+    }
     this.tabularContent.tableData = successData;
     this.changeDetect.detectChanges()
   }

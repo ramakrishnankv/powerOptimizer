@@ -70,17 +70,15 @@ export class NonGroupDevicesComponent implements OnInit {
 
   linkedDevice(data){
       this.selectedDevice=this.getSelectedDevice(data);
-      alert(this.selectedGroup);
-      alert(this.selectedDevice);
-     /* this.groupsService.assignGroup(this.selectedGroup,this.selectedDevice).subscribe(
+     // alert(this.selectedGroup);
+     // alert(this.selectedDevice);
+      this.groupsService.assignGroup(this.selectedGroup,this.selectedDevice).subscribe(
       successdata => {
        console.log(successdata);
       },
       error => {
-      });*/
+      });
 
-   // alert(this.selectedDevice.substr(1));
-   // alert(this.selectedGroup);
   }
 
 
