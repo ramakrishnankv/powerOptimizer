@@ -18,11 +18,10 @@
            let i = index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
         <ng-template [ngSwitchCase]="'issues'">
           <!-- Issues Data -->
-          <td>{{data.serial}}</td>
-          <td>{{data.category}}</td>
-          <td>{{data.deviceID}}</td>
-          <td>{{data.createdBy}}</td>
-          <td>{{data.assignee}}</td>
+          <td>{{data.Status}}</td>
+          <td>{{data.Category}}</td>
+          <td>{{data.IssueName}}</td>
+          <td>{{data.Priority}}</td>
         </ng-template>
         <ng-template [ngSwitchCase]="'groupDevices'">
           <!-- Groups / nonGroupDevices Data -->

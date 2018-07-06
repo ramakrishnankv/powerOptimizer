@@ -30,7 +30,8 @@ export const AppConstants = {
     deleteGroup:'group?groupid=',
     unassignedGroup:'group?deviceids=',
     emptyGroup:'group/emptyGroup?userid=',
-    nondevice:'device/nonGroupDevices?userId='
+    nondevice:'device/nonGroupDevices?userId=',
+    getIssue:'Issue'
   }
 
 }

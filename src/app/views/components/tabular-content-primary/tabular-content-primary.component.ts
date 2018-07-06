@@ -26,7 +26,6 @@ export class TabularContentPrimaryComponent implements OnInit {
   searchFilterColumn: any;
 
   constructor( private dataPublishService: DataPublishService,private fb: FormBuilder ) {
-    
     this.appUIConf = AppUIConfigProperties;
     this.dataPublishService.getData.subscribe((data) => {
           this.searchContent = data;
@@ -49,9 +48,6 @@ export class TabularContentPrimaryComponent implements OnInit {
       let index = deviceFormArray.controls.findIndex(x => x.value == data)
       deviceFormArray.removeAt(index);
     }
-
-
-
     this.selectedDevice=deviceFormArray.value;
   }
 
@@ -73,7 +69,6 @@ export class TabularContentPrimaryComponent implements OnInit {
 
 
   onUnLinked(){
-    //alert(this.selectedDevice);
     this.unLinkedDevice.emit(this.selectedDevice);
   }
 }
