@@ -37,6 +37,27 @@ export const AppUIConfigProperties = {
     users: [ 'UserID', 'FirstName', 'LastName', 'CustomerName', 'Role' ],
     customers: [ 'Status', 'Name', 'PhoneNumber', 'CustomerType'],
     adminDeviceList: [ 'Name', 'SimNo', 'WardNumber', 'PinCode' ],
-
+  },
+  template: {
+    creationProps: {
+      time: {
+        minTime: {
+          hours: 6,
+          minutes: 0
+        },
+        maxTime: {
+          hours: 23,
+          minutes: 59
+        }
+      },
+      luminosity : {
+        levels: [
+          {name: '100%', value: 100},
+          {name: '70%', value: 70},
+          {name: '50%', value: 50},
+          {name: '30%', value: 30}
+        ]
+      }
+    }
   }
 }

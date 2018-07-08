@@ -87,53 +87,64 @@
         </div>
       </div>
 
-      <div class="row no-gutters form-group">
-        <div class="w-100"><strong>Time</strong></div>
-        <div class="col-12 col-sm-6">
-          <label class="mb-0">From:</label>
-          <timepicker [(ngModel)]="templateStartTime"
-                      [showMeridian]="false"
-                      [showMinutes]="true"
-                      [showSeconds]="true"
-                      [mousewheel]="true"
-                      [arrowkeys]="true"
-                      [showSpinners]="false"
-                      required
-                      formControlName="templateTimeFrom"></timepicker>
+      <div class="time-dynamic-sec">
+        <div #timeSectionContainer>
+          <ng-template #timeSection let-localCount="localCount" let-isPlusButton="isPlusButton">
+            <div id="sectionId-{{localCount}}" class="time-section-container">
+              <div class="row no-gutters form-group">
+                <div class="w-100"><strong>Time</strong></div>
+                <div class="col-6">
+                  <label class="mb-0">From:</label>
+                  <timepicker [(ngModel)]="templateStartTime"
+                              [showMeridian]="false"
+                              [showMinutes]="true"
+                              [showSeconds]="false"
+                              [mousewheel]="true"
+                              [arrowkeys]="true"
+                              [showSpinners]="false"
+                              [hourStep]="1"
+                              [minuteStep]="5"
+                              [min]="minTime"
+                              [max]="maxTime"
+                              required
+                              formControlName="templateTimeFrom"></timepicker>
 
+                </div>
+                <div class="col-6">
+                  <label class="mb-0">Till:</label>
+                  <timepicker [(ngModel)]="templateEndTime"
+                              [showMeridian]="false"
+                              [showMinutes]="true"
+                              [showSeconds]="false"
+                              [mousewheel]="true"
+                              [arrowkeys]="true"
+                              [showSpinners]="false"
+                              [hourStep]="1"
+                              [minuteStep]="5"
+                              [min]="minTime"
+                              [max]="maxTime"
+                              required
+                              formControlName="templateTimeTill"></timepicker>
+                </div>
+              </div>
+              <div class="row no-gutters form-group">
+                <div class="w-100"><strong>Luminosity</strong></div>
+                <div class="col-5">
+                  <select class="col form-control" id="template-luminosity-select{{localCount}}" name="template-luminosity-select{{localCount}}"
+                          formControlName="templateLuminositySelect{{localCount}}" >
+                    <option *ngFor="let optData of templateLuminosityData" [value]="optData.value" >
+                      {{optData.name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-7 text-right mt-1">
+                  <button *ngIf="!isPlusButton" type="button" class="btn btn-primary" (click)="removeTimeLumSection($event, localCount)">-</button>
+                  <button *ngIf="isPlusButton" type="button" class="btn btn-primary ml-1" (click)="addTimeLumSection($event)">+</button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
-        <div class="col-12 col-sm-6">
-          <label class="mb-0">Till:</label>
-          <timepicker [(ngModel)]="templateEndTime"
-                      [showMeridian]="false"
-                      [showMinutes]="true"
-                      [showSeconds]="true"
-                      [mousewheel]="true"
-                      [arrowkeys]="true"
-                      [showSpinners]="false"
-                      required
-                      formControlName="templateTimeTill"></timepicker>
-        </div>
-
-      </div>
-      <div class="row no-gutters form-group">
-        <div class="w-100"><strong>Luminocity</strong></div>
-        <div class="col-3 col-sm-2">
-          <timepicker [(ngModel)]="templateLuminocity"
-                      [showMeridian]="false"
-                      [showMinutes]="false"
-                      [showSeconds]="false"
-                      [mousewheel]="true"
-                      [arrowkeys]="true"
-                      [showSpinners]="false"
-                      [min]="luminocityMin"
-                      [max]="luminocityMax"
-                      required
-                      #luminocity
-                      formControlName="templateLuminocity"></timepicker>
-        </div>
-        <button type="button" class="btn btn-primary" (click)="decreaseLuminocity()"><strong>-</strong></button>
-        <button type="button" class="btn btn-primary ml-1" (click)="increaseLuminocity()">+</button>
       </div>
       <div class="row no-gutters form-group">
         <div class="buttons form-inline">
@@ -145,7 +156,6 @@
           </div>
         </div>
       </div>
-
-      </fieldset>
-    </form>
+    </fieldset>
+  </form>
 </app-modal-popup>

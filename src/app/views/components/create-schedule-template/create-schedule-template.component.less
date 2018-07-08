@@ -1,9 +1,19 @@
 @import '~assets/styles/app/less/variables.less';
 @import '~assets/styles/app/less/colors.less';
 
+.time-dynamic-sec {
+  max-height: 170px;
+  overflow-y: scroll;
+}
 .form-check-inline {
   margin: 0;
 }
 .form-check-input {
   margin-left: 0;
+}
+
+@media (min-height: 461px) {
+  .time-dynamic-sec {
+    max-height: 300px;
+  }
 }
