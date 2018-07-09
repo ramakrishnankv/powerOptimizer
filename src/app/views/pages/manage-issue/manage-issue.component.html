@@ -17,19 +17,44 @@
 
                <tr class="form-group">
                   <td><label for="add-issue-type" class="font-weight-bold">Type*:</label></td>
-                  <td><input type="text" class="form-control" id="issue-type" name="issue-type" placeholder="" formControlName="Type" required  [ngModel]="issueFormData.Type"></td>
+                  <td>
+                    <select class="form-control" id="issue-type" name="issue-type" formControlName="Type" [(ngModel)]="issueFormData.Type">
+                        <option value="" >Select Type</option>  
+                      <option *ngFor="let it of issueType" [ngValue]="it.value" >{{it.label}}</option>
+                    </select>
+                  </td>
+                  <!--<td><input type="text" class="form-control" id="issue-type" name="issue-type" placeholder="" formControlName="Type" required  [ngModel]="issueFormData.Type"></td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="issue-category" class="font-weight-bold">Category*:</label></td>
-                  <td><input type="text" class="form-control" id="issue-category" name="issue-category" placeholder="" formControlName="Category" [ngModel]="issueFormData.Category"></td>
+                  <td>
+                    <select class="form-control" id="issue-category" name="issue-category" formControlName="Category" [(ngModel)]="issueFormData.Category">
+                        <option value="" >Select Type</option>  
+                      <option *ngFor="let il of issueList" [ngValue]="il.value" >{{il.label}}</option>
+                    </select>
+                  </td>
+                  <!--<td><input type="text" class="form-control" id="issue-category" name="issue-category" placeholder="" formControlName="Category" [ngModel]="issueFormData.Category"></td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="issue-device" class="font-weight-bold">Device*:</label></td>
-                  <td><input type="text" class="form-control" id="issue-device" name="issue-device" placeholder="" formControlName="DeviceID" [ngModel]="issueFormData.DeviceID"></td>
+                  <td>
+                    <select class="form-control" id="issue-device" name="issue-device" formControlName="DeviceID" [(ngModel)]="issueFormData.DeviceID">
+                        <option value="" >Select Device</option>  
+                      <option *ngFor="let device of deviceDataSource" [ngValue]="device.DeviceID" >{{device.Name}}</option>
+                    </select>
+                  </td>
+                  
+                  <!--<td><input type="text" class="form-control" id="issue-device" name="issue-device" placeholder="" formControlName="DeviceID" [ngModel]="issueFormData.DeviceID"></td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="issue-priority" class="font-weight-bold">Priority*:</label></td>
-                  <td><input type="text" class="form-control" id="issue-priority" name="issue-priority" placeholder="" formControlName="Priority" [ngModel]="issueFormData.Priority"></td>
+                  <td>
+                    <select class="form-control" id="issue-priority" name="issue-priority" formControlName="Priority" [(ngModel)]="issueFormData.Priority">
+                        <option value="" >Select Priority</option>  
+                      <option *ngFor="let pr of priority" [ngValue]="pr.value" >{{pr.label}}</option>
+                    </select>
+                  </td>
+                  <!--<td><input type="text" class="form-control" id="issue-priority" name="issue-priority" placeholder="" formControlName="Priority" [ngModel]="issueFormData.Priority"></td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="issue-description" class="font-weight-bold">Description*:</label></td>
@@ -37,7 +62,13 @@
                 </tr>
                 <tr class="form-group">
                   <td><label for="issue-status" class="font-weight-bold">Status*:</label></td>
-                  <td><input type="text" class="form-control" id="issue-status" name="issue-status" placeholder="" formControlName="Status" required  [ngModel]="issueFormData.Status"></td>
+                  <td>
+                    <select class="form-control" id="issue-status" name="issue-status" formControlName="Status" [(ngModel)]="issueFormData.Status">
+                        <option value="" >Select Status</option>  
+                      <option *ngFor="let is of issueStatus" [ngValue]="is.value" >{{is.label}}</option>
+                    </select>
+                  </td>
+                  <!--<td><input type="text" class="form-control" id="issue-status" name="issue-status" placeholder="" formControlName="Status" required  [ngModel]="issueFormData.Status"></td>-->
                 </tr>
                 <tr class="form-group">
                   <td><label for="issue-resolution" class="font-weight-bold">Resolution*:</label></td>

@@ -17,8 +17,10 @@ export class Issue {
    public  User;
    public counter:any=0;
    issueData: any = [];
-
-
+   issueStatus=[{"label":"Open","value":"Open"},{"label":"Closed","value":"Closed"}];
+   issueType=[{"label":"Manual","value":"Manual"},{"label":"Automatic","value":"Automatic"}];
+   issueList=[{"label":"Device","value":"Device"},{"label":"Group","value":"Group"},{"label":"Schedule","value":"Schedule"}];
+   priority=[{"label":"P1","value":"1"},{"label":"P2","value":"2"},{"label":"P3","value":"3"}];
    issueFormData = {
     "UserId" : "",
     "IssueName" : "",
