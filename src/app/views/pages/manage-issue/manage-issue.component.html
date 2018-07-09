@@ -1,0 +1,62 @@
+<app-page-prime>
+  <section class="admin-add-customer-module container-flex content-wrapper-module">
+    <div class="container-liquid">
+      <div class="row">
+        <div class="form-title-container col-12">
+          <span class="form-title">ISSUE</span>
+        </div>
+        <div class="form-container col-12 form-wrapper">
+         <form name="IssueForm" (submit)="manageIssue()" [formGroup]="IssueForm" novalidate >
+            <fieldset>
+                <input  type="hidden" class="form-control" id="Issue-UserId" name="Issue-UserId" placeholder="" formControlName="UserId" [ngModel]="issueFormData.UserID">
+              <table class="table">
+                <tr class="form-group">
+                  <td><label for="issue-name" class="font-weight-bold">Issue Name*:</label></td>
+                <td><input  type="text" class="form-control" id="add-issue-name" name="add-issue-name" placeholder="" formControlName="issueName" [ngModel]="issueFormData.issueName"></td>
+                </tr>
+
+               <tr class="form-group">
+                  <td><label for="add-issue-type" class="font-weight-bold">Type*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-type" name="issue-type" placeholder="" formControlName="Type" required  [ngModel]="issueFormData.Type"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="issue-category" class="font-weight-bold">Category*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-category" name="issue-category" placeholder="" formControlName="Category" [ngModel]="issueFormData.Category"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="issue-device" class="font-weight-bold">Device*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-device" name="issue-device" placeholder="" formControlName="DeviceID" [ngModel]="issueFormData.DeviceID"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="issue-priority" class="font-weight-bold">Priority*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-priority" name="issue-priority" placeholder="" formControlName="Priority" [ngModel]="issueFormData.Priority"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="issue-description" class="font-weight-bold">Description*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-description" name="issue-description" placeholder="" formControlName="Description" required  [ngModel]="issueFormData.Description"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="issue-status" class="font-weight-bold">Status*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-status" name="issue-status" placeholder="" formControlName="Status" required  [ngModel]="issueFormData.Status"></td>
+                </tr>
+                <tr class="form-group">
+                  <td><label for="issue-resolution" class="font-weight-bold">Resolution*:</label></td>
+                  <td><input type="text" class="form-control" id="issue-resolution" name="issue-resolution" placeholder="" formControlName="Resolution" required  [ngModel]="issueFormData.Resolution"></td>
+                </tr>
+                <tr class="form-group">
+                  <td>&nbsp;</td>
+                  <td>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-primary" [disabled]="!IssueForm.valid">Save</button>
+                      <button type="button" class="btn btn-primary" (click)="openCancel()" >Cancel</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-page-prime>

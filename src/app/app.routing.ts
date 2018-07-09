@@ -21,6 +21,7 @@ import { EditDeviceComponent } from './views/pages/admin/edit-device/edit-device
 import { UserListComponent } from './views/pages/admin/user-list/user-list.component';
 import { DeviceListComponent } from './views/pages/admin/device-list/device-list.component';
 import { CustomerListComponent } from './views/pages/admin/customer-list/customer-list.component';
+import { ManageIssueComponent } from './views/pages/manage-issue/manage-issue.component';
 export const AppRoutes: Routes = [
   {path: '', children: [{path: '', component: LoginComponent}, {path: 'login', component: LoginComponent}]},
   {path: 'dashboard', component: DashboardComponent},
@@ -45,6 +46,7 @@ export const AppRoutes: Routes = [
   {path: 'admin/users', component: UserListComponent},
   {path: 'admin/editDevice/:Id', component: EditDeviceComponent},
   {path: 'admin/device', component: DeviceListComponent},
+  {path: 'manageIssue', component: ManageIssueComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

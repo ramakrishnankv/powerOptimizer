@@ -18,6 +18,19 @@ export class Issue {
    public counter:any=0;
    issueData: any = [];
 
+
+   issueFormData = {
+    "UserId" : "",
+    "IssueName" : "",
+    "Type" : "",
+    "Category" : "",
+    "DeviceID" : "",
+    "Priority" : "",
+    "Description" : "",
+    "Status" : "",
+    "Resolution" : ""
+  }
+
    getIssue(param){
     this.issueData=[];
     for(this.counter=0;this.counter<param.length;this.counter++)

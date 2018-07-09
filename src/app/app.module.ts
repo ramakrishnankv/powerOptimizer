@@ -65,6 +65,7 @@ import { TabularDataSearchFilterPipe } from './helpers/tabular-data-search-filte
 import { TabularSearchFieldComponent } from './views/components/tabular-search-field/tabular-search-field.component';
 import { TreeSelectComponent } from './views/components/tree-select/tree-select.component';
 import { AddGroupTemplateComponent } from './views/components/add-group-template/add-group-template.component';
+import { ManageIssueComponent } from './views/pages/manage-issue/manage-issue.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { AddGroupTemplateComponent } from './views/components/add-group-template
     TabularDataSearchFilterPipe,
     TabularSearchFieldComponent,
     TreeSelectComponent,
-    AddGroupTemplateComponent
+    AddGroupTemplateComponent,
+    ManageIssueComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { IssueService } from '../../../services/issue.service';
 import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 import{Issue} from '../../../models/issue.modal';
 import{GraphService} from '../../../services/graph.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-issues',
@@ -12,7 +13,7 @@ import{GraphService} from '../../../services/graph.service';
   providers: [ ActivitySummaryModel,IssueService,Issue,GraphService ]
 })
 export class IssuesComponent implements OnInit {
-
+  router: Router;
   appUIConf: any;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
@@ -21,6 +22,7 @@ export class IssuesComponent implements OnInit {
 
   constructor( private changeDetect:ChangeDetectorRef,
                private _issue:Issue,
+               private rout: Router,
                private _graphService:GraphService,
                private _issueService:IssueService,
                private _activitySummary: ActivitySummaryModel ) {
@@ -34,6 +36,7 @@ export class IssuesComponent implements OnInit {
   }
 
     ngOnInit() {
+      this.router = this.rout;
     // Update Graph and summary data
       this.getIssuesStats();
       this.getIssueContent();
@@ -77,6 +80,11 @@ export class IssuesComponent implements OnInit {
     this.changeDetect.reattach();
     this.changeDetect.detectChanges();
   }
+
+  myClickHandler(e){
+    e.preventDefault();
+    this.router.navigate(['manageIssue']);
+   }
 
 
    /*getIssuesStats() {
