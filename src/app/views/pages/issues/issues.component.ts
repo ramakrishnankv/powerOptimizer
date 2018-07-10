@@ -5,6 +5,7 @@ import { ActivitySummaryModel } from '../../../models/activity-summary.model';
 import{Issue} from '../../../models/issue.modal';
 import{GraphService} from '../../../services/graph.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-issues',
@@ -25,6 +26,7 @@ export class IssuesComponent implements OnInit {
                private rout: Router,
                private _graphService:GraphService,
                private _issueService:IssueService,
+               private dataService: DataService,
                private _activitySummary: ActivitySummaryModel ) {
     this.appUIConf = AppUIConfigProperties;
     this.activitySummary = _activitySummary;
@@ -36,10 +38,10 @@ export class IssuesComponent implements OnInit {
   }
 
     ngOnInit() {
-      this.router = this.rout;
-    // Update Graph and summary data
-      this.getIssuesStats();
-      this.getIssueContent();
+    this.router = this.rout;
+  // Update Graph and summary data
+    this.getIssuesStats();
+    this.getIssueContent();
 
     }
   getIssuesStats() {
@@ -57,6 +59,7 @@ export class IssuesComponent implements OnInit {
   getIssueContent() {
     this._issueService.getIssue().subscribe(
       successData => {
+        console.log(successData);
          // Success response handler
           this.getIssueDetails(successData);
        },
@@ -85,34 +88,12 @@ export class IssuesComponent implements OnInit {
     e.preventDefault();
     this.router.navigate(['manageIssue']);
    }
-
-
-   /*getIssuesStats() {
-
-
-
-
-
-    let successData = {
-      TotalIssues: 14,
-      Priority1: 8,
-      Priority2: 5,
-      Priority3: 1
-    }
-    setTimeout(() => {this.updateIssuesGraph(successData)}, 1000)
-
-
-   this.schedulesService.getDeviceScheduleStats().subscribe(
-    successData => {
-        // Success response handler
-        this.updateIssuesGraph(successData);
-     },
-     error => {
-        // Error response handler
-        this.apiCallFailed(error);
-     }
-    );
-  }*/
+ 
+  selectRow(data){
+   // console.log(data);
+    this.dataService.sendData(data);
+    this.router.navigate(['manageIssue']);
+  }
 
   updateIssuesGraph(resData) {
     this.graphData.push(this.activitySummary.getSummaryGraphData(resData, 'issues'));

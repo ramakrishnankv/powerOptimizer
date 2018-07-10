@@ -19,12 +19,23 @@ export class IssueService {
     this.appConfigs = AppConfigProperties;
     let userId = cookieService.get('UserId');
     this.Id=userId;
-    this.issueApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getIssue}`);
+    this.issueApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.Issue}`);
   }
 
   getIssue() {
     return this.apiService.get(this.issueApiURL, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
+  }
+
+  addIssue(param) {
+    return this.apiService.post(this.issueApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+    .map((res: Response) => res.json());
+  }
+
+  editIssue(issue_id,param){
+    this.issueApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.Issue}&issueid=${issue_id}`);
+    return this.apiService.post(this.issueApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+    .map((res: Response) => res.json());
   }
 
 }

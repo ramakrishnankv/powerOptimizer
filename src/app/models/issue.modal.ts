@@ -1,4 +1,11 @@
+import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+@Injectable()
 export class Issue {
+   constructor( private cookieService: CookieService){
+
+   }
+  
    public  Description;
    public  Device;
    public  DeviceID;
@@ -17,12 +24,13 @@ export class Issue {
    public  User;
    public counter:any=0;
    issueData: any = [];
+   
    issueStatus=[{"label":"Open","value":"Open"},{"label":"Closed","value":"Closed"}];
    issueType=[{"label":"Manual","value":"Manual"},{"label":"Automatic","value":"Automatic"}];
    issueList=[{"label":"Device","value":"Device"},{"label":"Group","value":"Group"},{"label":"Schedule","value":"Schedule"}];
-   priority=[{"label":"P1","value":"1"},{"label":"P2","value":"2"},{"label":"P3","value":"3"}];
+   priority=[{"label":"P1","value":1},{"label":"P2","value":2},{"label":"P3","value":3}];
    issueFormData = {
-    "UserId" : "",
+    "UserId" :this.cookieService.get('UserId'),
     "IssueName" : "",
     "Type" : "",
     "Category" : "",
@@ -38,6 +46,7 @@ export class Issue {
     for(this.counter=0;this.counter<param.length;this.counter++)
     {
         let issueList = {
+            'IssueId': param[this.counter].IssueID, 
             'Description': param[this.counter].Description, 
             'Device': param[this.counter].Device,
             'DeviceID': param[this.counter].DeviceID,
@@ -60,6 +69,26 @@ export class Issue {
 
     }
      return this.issueData;
+ }
+
+
+
+ getIssueData(data){
+   let  issueSelectedData = {
+        "UserId" :this.cookieService.get('UserId'),
+        "issueName":data['IssueName'],
+        "Type" : "Manual",
+        "Category" : data['Category'],
+        "DeviceID" : data['DeviceID'],
+        "Priority" : data['Priority'],
+        "Description" :data['Description'],
+        "Status" : data['Status'],
+        "Resolution" : data['Resolution']
+      }
+
+      return issueSelectedData;
+
+
  }
 
 }

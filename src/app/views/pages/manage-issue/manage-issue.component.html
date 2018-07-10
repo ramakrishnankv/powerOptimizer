@@ -8,7 +8,7 @@
         <div class="form-container col-12 form-wrapper">
          <form name="IssueForm" (submit)="manageIssue()" [formGroup]="IssueForm" novalidate >
             <fieldset>
-                <input  type="hidden" class="form-control" id="Issue-UserId" name="Issue-UserId" placeholder="" formControlName="UserId" [ngModel]="issueFormData.UserID">
+                <input  type="hidden" class="form-control" id="Issue-UserId" name="Issue-UserId" placeholder="" formControlName="UserId" [ngModel]="issueFormData.UserId">
               <table class="table">
                 <tr class="form-group">
                   <td><label for="issue-name" class="font-weight-bold">Issue Name*:</label></td>
@@ -29,7 +29,7 @@
                   <td><label for="issue-category" class="font-weight-bold">Category*:</label></td>
                   <td>
                     <select class="form-control" id="issue-category" name="issue-category" formControlName="Category" [(ngModel)]="issueFormData.Category">
-                        <option value="" >Select Type</option>  
+                      <!--  <option value="" >Select Type</option>  -->
                       <option *ngFor="let il of issueList" [ngValue]="il.value" >{{il.label}}</option>
                     </select>
                   </td>
@@ -39,7 +39,7 @@
                   <td><label for="issue-device" class="font-weight-bold">Device*:</label></td>
                   <td>
                     <select class="form-control" id="issue-device" name="issue-device" formControlName="DeviceID" [(ngModel)]="issueFormData.DeviceID">
-                        <option value="" >Select Device</option>  
+                       
                       <option *ngFor="let device of deviceDataSource" [ngValue]="device.DeviceID" >{{device.Name}}</option>
                     </select>
                   </td>
@@ -50,7 +50,7 @@
                   <td><label for="issue-priority" class="font-weight-bold">Priority*:</label></td>
                   <td>
                     <select class="form-control" id="issue-priority" name="issue-priority" formControlName="Priority" [(ngModel)]="issueFormData.Priority">
-                        <option value="" >Select Priority</option>  
+                        
                       <option *ngFor="let pr of priority" [ngValue]="pr.value" >{{pr.label}}</option>
                     </select>
                   </td>
