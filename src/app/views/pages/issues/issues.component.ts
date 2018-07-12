@@ -90,7 +90,6 @@ export class IssuesComponent implements OnInit {
    }
  
   selectRow(data){
-   // console.log(data);
     this.dataService.sendData(data);
     this.router.navigate(['manageIssue']);
   }

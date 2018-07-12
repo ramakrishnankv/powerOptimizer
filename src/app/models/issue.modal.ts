@@ -52,6 +52,7 @@ export class Issue {
             'DeviceID': param[this.counter].DeviceID,
             'IssueLogs': param[this.counter].IssueLogs,
             'IssueName':param[this.counter].IssueName ,
+            'Type':param[this.counter].Type ,
             'Priority':param[this.counter].Priority ,
             'ReportedBy':param[this.counter].ReportedBy ,
             'ReportedDate': param[this.counter].ReportedDate,
@@ -77,7 +78,7 @@ export class Issue {
    let  issueSelectedData = {
         "UserId" :this.cookieService.get('UserId'),
         "issueName":data['IssueName'],
-        "Type" : "Manual",
+        "Type" : data['Type'],
         "Category" : data['Category'],
         "DeviceID" : data['DeviceID'],
         "Priority" : data['Priority'],

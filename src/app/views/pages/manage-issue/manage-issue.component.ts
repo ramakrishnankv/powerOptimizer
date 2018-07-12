@@ -41,16 +41,14 @@ export class ManageIssueComponent implements OnInit {
     this.issueFormData=this._issue.issueFormData;
 
     this.dataService.getData.subscribe((data) => {
-      this.isCreateForm=false;
-
-      this.selectedIssue = data;
-      //alert(this.selectedIssue['IssueId']);
-      console.log(this.selectedIssue);
-});
+        this.selectedIssue = data;
+    });
 
   }
   ngOnInit() {
-
+    if(this.selectedIssue){
+      this.isCreateForm=false;
+    }
     this.priority=this._issue.priority;
     this.issueStatus=this._issue.issueStatus;
     this.issueType=this._issue.issueType;
@@ -65,10 +63,9 @@ export class ManageIssueComponent implements OnInit {
     this._devicesService.getDevices().subscribe(
       successData => {
         this.getDeviceDetails(successData);
-            // Success response handler
       },
       error => {
-        // Error response handler
+        console.log(error);
       });
   }
 
@@ -81,6 +78,10 @@ export class ManageIssueComponent implements OnInit {
   getSelectedIssue(){
     this.issueFormData=this._issue.getIssueData(this.selectedIssue);
 
+  }
+
+  openCancel(){
+    this.router.navigate(['issues']);
   }
 
   createIssueForm() {
@@ -98,29 +99,29 @@ export class ManageIssueComponent implements OnInit {
   }
 
   manageIssue(){
-    if (this.IssueForm.dirty && this.IssueForm.valid) {
        
-      if(this.isCreateForm){
+    if (this.IssueForm.dirty && this.IssueForm.valid) {
+        if(this.isCreateForm){
         this._issueService.addIssue(this.IssueForm.value).subscribe(
           successData => {
+            console.log(successData);
             this.router.navigate(['issues']);
           },
           error => {
-           // console.log("error");
+           console.log(error);
           }); 
       }
       else
       {
         this._issueService.editIssue(this.selectedIssue['IssueId'],this.IssueForm.value).subscribe(
           successData => {
-
-            alert("123");
-           // this.router.navigate(['issues']);
+              this.router.navigate(['issues']);
           },
           error => {
-           // console.log("error");
+           console.log(error);
           }); 
       }
+
 
 
     }

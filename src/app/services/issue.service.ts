@@ -28,14 +28,16 @@ export class IssueService {
   }
 
   addIssue(param) {
+    console.log(param);
     return this.apiService.post(this.issueApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
-    .map((res: Response) => res.json());
+    .map((res: Response) => res.status);
   }
 
   editIssue(issue_id,param){
-    this.issueApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.Issue}&issueid=${issue_id}`);
-    return this.apiService.post(this.issueApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
-    .map((res: Response) => res.json());
+    console.log(param);
+    this.issueApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.Issue}?issueid=${issue_id}`);
+    return this.apiService.put(this.issueApiURL,param, this.apiService.getHeaderOptionWithBearerToken())
+    .map((res: Response) => res.status);
   }
 
 }
