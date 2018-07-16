@@ -56,6 +56,7 @@ export class GroupDevicesComponent implements OnInit {
    }
 
   getSelectedDevice(data){
+    alert(data);
     this.selectedDevice="";
     for (let elem in data) {
       this.selectedDevice+=","+data[elem];
@@ -65,14 +66,18 @@ export class GroupDevicesComponent implements OnInit {
   }
   
   unLinkedDevice(data){
+
     this.selectedDevice=this.getSelectedDevice(data);
+
     this.groupsService.unassignGroup(this.selectedDevice).subscribe(
       successdata => {
-       console.log(successdata);
+      this.getGroupDevicesContent();
+      console.log(successdata);
       },
       error => {
         this.apiCallFailed(error);
       });
+      
   }
 
   updateGroups(successData) {

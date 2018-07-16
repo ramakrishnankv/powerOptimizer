@@ -23,6 +23,7 @@ export class GroupsService {
   }
 
   getGroups() {
+    this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.group}${this.Id}`);
     return this.apiService.get(this.groupsApiURL, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());
   }
@@ -77,7 +78,7 @@ export class GroupsService {
 
 
   unassignGroup(arg){
- 
+    console.log(arg);
     this.groupsApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.unassignedGroup}${arg}`);
     return this.apiService.put(this.groupsApiURL,this.defaultParam, this.apiService.getHeaderOptionWithBearerToken())
           .map((res: Response) => res.json());

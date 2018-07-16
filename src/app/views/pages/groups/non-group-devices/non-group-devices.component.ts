@@ -27,7 +27,7 @@ export class NonGroupDevicesComponent implements OnInit {
 
       this.dataService.getData.subscribe((data) => {
         this.selectedGroup = data;
-  });
+      });
 
   }
 
@@ -39,6 +39,7 @@ export class NonGroupDevicesComponent implements OnInit {
   getNonGroupDevicesContent() {
     this.groupsService.getNonDevice().subscribe(
       successData => {
+          console.log(successData);
           this.updateGroups(successData);
        }
     );
@@ -70,10 +71,9 @@ export class NonGroupDevicesComponent implements OnInit {
 
   linkedDevice(data){
       this.selectedDevice=this.getSelectedDevice(data);
-     // alert(this.selectedGroup);
-     // alert(this.selectedDevice);
       this.groupsService.assignGroup(this.selectedGroup,this.selectedDevice).subscribe(
       successdata => {
+       this.getNonGroupDevicesContent();
        console.log(successdata);
       },
       error => {
