@@ -80,4 +80,15 @@ export class ApiService {
     headerOption.Authorization = `bearer ${token}`;
     return headerOption;
   }
+
+  getHeaderOptionForImage() {
+   this.headers = new Headers();
+    //this.headers.append('Content-Type', 'multipart/form-data');
+    this.headers.append('accept', 'application/json');
+    this.headers.append('access-control-allow-origin', '*');
+    let token = this.cookieService.get('Token');
+    let headerOption: any = {};
+    headerOption.Authorization = `bearer ${token}`;
+    return headerOption;
+  }
 }

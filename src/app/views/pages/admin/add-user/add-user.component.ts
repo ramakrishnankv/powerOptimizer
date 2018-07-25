@@ -19,6 +19,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AddUserComponent implements OnInit,OnDestroy  {
  
+  imageUrl:string = "";
+  filetoUpload: File = null;
   addUserForm: FormGroup;
   private sub:Subscription;
   userFormData:any;
@@ -126,8 +128,15 @@ export class AddUserComponent implements OnInit,OnDestroy  {
       });
   }
 
-  onFileSelected(event){
-    this.selectedFile=<File>event.target.files[0];
+  onFileSelected(file:FileList){
+    /*this.selectedFile=<File>event.target.files[0];*/
+    this.filetoUpload = file.item(0);
+    var reader=new FileReader();
+    reader.onload=(event:any)=>{
+      this.imageUrl = event.target.result;
+      //console.log(this.imageUrl);
+    }
+    reader.readAsDataURL(this.filetoUpload);
   }
 
   getGroupIssueList(){
@@ -179,8 +188,6 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     this._userService.onUpload(fd);
   }
 
-
-
   saveUser(template: TemplateRef<any>) {
 
 
@@ -188,6 +195,7 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     if (this.addUserForm.dirty && this.addUserForm.valid) {
      if(this.UserForm=="Edit"){
        console.log("test="+this.addUserForm.value);
+     
      this._userService.editUser(this.addUserForm.value).subscribe(
       successData => {
         this.openModal(template);
@@ -202,12 +210,34 @@ export class AddUserComponent implements OnInit,OnDestroy  {
     }
     else
     {
-      console.log("test="+this.addUserForm.value);
-      this._userService.addUser(this.addUserForm.value).subscribe(
+      /*console.log("test="+this.addUserForm.value);*/
+
+     /* this._userService.addUser(this.addUserForm.value).subscribe(
         successData => {
           this.statusClass = 'valid';
           this.errorMsg="";
           this.router.navigate(['admin/users']);
+        },
+        error => {
+          this.statusClass = 'error';
+          this.errorMsg=error;
+        });*/
+    // console.log(this.addUserForm.value.EmailAddress);
+    
+     this._userService.updateProfileImage(this.filetoUpload).subscribe(
+        successData => {
+          console.log(successData);
+          this._userService.addUser(this.addUserForm.value).subscribe(
+            successData => {
+              this.statusClass = 'valid';
+              this.errorMsg="";
+              this.router.navigate(['admin/users']);
+            },
+            error => {
+              this.statusClass = 'error';
+              this.errorMsg=error;
+            });
+          //console.log("success");
         },
         error => {
           this.statusClass = 'error';

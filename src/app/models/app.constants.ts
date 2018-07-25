@@ -31,7 +31,8 @@ export const AppConstants = {
     unassignedGroup:'group?deviceids=',
     emptyGroup:'group/emptyGroup?userid=',
     nondevice:'device/nonGroupDevices?userId=',
-    Issue:'Issue'
+    Issue:'Issue',
+    updateProfileImage:'file/updateProfileImage?userId='
 
   }
 

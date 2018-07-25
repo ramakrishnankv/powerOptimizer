@@ -55,9 +55,9 @@
                 <tr class="form-group">
                   <td><label for="add-user-profile-picture" >Profile Picture:</label></td>
                   <td>
-                    <input type="file" (change)="onFileSelected($event)">
+                    <input type="file" (change)="onFileSelected($event.target.files)">
+
                     <!--<input type="text" class="form-control" id="add-user-profile-picture" name="add-user-profile-picture" placeholder="" formControlName="ProfilePicture" [ngModel]="userFormData.ProfilePicture">-->
-                  
                   </td>
                 </tr>
                 <tr class="form-group">

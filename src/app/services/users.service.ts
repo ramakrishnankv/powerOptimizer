@@ -56,6 +56,17 @@ addUser(param){
   .map((res: Response) => res.json());
 }
 
+updateProfileImage(fileToUpload:File){
+
+  this.userApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.updateProfileImage}${this.Id}`);
+  const formData:FormData=new FormData();
+  formData.append('ProfileImage',fileToUpload);
+
+
+  return this.apiService.put(this.userApiURL,formData, this.apiService.getHeaderOptionForImage())
+  .map((res: Response) => res.json());
+}
+
 getGroupIssueList(){
   this.userApiURL = this.appConfigs.buildBaseURL(`${AppConstants.apiResources.getMasterIssueGroups}`);
       return this.apiService.get(this.userApiURL, this.apiService.getHeaderOptionWithBearerToken())
