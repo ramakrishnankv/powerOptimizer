@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppUIConfigProperties } from '../../../configs/app-ui-config-properties';
 
 import { TemplatesService } from '../../../services/templates.service';
+import { validateStartTime, validateEndTime } from '../../../validators/create-template.validators';
 
 @Component({
   selector: 'app-create-schedule-template',
@@ -29,6 +30,7 @@ export class CreateScheduleTemplateComponent implements OnInit {
   templateEndTime: Date = new Date();
   luminocityMin: Date = new Date();
   @ViewChildren('daysCheckBox') daysCheckBox: QueryList<ElementRef>;
+  @ViewChildren('daysCheckBoxContainer') daysCheckBoxContainer: QueryList<ElementRef>;
   cookieService: CookieService;
   templateLuminosityDefaultOpt: number = 100;
   templateLuminosityData: any;
@@ -37,9 +39,20 @@ export class CreateScheduleTemplateComponent implements OnInit {
 
   @ViewChild('timeSection') timeSection: any;
   @ViewChild('timeSectionContainer', {read:ViewContainerRef}) timeSectionContainer:any;
+
+  @ViewChild('AllDaysContainer', {read:ViewContainerRef}) AllDaysContainer:any;
+  @ViewChild('MondayContainer', {read:ViewContainerRef}) MondayContainer:any;
+  @ViewChild('TuesdayContainer', {read:ViewContainerRef}) TuesdayContainer:any;
+  @ViewChild('WednesdayContainer', {read:ViewContainerRef}) WednesdayContainer:any;
+  @ViewChild('ThursdayContainer', {read:ViewContainerRef}) ThursdayContainer:any;
+  @ViewChild('FridayContainer', {read:ViewContainerRef}) FridayContainer:any;
+  @ViewChild('SaturdayContainer', {read:ViewContainerRef}) SaturdayContainer:any;
+  @ViewChild('SundayContainer', {read:ViewContainerRef}) SundayContainer:any;
+
   timeSectionContainerLength: number;
   timeSecCount: number = 0;
   isPlusButton: boolean = false;
+  errorMsg: string = 'Error';
 
   constructor( private fb: FormBuilder, private _cookie: CookieService,
                private templatesService: TemplatesService ) {
@@ -58,8 +71,8 @@ export class CreateScheduleTemplateComponent implements OnInit {
     this.maxTime.setMinutes(this.templateConf.time.maxTime.minutes)
     this.templateStartTime.setHours(this.templateConf.time.minTime.hours);
     this.templateStartTime.setMinutes(this.templateConf.time.minTime.minutes);
-    this.templateEndTime.setHours(this.templateConf.time.minTime.hours);
-    this.templateEndTime.setMinutes(this.templateConf.time.minTime.minutes);
+    this.templateEndTime.setHours(this.templateConf.time.minTime.hours + this.templateConf.time.minValidTime.hours);
+    this.templateEndTime.setMinutes(this.templateConf.time.minTime.minutes + this.templateConf.time.minValidTime.minutes);
   }
 
   ngOnInit() {
@@ -79,17 +92,23 @@ export class CreateScheduleTemplateComponent implements OnInit {
     this.updatePlusMinusButtonState();
   }
 
-  addTimeLumSection( event ) {
-    let targetElem = event.target || event.srcElement || event.currentTarget;
-    let timeLumParentSection = targetElem.parentElement.parentElement.parentElement
-    this.timeSecCount = (this.timeSecCount > 12) ? this.timeSecCount : this.timeSecCount+1;
+  addTimeLumSection( event, prevIndex ) {
+    let timeTill = `templateTimeTill${prevIndex}`;
+    let prevEndTime = new Date(this.createScheduleTemplateForm.controls[timeTill].value);
+    // Set new start and end times
+    this.templateStartTime.setHours(prevEndTime.getHours());
+    this.templateStartTime.setMinutes(prevEndTime.getMinutes());
+    this.templateEndTime.setHours(prevEndTime.getHours() + this.templateConf.time.minValidTime.hours);
+    this.templateEndTime.setMinutes(prevEndTime.getMinutes() + this.templateConf.time.minValidTime.minutes);
+
+    // Setup is complete now create the section
     this.createTimeLumSection();
  }
 
   removeTimeLumSection( event, removedIndex ) {
     // removedIndex is the local count of each block of html mark up for the lumin section
-    let formContName = 'templateLuminositySelect'+removedIndex;
-    this.createScheduleTemplateForm.removeControl( formContName );
+    let formContSelect = 'templateLuminositySelect'+removedIndex;
+    this.createScheduleTemplateForm.removeControl( formContSelect );
     // container will have embeddedviews with removedIndex starting from 0
     this.timeSectionContainer.remove( removedIndex );
     this.updateAfterRemoval( removedIndex );
@@ -121,7 +140,7 @@ export class CreateScheduleTemplateComponent implements OnInit {
 
   prepareScheduleTemplateForm() {
     this.createScheduleTemplateForm = this.fb.group({
-      templateName: ['',  [Validators.required]],
+      templateName: ['',  [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       templateAllDays: [''],
       templateMonday: [''],
       templateTuesday: [''],
@@ -129,19 +148,37 @@ export class CreateScheduleTemplateComponent implements OnInit {
       templateThursday: [''],
       templateFriday: [''],
       templateSaturday: [''],
-      templateSunday: [''],
-      templateTimeFrom: [''],
-      templateTimeTill: ['']
+      templateSunday: ['']
     })
   }
 
   addInput( localCount ): void {
-    let formContName = 'templateLuminositySelect'+localCount;
-    this.createScheduleTemplateForm.addControl( formContName, new FormControl(this.templateLuminosityDefaultOpt, Validators.required) )
+    this.createScheduleTemplateForm.addControl( `templateLuminositySelect${localCount}`, new FormControl(this.templateLuminosityDefaultOpt, Validators.required) );
+    this.createScheduleTemplateForm.addControl( `templateTimeFrom${localCount}`, new FormControl('', [Validators.required, validateStartTime( localCount )]) );
+    this.createScheduleTemplateForm.addControl( `templateTimeTill${localCount}`, new FormControl('',[Validators.required, validateEndTime( localCount )]) );
   }
 
   validateForm() {
     // TODO: Update validation styles
+  }
+
+  handleErrorMessages() {
+    // Template name
+    let templName = this.createScheduleTemplateForm.controls.templateName;
+
+    if(templName.errors) {
+      let err = templName.errors;
+      if( err.required ) {
+        this.errorMsg = 'Template Name is required';
+      }
+      if( err.minlength || err.maxlength ) {
+        this.errorMsg = 'Template Name should be 3 to 20 charecters length';
+      }
+    }
+  }
+
+  endTimeValid( event ) {
+    this.errorMsg = "Updated time is wrong";
   }
 
   createScheduleTemplateSubmit(event) {
@@ -149,6 +186,7 @@ export class CreateScheduleTemplateComponent implements OnInit {
 
     if(!this.createScheduleTemplateForm.valid) {
       this.statusClass = 'error';
+      this.handleErrorMessages();
       return;
     }
     this.statusClass = 'valid';
@@ -178,6 +216,85 @@ export class CreateScheduleTemplateComponent implements OnInit {
 
   collectDaySelections(obj, ind, ar) {
     return obj.nativeElement.checked;
+  }
+
+  hanleCheckboxClick(event) {
+    setTimeout(() => {
+      let target = event.target;
+      let isChecked = target.checked;
+      let targetValue = target.attributes.value.value;
+      let selectedItem = 'Mon';
+
+      this.updateCheckboxContainers( targetValue, isChecked );
+      if(targetValue === 'AllDays') {
+        if(isChecked) {
+          selectedItem = targetValue;
+          this.updateTemplateSchedule( selectedItem );
+        } else {
+          selectedItem = selectedItem;
+          this.selectDefaultCheckbox( targetValue );
+        }
+      }
+      else {
+        if(isChecked) {
+          selectedItem = targetValue;
+          this.updateTemplateSchedule( selectedItem );
+        } else {
+          this.selectDefaultCheckbox( targetValue );
+        }
+      }
+    }, 1);
+  }
+
+  selectDefaultCheckbox( targetValue ) {
+    let checkCount = 0;
+    let selectedItem = 'Mon';
+
+    this.daysCheckBox.map((item) => {
+      if(item.nativeElement.checked) {
+        checkCount++;
+      }
+    });
+    if(checkCount == 0) {
+      let selectedCheckbox = this.daysCheckBox.find(item => item.nativeElement.value === selectedItem);
+      selectedCheckbox.nativeElement.checked = true;
+      this.updateTemplateSchedule( selectedItem );
+      this.updateCheckboxContainers( selectedItem, true );
+    }
+  }
+
+  updateTemplateSchedule( selectedItem ) {
+    this.daysCheckBoxContainer.map((item) => {
+      item.nativeElement.classList.add("hidden");
+      if(item.nativeElement.attributes['data-day'].value == selectedItem) {
+        item.nativeElement.classList.remove("hidden"); // TODO: WORK HERE
+      }
+    })
+  }
+
+  updateCheckboxContainers( changedItem, isChecked ) {
+    /*console.log(changedItem );
+    console.log(isChecked );
+
+    const viewList = ['AllDays', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    let localCount = this.timeSecCount;
+    let contextObject = {
+      localCount: localCount,
+      isPlusButton: true
+    }
+    if( (changedItem == 'AllDays') && isChecked) {
+      let cont = `${changedItem}Container`
+      this[cont].createEmbeddedView(this.timeSection, contextObject);
+      this.daysCheckBoxContainer.map((item, index) => {
+        console.log(item);
+        console.log(index);
+
+        this[cont].remove( 0 )
+        console.log(this[cont]);
+      })
+    }*/
+
+    //this.allDaysContainer.createEmbeddedView(this.timeSection, contextObject);
   }
 
   createListSchedules(obj, ind, ar) {

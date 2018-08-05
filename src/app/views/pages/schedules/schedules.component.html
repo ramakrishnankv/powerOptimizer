@@ -78,27 +78,20 @@
 
       <div class="row product-details-row">
         <nav class="navbar no-gutters navbar-light bg-light icon-bar inverse-theme form-tight-row">
-          <!--<form class="form-inline" name="scheduleUpdateForm3" action="" method="post" [formGroup]="scheduleUpdateForm3" novalidate >
+          <form class="form-inline w-100" name="scheduleDateRangeForm" action="" method="post"
+                [formGroup]="scheduleDateRangeForm" novalidate >
             <div class="form-row row no-gutters w-100">
-              &lt;!&ndash;<div class="col-4">
-
-                <input type="text"
-                       placeholder="Datepicker"
-                       class="form-control"
-                       bsDatepicker>
-              </div>&ndash;&gt;
-              <div class="col-8">
-
-                <input type="text"
-                       placeholder="Datepicker"
-                       class="form-control"
-                       bsDaterangepicker>
+              <div class="col-9">
+                <input type="text" class="form-control w-100" #drp="bsDaterangepicker" placeholder="Select Date"
+                       bsDaterangepicker [ngModel]="bsRangeValue" formControlName="dateRange"
+                       [bsConfig]="{ dateInputFormat: 'MMMM Do YYYY, h:mm:ss a' }"
+                       [bsValue]="bsRangeValue" />
               </div>
-              <div class="col-4">
-                <button type="submit" class="btn btn-primary" [routerLink]="['/devices']">Save</button>
+              <div class="col-3 text-left pl-2">
+                <button type="submit" class="btn btn-primary" [routerLink]="['/devices']">Set</button>
               </div>
             </div>
-          </form>-->
+          </form>
         </nav>
       </div>
 

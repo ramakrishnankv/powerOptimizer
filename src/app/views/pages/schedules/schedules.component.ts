@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
+
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -26,6 +28,7 @@ export class SchedulesComponent implements OnInit {
   menuList: any;
   scheduleTemplateForm: FormGroup;
   scheduleGroupsForm: FormGroup;
+  scheduleDateRangeForm: FormGroup;
   isChartCollapsed: boolean = false;
   collapsedClass: string = '';
   modalRef: BsModalRef;
@@ -35,6 +38,10 @@ export class SchedulesComponent implements OnInit {
   scheduleGroupData: any = [];
   schduleTemplateDefaultOpt: number = 2; // Default Public Template is the default template
   schduleGroupsDefaultOpt: string;
+
+  bsValue = new Date();
+  bsRangeValue: Date[];
+  maxDate = new Date();
 
   constructor( private modalService: BsModalService,
                private fb: FormBuilder, private schedulesService: SchedulesService,
@@ -47,8 +54,11 @@ export class SchedulesComponent implements OnInit {
     this.menuList = schedulesMenuList;
     this.createScheduleTemplateForm();
     this.createScheduleGroupsForm();
+    this.createScheduleDateRangeForm();
     this.activitySummary = _activitySummary;
 
+this.maxDate.setDate(this.maxDate.getDate() + 7);
+    this.bsRangeValue = [this.bsValue, this.maxDate];
 
     this.changeDetect.detach();
   }
@@ -103,6 +113,14 @@ export class SchedulesComponent implements OnInit {
   createScheduleTemplateForm() {
     this.scheduleTemplateForm = this.fb.group({
       scheduleTemplateNameSelect: [this.schduleTemplateDefaultOpt, [Validators.required]]
+    });
+
+  }
+
+  createScheduleDateRangeForm() {
+    // TODO: Fix set date
+    this.scheduleDateRangeForm = this.fb.group({
+      dateRange: [this.bsRangeValue, [Validators.required]]
     });
   }
 

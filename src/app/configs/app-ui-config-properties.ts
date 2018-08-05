@@ -48,6 +48,10 @@ export const AppUIConfigProperties = {
         maxTime: {
           hours: 23,
           minutes: 59
+        },
+        minValidTime: {
+          hours: 0,
+          minutes: 30
         }
       },
       luminosity : {
